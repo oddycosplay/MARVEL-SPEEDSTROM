@@ -1,55 +1,157 @@
 # MARVEL-SPEEDSTROM
 
-MARVEL-SPEEDSTROM adalah project game balapan bertema aksi cepat dengan nuansa superhero dan dunia kartun yang berenergi tinggi. Game ini dirancang untuk menghadirkan pengalaman balapan yang seru, menantang, dan penuh adrenalin dengan tampilan yang berani dan dinamis.
+<p align="center">
+  <img src="https://img.shields.io/badge/Project-Browser%20Game-0F172A?style=for-the-badge&logo=gamejolt" alt="Project Type" />
+  <img src="https://img.shields.io/badge/Status-Prototype-22C55E?style=for-the-badge" alt="Status" />
+  <img src="https://img.shields.io/badge/Stack-HTML%20%2B%20JS%20%2B%20Three.js-FF6B6B?style=for-the-badge" alt="Stack" />
+  <img src="https://img.shields.io/badge/License-Apache%202.0-10B981?style=for-the-badge" alt="License" />
+</p>
 
-## About
+<p align="center">
+  <img src="https://img.shields.io/badge/3D-Rendering-Three.js-FFB703?style=for-the-badge" alt="3D Rendering" />
+  <img src="https://img.shields.io/badge/UI-Tailwind-CSS-38BDF8?style=for-the-badge" alt="UI" />
+  <img src="https://img.shields.io/badge/Runtime-Node.js-5FAF45?style=for-the-badge&logo=node.js" alt="Runtime" />
+</p>
 
-Project ini merupakan sebuah game racing yang menggabungkan elemen kecepatan, kompetisi, dan gaya visual yang modern. Meskipun repositori ini masih memiliki struktur dasar yang sederhana, fokus utamanya adalah untuk terus berkembang menjadi game yang lebih lengkap dengan fitur gameplay, karakter, dan mode balapan yang lebih menarik.
+<div align="center">
+  <img width="100%" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80" alt="Racing game concept banner" />
+</div>
 
-Tujuan utama dari MARVEL-SPEEDSTROM adalah:
+A Marvel-inspired arcade racing prototype built as a browser-based game experience.  
+This project combines cinematic visuals, custom garage systems, hero selection, and a stylized 3D racing loop into a single front-end game concept.
 
-- Memberikan pengalaman balapan yang cepat dan menyenangkan
-- Menghadirkan sensasi adrenalin seperti game racing arcade modern
-- Mengembangkan ide permainan dengan gaya visual yang energetic dan menarik
-- Menjadi base project untuk pengembangan lebih lanjut
+## Overview
 
-## Fitur yang Didukung
+MARVEL-SPEEDSTROM is a concept project exploring a high-speed racing game with a superhero aesthetic. The experience is built to feel energetic, visually bold, and fast-paced, with a polished UI and browser gameplay loop.
 
-- Gameplay balapan berbasis kecepatan
-- Tampilan visual yang berani dan dinamis
-- Desain project yang mudah dikembangkan ke tahap berikutnya
-- Struktur repo yang sederhana dan siap untuk dikembangkan lebih lanjut
+The project emphasizes:
+- cinematic presentation
+- hero and villain roster selection
+- garage customization
+- dynamic race modes
+- nitro boost mechanics
+- arcade-style motion and HUD feedback
 
-## Cara Menjalankan
+This repository is currently positioned as a prototype and concept showcase rather than a fully production-ready commercial game.
 
-1. Clone repository ini
-2. Buka project di editor atau environment yang sesuai
-3. Jalankan file game sesuai kebutuhan proyek
-4. Mulai balapan dan nikmati gameplay
+## Why This Project
 
-## Release Notes
+This project was designed to explore:
+- browser-based 3D interaction with Three.js
+- game UI and concept design
+- interactive frontend gameplay loop
+- dynamic state management for racing experiences
+- polished visual direction without heavy infrastructure
 
-### v1.0.0 - Initial Release
+## Key Features
 
-- Penambahan README project
-- Penambahan deskripsi umum tentang game
-- Persiapan struktur dasar repositori untuk pengembangan lebih lanjut
-- Dokumentasi awal untuk project overview dan release notes
+- Marvel-inspired racer roster
+- faction-based character selection
+- vehicle customization for skins, chassis, and paint
+- multiple gameplay modes:
+  - Grand Prix
+  - Time Trial
+  - Omega Arena
+- multiple track themes:
+  - Desert
+  - Night
+- nitro boost and speed mechanics
+- race HUD and leaderboard overlays
+- keyboard and touch controls
+- procedural sound effects using Web Audio API
+- modern, cinematic interface
 
-## Status Proyek
+## Tech Stack
 
-Project ini masih dalam tahap awal pengembangan, namun repo sudah disiapkan dengan dokumentasi dasar agar lebih mudah dikelola dan dikembangkan di masa depan.
+- HTML5
+- JavaScript
+- Three.js
+- Tailwind CSS
+- Font Awesome
+- Google Fonts
+- Node.js
 
-## Kontribusi
+## Project Structure
 
-Kontribusi sangat terbuka untuk pengembangan lanjutan, seperti:
+```text
+MARVEL-SPEEDSTROM/
+├── .github/
+├── LICENSE
+├── README.md
+├── index.html
+├── marvel_speedstorm_ctr_3d_racing (1).html
+├── server.js
+├── validate.js
+```
 
-- penambahan level balapan
-- pengembangan kontrol game
-- perbaikan visual dan sound effect
-- penambahan mode permainan baru
-- optimasi performa dan gameplay
+## Gameplay Concept
 
-## Lisensi
+The game presents a fictional racing universe where players:
+1. choose a hero or villain
+2. customize the vehicle
+3. select a track and mode
+4. race through a stylized environment
+5. use nitro boosts and manage race flow
 
-Project ini belum memiliki lisensi yang ditentukan. Jika Anda ingin menggunakannya untuk publikasi atau pengembangan lebih lanjut, disarankan untuk menambahkan lisensi yang sesuai.
+The game is designed to emulate a fast, high-energy racing experience with strong concept and visual identity.
+
+## Repository
+
+- GitHub: https://github.com/oddycosplay/MARVEL-SPEEDSTROM
+- Project Type: Browser-based racing prototype
+- Status: Prototype / concept demo
+- License: Apache 2.0
+
+## Getting Started
+
+### Prerequisites
+- Node.js
+- Modern browser
+
+### Run Locally
+
+```bash
+git clone https://github.com/oddycosplay/MARVEL-SPEEDSTROM.git
+cd MARVEL-SPEEDSTROM
+node server.js
+```
+
+Then open:
+
+```text
+http://localhost:3000
+```
+
+## Controls
+
+- Left / Right Arrow or A / D: steer
+- Space / Shift: nitro boost
+- Mouse drag: camera movement
+- On-screen buttons: touch interaction
+
+## Roadmap
+
+Planned improvements include:
+- more advanced AI behavior
+- richer race physics and collision logic
+- more track environments
+- character-specific abilities
+- progression and rewards
+- broader sound design and music
+- mobile optimization
+- production polish for demo presentation
+
+## Project Status
+
+This project is currently in the concept/prototype stage.  
+It already demonstrates a strong visual identity, a polished game interface, and a playable front-end loop, but it is not yet a production-level commercial game.
+
+## License
+
+This project is licensed under the Apache License 2.0.
+
+---
+
+<p align="center">
+  <strong>Built as a browser-based racing game concept with a cinematic Marvel-inspired visual direction.</strong>
+</p>
