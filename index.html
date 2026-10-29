@@ -1,0 +1,1987 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MARVEL SPEEDSTORM - CTR 3D Racing</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Rajdhani & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #05050a; color: #f8fafc; overflow-x: hidden; user-select: none; }
+        .font-racing { font-family: 'Rajdhani', sans-serif; letter-spacing: 0.05em; }
+        .marvel-gradient { background: linear-gradient(135deg, #ed1d24 0%, #b91c1c 50%, #1e1b4b 100%); }
+        .gold-border { border: 2px solid rgba(250, 204, 21, 0.45); box-shadow: 0 0 15px rgba(250, 204, 21, 0.2); }
+        .neon-glow { box-shadow: 0 0 25px rgba(237, 29, 36, 0.45); }
+        .skew-box { transform: skewX(-6deg); transition: all 0.25s ease; }
+        .skew-box:hover { transform: skewX(-6deg) translateY(-3px); }
+        .skew-box .unskew { transform: skewX(6deg); }
+        .roster-card { background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95)); border: 1px solid rgba(255, 255, 255, 0.12); }
+        .roster-card.active { border-color: #ed1d24; box-shadow: 0 0 20px rgba(237, 29, 36, 0.6); background: linear-gradient(145deg, rgba(60, 20, 25, 0.95), rgba(15, 23, 42, 0.98)); }
+        .nfs-hud-skew { transform: skewX(-14deg); }
+        .nfs-hud-unskew { transform: skewX(14deg); }
+        @keyframes speedLineAnim {
+            0% { opacity: 0.15; transform: scaleY(0.8); }
+            50% { opacity: 0.85; transform: scaleY(1.25); }
+            100% { opacity: 0.15; transform: scaleY(0.8); }
+        }
+        .speed-streak { animation: speedLineAnim 0.2s infinite ease-in-out; }
+        canvas { display: block; outline: none; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #ed1d24; border-radius: 3px; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-950 text-slate-100 relative">
+
+    <!-- ========================================================================= -->
+    <!-- 1. INTRO SPLASH / CINEMATIC OVERLAY -->
+    <!-- ========================================================================= -->
+    <div id="marvel-intro" class="fixed inset-0 z-50 flex flex-col justify-between p-6 sm:p-12 marvel-gradient overflow-y-auto">
+        <div class="max-w-6xl w-full mx-auto flex flex-col justify-between h-full min-h-[600px]">
+            <!-- Top Intro Header -->
+            <div class="flex items-center justify-between border-b border-white/20 pb-4">
+                <div class="flex items-center gap-3">
+                    <span class="bg-red-600 text-white font-racing font-black px-3 py-1 rounded text-lg tracking-widest gold-border">MARVEL</span>
+                    <span class="text-xs uppercase tracking-widest text-amber-300 font-bold">Speedstorm CTR 3D • Season 1: Battle of Champions</span>
+                </div>
+                <button onclick="openSettingsModal()" class="px-3 py-1.5 rounded-lg bg-black/40 hover:bg-black/60 text-slate-300 text-xs font-racing font-bold flex items-center gap-2 border border-white/10">
+                    <i class="fa-solid fa-gear"></i> PENGATURAN
+                </button>
+            </div>
+
+            <!-- Hero Intro Centerpiece -->
+            <div class="my-auto py-8 text-center sm:text-left grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 bg-red-950/80 border border-red-500/40 px-3 py-1 rounded-full text-xs text-red-200">
+                        <i class="fa-solid fa-bolt text-yellow-400"></i> NEED FOR SPEED X CRASH TEAM RACING 3D
+                    </div>
+                    <h1 class="font-racing text-5xl sm:text-7xl lg:text-8xl font-black italic tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-red-500 to-amber-100 drop-shadow-[0_5px_15px_rgba(237,29,36,0.5)]">
+                        MARVEL SPEEDSTORM
+                    </h1>
+                    <p class="text-slate-300 text-sm sm:text-base max-w-xl leading-relaxed">
+                        Pilih pahlawan dan penjahat terhebat Marvel dari 4 faksi legendaris. Kendarai hypercar aerodinamis kelas dunia, rebut Blindbox kotak misteri, aktifkan Nitro Boost, dan kalahkan rival di sirkuit kecepatan tinggi!
+                    </p>
+
+                    <!-- Control Guide Badges -->
+                    <div class="grid grid-cols-3 gap-3 max-w-lg pt-2 text-xs">
+                        <div class="bg-black/50 border border-white/10 rounded-xl p-3 flex flex-col items-center sm:items-start">
+                            <span class="text-slate-400 text-[10px] uppercase font-bold">Kemudi (Steer)</span>
+                            <span class="font-racing font-bold text-yellow-400 text-sm mt-1">[A] / [D] atau [←] [→]</span>
+                        </div>
+                        <div class="bg-black/50 border border-white/10 rounded-xl p-3 flex flex-col items-center sm:items-start">
+                            <span class="text-slate-400 text-[10px] uppercase font-bold">Nitro Boost</span>
+                            <span class="font-racing font-bold text-cyan-400 text-sm mt-1">[SPACE] / [SHIFT]</span>
+                        </div>
+                        <div class="bg-black/50 border border-white/10 rounded-xl p-3 flex flex-col items-center sm:items-start">
+                            <span class="text-slate-400 text-[10px] uppercase font-bold">Kamera & Kustom</span>
+                            <span class="font-racing font-bold text-emerald-400 text-sm mt-1">Drag Mouse 360°</span>
+                        </div>
+                    </div>
+
+                    <!-- Intro CTA Buttons -->
+                    <div class="flex flex-wrap gap-4 pt-4 justify-center sm:justify-start">
+                        <button onclick="dismissMarvelIntro()" class="skew-box px-8 py-4 bg-gradient-to-r from-red-600 via-red-500 to-amber-500 hover:from-red-500 hover:to-amber-400 text-white font-racing font-black text-xl rounded-xl shadow-[0_0_25px_rgba(237,29,36,0.6)] gold-border">
+                            <span class="unskew flex items-center gap-3">
+                                <i class="fa-solid fa-play text-yellow-300"></i> MULAI BALAPAN SEKARANG
+                            </span>
+                        </button>
+                        <button onclick="openGarageTab(); dismissMarvelIntro();" class="skew-box px-6 py-4 bg-slate-900/90 hover:bg-slate-800 text-white font-racing font-bold text-base rounded-xl border border-white/20">
+                            <span class="unskew flex items-center gap-2">
+                                <i class="fa-solid fa-warehouse text-red-500"></i> GARASI MODIFIKASI
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Featured Faction Cards Teaser -->
+                <div class="lg:col-span-5 grid grid-cols-2 gap-3.5">
+                    <div class="roster-card p-4 rounded-2xl border-l-4 border-red-500">
+                        <div class="text-[10px] text-red-400 font-bold uppercase tracking-wider">Avengers</div>
+                        <div class="font-racing font-black text-lg text-white">Iron Man & Thor</div>
+                        <div class="text-xs text-slate-400 mt-1">Armor Nanotech & Petir Asgard</div>
+                    </div>
+                    <div class="roster-card p-4 rounded-2xl border-l-4 border-blue-500">
+                        <div class="text-[10px] text-blue-400 font-bold uppercase tracking-wider">Fantastic 4</div>
+                        <div class="font-racing font-black text-lg text-white">Mr. Fantastic & The Thing</div>
+                        <div class="text-xs text-slate-400 mt-1">Kejeniusan Elastis & Otot Batu</div>
+                    </div>
+                    <div class="roster-card p-4 rounded-2xl border-l-4 border-yellow-500">
+                        <div class="text-[10px] text-yellow-400 font-bold uppercase tracking-wider">X-Men Mutants</div>
+                        <div class="font-racing font-black text-lg text-white">Wolverine & Magneto</div>
+                        <div class="text-xs text-slate-400 mt-1">Cakar Adamantium & Medan Magnet</div>
+                    </div>
+                    <div class="roster-card p-4 rounded-2xl border-l-4 border-purple-500">
+                        <div class="text-[10px] text-purple-400 font-bold uppercase tracking-wider">Omega Villains</div>
+                        <div class="font-racing font-black text-lg text-white">Dr. Doom & Thanos</div>
+                        <div class="text-xs text-slate-400 mt-1">Sihir Latveria & Sarung Infinity</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="border-t border-white/10 pt-4 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-2">
+                <span>Versi WebGL 3D Production-Ready • Three.js r128 & Tailwind CSS</span>
+                <span class="flex items-center gap-2">
+                    <i class="fa-solid fa-gamepad text-red-500"></i> Keyboard & Touch Supported
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- 2. HOME DASHBOARD / MAIN LOBBY -->
+    <!-- ========================================================================= -->
+    <div id="home-dashboard" class="flex-1 flex flex-col hidden bg-gradient-to-b from-slate-950 via-slate-900 to-black min-h-screen">
+        <!-- Top Navigation Header -->
+        <header class="bg-slate-950/90 backdrop-blur-md border-b border-white/10 sticky top-0 z-30 px-4 sm:px-8 py-3">
+            <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="bg-red-600 px-2.5 py-1 rounded font-racing font-black text-sm tracking-wider text-white">MARVEL</div>
+                    <div class="font-racing font-black text-xl italic text-white hidden sm:block">SPEEDSTORM <span class="text-xs font-normal text-yellow-400 not-italic ml-1">CTR 3D</span></div>
+                </div>
+
+                <!-- Quick Hero Selector Carousel in Nav -->
+                <div class="flex items-center gap-1.5 overflow-x-auto max-w-md sm:max-w-xl py-1 px-2 bg-slate-900/80 rounded-xl border border-white/10" id="home-quick-heroes">
+                    <!-- Populated dynamically via updateHomeQuickHeroes() -->
+                </div>
+
+                <!-- Action Toolbar -->
+                <div class="flex items-center gap-2">
+                    <button onclick="toggleAudio()" id="sound-btn" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs border border-white/10" title="Suara Game">
+                        <i class="fa-solid fa-volume-high" id="sound-icon"></i>
+                    </button>
+                    <button onclick="openSettingsModal()" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs border border-white/10" title="Pengaturan">
+                        <i class="fa-solid fa-gear"></i>
+                    </button>
+                    <button onclick="showMarvelIntro()" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs border border-white/10" title="Info & Intro">
+                        <i class="fa-solid fa-circle-question"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Subtab Navigation Bar -->
+        <div class="bg-slate-900/60 border-b border-white/10 px-4 sm:px-8 py-2">
+            <div class="max-w-7xl mx-auto flex items-center gap-3 overflow-x-auto">
+                <button id="tab-btn-play" onclick="switchHomeSubTab('play')" class="skew-box px-3.5 py-1.5 bg-white text-slate-950 rounded shadow font-racing font-bold text-xs sm:text-sm">
+                    <span class="unskew flex items-center gap-1.5"><i class="fa-solid fa-flag-checkered text-red-600"></i> MODE BALAPAN</span>
+                </button>
+                <button id="tab-btn-chapters" onclick="switchHomeSubTab('chapters')" class="skew-box px-3.5 py-1.5 bg-slate-800/90 hover:bg-slate-700 text-slate-200 rounded border border-white/20 font-racing font-bold text-xs sm:text-sm">
+                    <span class="unskew flex items-center gap-1.5"><i class="fa-solid fa-book-open text-amber-400"></i> CHAPTER KISAH</span>
+                </button>
+                <button id="tab-btn-collections" onclick="switchHomeSubTab('collections')" class="skew-box px-3.5 py-1.5 bg-slate-800/90 hover:bg-slate-700 text-slate-200 rounded border border-white/20 font-racing font-bold text-xs sm:text-sm">
+                    <span class="unskew flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-cyan-400"></i> KOLEKSI HERO & KART</span>
+                </button>
+                <button id="tab-btn-roadmap" onclick="switchHomeSubTab('roadmap')" class="skew-box px-3.5 py-1.5 bg-slate-800/90 hover:bg-slate-700 text-slate-200 rounded border border-white/20 font-racing font-bold text-xs sm:text-sm">
+                    <span class="unskew flex items-center gap-1.5"><i class="fa-solid fa-map-location-dot text-emerald-400"></i> ROADMAP</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-8 space-y-8">
+            <!-- TAB 1: PLAY / BALAPAN -->
+            <section id="home-subtab-play" class="space-y-6">
+                <!-- Banner Spotlight -->
+                <div class="relative rounded-3xl overflow-hidden marvel-gradient p-6 sm:p-10 border border-white/20 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="space-y-3 max-w-2xl">
+                        <div class="inline-flex items-center gap-2 bg-black/40 px-3 py-1 rounded-full text-xs text-yellow-300 font-bold border border-yellow-400/30">
+                            <i class="fa-solid fa-trophy"></i> TOURNAMENT GRAND PRIX TERBUKA
+                        </div>
+                        <h2 class="font-racing text-3xl sm:text-5xl font-black text-white italic">SIAPKAN KART & REBUT TROFI EMAS</h2>
+                        <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+                            Pilih sirkuit berkecepatan tinggi, kustomisasi mesin dan warna cat candy gloss supercar kamu di garasi, lalu adu kecepatan melawan 3 rival AI bertenaga super!
+                        </p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                        <button onclick="openGarageTab()" class="skew-box px-6 py-3.5 bg-slate-900/90 hover:bg-slate-800 text-white font-racing font-bold text-sm rounded-xl border border-white/20 shadow text-center">
+                            <span class="unskew flex items-center justify-center gap-2"><i class="fa-solid fa-screwdriver-wrench text-yellow-400"></i> GARASI 3D</span>
+                        </button>
+                        <button onclick="startRacingMode()" class="skew-box px-8 py-3.5 bg-gradient-to-r from-red-600 to-amber-500 hover:from-red-500 hover:to-amber-400 text-white font-racing font-black text-lg rounded-xl shadow-xl gold-border text-center">
+                            <span class="unskew flex items-center justify-center gap-2"><i class="fa-solid fa-play text-yellow-300"></i> GAS BALAPAN!</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2-Column: Game Modes & Circuit Themes -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <!-- Left: Game Mode Selector -->
+                    <div class="lg:col-span-7 bg-slate-900/80 border border-white/10 rounded-2xl p-6 space-y-4">
+                        <h3 class="font-racing font-bold text-lg text-white flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-red-500"></i> PILIH MODE PERMAINAN
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <button onclick="setGameMode('grand_prix')" class="p-4 rounded-xl bg-slate-950/70 border-2 border-red-500 text-left hover:border-red-400 transition group">
+                                <div class="text-red-500 text-xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-trophy"></i></div>
+                                <div class="font-racing font-black text-white text-base">GRAND PRIX</div>
+                                <div class="text-[11px] text-slate-400 mt-1">3 Lap sirkuit penuh dengan kotak senjata CTR & sistem poin klasemen.</div>
+                            </button>
+                            <button onclick="setGameMode('time_trial')" class="p-4 rounded-xl bg-slate-950/70 border-2 border-white/10 text-left hover:border-cyan-400 transition group">
+                                <div class="text-cyan-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-stopwatch"></i></div>
+                                <div class="font-racing font-black text-white text-base">TIME TRIAL</div>
+                                <div class="text-[11px] text-slate-400 mt-1">Adu rekor waktu tercepat per lap tanpa hambatan rival.</div>
+                            </button>
+                            <button onclick="setGameMode('omega_arena')" class="p-4 rounded-xl bg-slate-950/70 border-2 border-white/10 text-left hover:border-purple-400 transition group">
+                                <div class="text-purple-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-skull-crossbones"></i></div>
+                                <div class="font-racing font-black text-white text-base">OMEGA ARENA</div>
+                                <div class="text-[11px] text-slate-400 mt-1">Pertarungan eliminasi brutal dengan senjata CTR tak terbatas.</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Right: Track Theme Selector -->
+                    <div class="lg:col-span-5 bg-slate-900/80 border border-white/10 rounded-2xl p-6 space-y-4">
+                        <h3 class="font-racing font-bold text-lg text-white flex items-center gap-2">
+                            <i class="fa-solid fa-route text-amber-400"></i> SIRKUIT BALAP
+                        </h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button id="track-btn-desert" onclick="selectTrackTheme('desert')" class="p-3.5 rounded-xl bg-amber-950/60 border-2 border-amber-400 text-left transition">
+                                <div class="text-amber-400 text-lg mb-1"><i class="fa-solid fa-sun"></i></div>
+                                <div class="font-racing font-bold text-white text-sm">NEVADA DESERT</div>
+                                <div class="text-[10px] text-slate-300">Siang cerah, tebing ngarai, kaktus saguaro & pasir emas.</div>
+                            </button>
+                            <button id="track-btn-night" onclick="selectTrackTheme('night')" class="p-3.5 rounded-xl bg-slate-800/70 border-2 border-white/10 text-left transition">
+                                <div class="text-cyan-400 text-lg mb-1"><i class="fa-solid fa-moon"></i></div>
+                                <div class="font-racing font-bold text-white text-sm">BLACKRIDGE NIGHT</div>
+                                <div class="text-[10px] text-slate-300">Malam cyber-city, neon skyscraper, billboard bercahaya.</div>
+                            </button>
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-950/80 border border-white/10 text-xs text-slate-300 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-info text-cyan-400"></i>
+                            <span>Kamu juga bisa menukar tema track langsung saat balapan dengan tombol di HUD atas!</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: CHAPTERS -->
+            <section id="home-subtab-chapters" class="space-y-6 hidden">
+                <div class="bg-slate-900/80 border border-white/10 rounded-2xl p-6 space-y-4">
+                    <h3 class="font-racing font-bold text-2xl text-white flex items-center gap-2">
+                        <i class="fa-solid fa-book-open text-amber-400"></i> CAMPAIGN CHAPTERS
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="roster-card p-5 rounded-2xl border border-red-500/30 space-y-3">
+                            <span class="px-2 py-0.5 rounded bg-red-600/30 text-red-400 text-[10px] font-bold">CHAPTER 1</span>
+                            <h4 class="font-racing font-bold text-lg text-white">ASGARDIAN THUNDER RUN</h4>
+                            <p class="text-xs text-slate-400">Bantu Thor mengalahkan pasukan bayangan Loki di jembatan Bifrost menuju sirkuit bumi.</p>
+                            <button onclick="startRacingMode()" class="w-full py-2 bg-red-600 hover:bg-red-500 text-white font-racing font-bold text-xs rounded-lg">MAINKAN CHAPTER 1</button>
+                        </div>
+                        <div class="roster-card p-5 rounded-2xl border border-emerald-500/30 space-y-3">
+                            <span class="px-2 py-0.5 rounded bg-emerald-600/30 text-emerald-400 text-[10px] font-bold">CHAPTER 2</span>
+                            <h4 class="font-racing font-bold text-lg text-white">LATVERIAN CITADEL SIEGE</h4>
+                            <p class="text-xs text-slate-400">Hadapi armada Doombot berkecepatan 300+ KM/H di benteng pegunungan Doctor Doom.</p>
+                            <button onclick="startRacingMode()" class="w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-racing font-bold text-xs rounded-lg">MAINKAN CHAPTER 2</button>
+                        </div>
+                        <div class="roster-card p-5 rounded-2xl border border-purple-500/30 space-y-3">
+                            <span class="px-2 py-0.5 rounded bg-purple-600/30 text-purple-400 text-[10px] font-bold">CHAPTER 3</span>
+                            <h4 class="font-racing font-bold text-lg text-white">INFINITY SHOWDOWN</h4>
+                            <p class="text-xs text-slate-400">Pertempuran puncak melawan Thanos yang mengendarai Titan Heavy Charger di sirkuit kosmik.</p>
+                            <button onclick="startRacingMode()" class="w-full py-2 bg-purple-600 hover:bg-purple-500 text-white font-racing font-bold text-xs rounded-lg">MAINKAN CHAPTER 3</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: COLLECTIONS -->
+            <section id="home-subtab-collections" class="space-y-6 hidden">
+                <div class="bg-slate-900/80 border border-white/10 rounded-2xl p-6 space-y-4">
+                    <h3 class="font-racing font-bold text-2xl text-white flex items-center gap-2">
+                        <i class="fa-solid fa-shield-halved text-cyan-400"></i> ROSTER HERO & SUPERCAR KART
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="roster-card p-4 rounded-xl space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="font-racing font-black text-lg text-white">IRON MAN</span>
+                                <span class="text-[10px] bg-red-600 px-2 py-0.5 rounded text-white font-bold">AVENGERS</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400">Nanotech Mark 85 • Speed 94 • Accel 90</p>
+                            <button onclick="selectedHeroIndex=0; openGarageTab();" class="w-full py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-racing font-bold rounded">KUSTOMISASI</button>
+                        </div>
+                        <div class="roster-card p-4 rounded-xl space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="font-racing font-black text-lg text-white">THOR</span>
+                                <span class="text-[10px] bg-red-600 px-2 py-0.5 rounded text-white font-bold">AVENGERS</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400">God of Thunder • Boost 95 • Combat 98</p>
+                            <button onclick="selectedHeroIndex=1; openGarageTab();" class="w-full py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-racing font-bold rounded">KUSTOMISASI</button>
+                        </div>
+                        <div class="roster-card p-4 rounded-xl space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="font-racing font-black text-lg text-white">MR. FANTASTIC</span>
+                                <span class="text-[10px] bg-blue-600 px-2 py-0.5 rounded text-white font-bold">FANTASTIC 4</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400">Elastic Genius • Handling 96 • Accel 92</p>
+                            <button onclick="selectedHeroIndex=2; openGarageTab();" class="w-full py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-racing font-bold rounded">KUSTOMISASI</button>
+                        </div>
+                        <div class="roster-card p-4 rounded-xl space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="font-racing font-black text-lg text-white">THE THING</span>
+                                <span class="text-[10px] bg-amber-600 px-2 py-0.5 rounded text-white font-bold">FANTASTIC 4</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400">Rock Solid • Combat 99 • Boost 88</p>
+                            <button onclick="selectedHeroIndex=3; openGarageTab();" class="w-full py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-racing font-bold rounded">KUSTOMISASI</button>
+                        </div>
+                        <div class="roster-card p-4 rounded-xl space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="font-racing font-black text-lg text-white">WOLVERINE</span>
+                                <span class="text-[10px] bg-yellow-600 px-2 py-0.5 rounded text-white font-bold">MUTANTS</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400">Adamantium Claws • Speed 92 • Accel 94</p>
+                            <button onclick="selectedHeroIndex=4; openGarageTab();" class="w-full py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-racing font-bold rounded">KUSTOMISASI</button>
+                        </div>
+                        <div class="roster-card p-4 rounded-xl space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="font-racing font-black text-lg text-white">MAGNETO</span>
+                                <span class="text-[10px] bg-purple-600 px-2 py-0.5 rounded text-white font-bold">MUTANTS</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400">Master of Magnetism • Speed 95 • Boost 94</p>
+                            <button onclick="selectedHeroIndex=5; openGarageTab();" class="w-full py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-racing font-bold rounded">KUSTOMISASI</button>
+                        </div>
+                        <div class="roster-card p-4 rounded-xl space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="font-racing font-black text-lg text-white">DR. DOOM</span>
+                                <span class="text-[10px] bg-emerald-600 px-2 py-0.5 rounded text-white font-bold">VILLAINS</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400">Latverian Monarch • Handling 93 • Combat 95</p>
+                            <button onclick="selectedHeroIndex=6; openGarageTab();" class="w-full py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-racing font-bold rounded">KUSTOMISASI</button>
+                        </div>
+                        <div class="roster-card p-4 rounded-xl space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="font-racing font-black text-lg text-white">THANOS</span>
+                                <span class="text-[10px] bg-purple-900 px-2 py-0.5 rounded text-white font-bold">VILLAINS</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400">Mad Titan • Speed 96 • Combat 100</p>
+                            <button onclick="selectedHeroIndex=7; openGarageTab();" class="w-full py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-racing font-bold rounded">KUSTOMISASI</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: ROADMAP -->
+            <section id="home-subtab-roadmap" class="space-y-6 hidden">
+                <div class="bg-slate-900/80 border border-white/10 rounded-2xl p-6 space-y-4">
+                    <h3 class="font-racing font-bold text-2xl text-white flex items-center gap-2">
+                        <i class="fa-solid fa-map-location-dot text-emerald-400"></i> ROADMAP PEMBARUAN MUSIM
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="p-4 rounded-xl bg-slate-950/80 border border-white/10 flex items-center justify-between">
+                            <div>
+                                <div class="font-racing font-bold text-white text-base">UPDATE 1.1 • WAKANDA FALLS TRACK</div>
+                                <div class="text-xs text-slate-400">Sirkuit hutan hujan vibranium dengan jalur gravitasi magnetik melayang.</div>
+                            </div>
+                            <span class="px-2.5 py-1 bg-green-900/60 text-green-300 font-bold text-xs rounded border border-green-500/40">SEGERA HADIR</span>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-950/80 border border-white/10 flex items-center justify-between">
+                            <div>
+                                <div class="font-racing font-bold text-white text-base">UPDATE 1.2 • SPIDER-MAN & SYMBIOTE CAR</div>
+                                <div class="text-xs text-slate-400">Hero baru Spider-Man dengan webbing drift boost mekanik khusus.</div>
+                            </div>
+                            <span class="px-2.5 py-1 bg-amber-900/60 text-amber-300 font-bold text-xs rounded border border-amber-500/40">DALAM PENGEMBANGAN</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- 3. GAME VIEW CONTAINER (3D CANVAS + GARAGE DECK + RACE HUDS) -->
+    <!-- ========================================================================= -->
+    <div id="game-view-container" class="relative w-full h-screen overflow-hidden hidden bg-black">
+        <!-- 3D Canvas Mount Point -->
+        <div id="canvas-container" class="absolute inset-0 z-0"></div>
+
+        <!-- NFS Speed Streak Effect Overlay (Active during Nitro) -->
+        <div id="nfs-speed-lines" class="absolute inset-0 z-10 pointer-events-none hidden overflow-hidden">
+            <div class="w-full h-full speed-streak" style="background: radial-gradient(circle, transparent 40%, rgba(14,165,233,0.3) 80%, rgba(237,29,36,0.5) 100%);"></div>
+        </div>
+
+        <!-- 3D Floating Name Tags Projected Overlay Container -->
+        <div id="rival-labels-container" class="absolute inset-0 z-15 pointer-events-none"></div>
+
+        <!-- CTR Weapon Pickup Toast Alert Notification -->
+        <div id="weapon-toast" class="absolute top-20 left-1/2 transform -translate-x-1/2 z-30 hidden bg-gradient-to-r from-amber-600 via-red-600 to-amber-700 px-6 py-3 rounded-2xl gold-border shadow-2xl flex items-center gap-3">
+            <i id="weapon-toast-icon" class="fa-solid fa-rocket text-2xl text-yellow-300 animate-bounce"></i>
+            <div>
+                <div class="text-[10px] text-amber-200 uppercase font-bold tracking-wider">CTR KOTAK MISTERI DIPEROLEH</div>
+                <div id="weapon-toast-title" class="font-racing font-black text-lg text-white">MISIL REPULSOR</div>
+            </div>
+        </div>
+
+        <!-- Live Real-Time Leaderboard Overlay (Race Mode) -->
+        <div id="leaderboard-overlay" class="absolute top-20 left-4 z-20 bg-slate-950/85 backdrop-blur-md p-3 rounded-xl border border-white/10 hidden max-w-xs w-full shadow-2xl">
+            <div class="flex items-center justify-between border-b border-white/10 pb-1.5 mb-2">
+                <span class="font-racing font-bold text-xs text-white uppercase tracking-wider flex items-center gap-1.5">
+                    <i class="fa-solid fa-ranking-star text-yellow-400"></i> KLASEMEN BALAP
+                </span>
+                <span class="text-[10px] text-slate-400">JARAK</span>
+            </div>
+            <div id="leaderboard-list" class="space-y-1 text-xs font-racing font-bold">
+                <!-- Dynamically populated each frame -->
+            </div>
+        </div>
+
+        <!-- ----------------------------------------------------------------- -->
+        <!-- GARAGE 3D CUSTOMIZER DECK -->
+        <!-- ----------------------------------------------------------------- -->
+        <div id="garage-deck" class="absolute bottom-4 left-4 right-4 z-20 max-w-5xl mx-auto bg-slate-950/90 backdrop-blur-md border border-white/20 rounded-2xl p-4 shadow-2xl space-y-3">
+            <!-- Garage Deck Header -->
+            <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                <div>
+                    <h2 id="garage-hero-title" class="font-racing font-black text-lg sm:text-xl text-white">IRON MAN (Mark 85 Endgame)</h2>
+                    <p id="garage-hero-role" class="text-xs text-amber-400 font-semibold">Speedster Hero • Nanotech Armor</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="toggleWireframe()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-racing font-bold rounded-lg border border-white/10" title="Wireframe Model">
+                        <i class="fa-solid fa-cube mr-1"></i> WIREFRAME
+                    </button>
+                    <button onclick="toggleGarageCollapse()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-racing font-bold rounded-lg border border-white/10">
+                        <i id="collapse-icon" class="fa-solid fa-chevron-up mr-1"></i> <span id="collapse-text">SEMBUNYIKAN PANEL</span>
+                    </button>
+                    <button onclick="returnToHome()" class="px-3 py-1 bg-red-950/80 hover:bg-red-900 text-red-200 text-xs font-racing font-bold rounded-lg border border-red-500/30">
+                        <i class="fa-solid fa-house mr-1"></i> HOME
+                    </button>
+                </div>
+            </div>
+
+            <!-- Garage Collapsible Body -->
+            <div id="garage-collapsible-body" class="space-y-3 text-xs">
+                <!-- Faction Filter Tabs -->
+                <div id="faction-filter-deck" class="flex items-center gap-2 overflow-x-auto pb-1">
+                    <button onclick="filterFaction('all')" class="px-2.5 py-1 rounded bg-red-600 text-white font-racing font-bold text-xs shrink-0">SEMUA FACTION</button>
+                    <button onclick="filterFaction('avengers')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 font-racing font-bold text-xs shrink-0">AVENGERS</button>
+                    <button onclick="filterFaction('fantastic4')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 font-racing font-bold text-xs shrink-0">FANTASTIC 4</button>
+                    <button onclick="filterFaction('mutants')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 font-racing font-bold text-xs shrink-0">X-MEN MUTANTS</button>
+                    <button onclick="filterFaction('villains')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 font-racing font-bold text-xs shrink-0">OMEGA VILLAINS</button>
+                </div>
+
+                <!-- Hero Roster Select Bar -->
+                <div class="flex items-center gap-1.5 overflow-x-auto py-1" id="garage-roster-buttons">
+                    <!-- Populated dynamically -->
+                </div>
+
+                <!-- Customization Grid (Skins, Chassis, Paint) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1 border-t border-white/10">
+                    <!-- Skin Selector -->
+                    <div class="space-y-1.5">
+                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Kostum / Skin Hero</span>
+                        <div id="skin-buttons-container" class="flex flex-wrap gap-1.5"></div>
+                    </div>
+
+                    <!-- Kart Model Chassis Selector -->
+                    <div class="space-y-1.5">
+                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Chassis Supercar / Muscle Kart</span>
+                        <div id="kart-model-buttons" class="flex flex-wrap gap-1.5"></div>
+                    </div>
+
+                    <!-- Automotive Paint Colors -->
+                    <div class="space-y-1.5">
+                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Warna Cat Candy & Metallic</span>
+                        <div id="paint-color-buttons" class="flex items-center gap-2"></div>
+                    </div>
+                </div>
+
+                <!-- Start Race Direct Action Button -->
+                <div class="pt-2 flex justify-end">
+                    <button onclick="startRacingMode()" class="skew-box px-8 py-2.5 bg-gradient-to-r from-red-600 via-red-500 to-amber-500 hover:from-red-500 hover:to-amber-400 text-white font-racing font-black text-sm rounded-xl shadow-xl gold-border">
+                        <span class="unskew flex items-center gap-2"><i class="fa-solid fa-flag-checkered text-yellow-300"></i> GASPOL BALAPAN SEKARANG</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ----------------------------------------------------------------- -->
+        <!-- TOP RACE TELEMETRY HUD -->
+        <!-- ----------------------------------------------------------------- -->
+        <div id="hud-top-race" class="absolute top-4 left-4 right-4 z-20 flex items-center justify-between pointer-events-none hidden">
+            <!-- Left: Lap, Timer, Hits -->
+            <div class="bg-black/80 backdrop-blur-md px-4 py-2 rounded-xl border border-white/20 pointer-events-auto flex items-center gap-4">
+                <div>
+                    <div class="text-[10px] text-slate-400 uppercase font-bold">Lap Balapan</div>
+                    <div id="lb-lap-info" class="font-racing font-black text-xl text-yellow-400">LAP 1/3</div>
+                </div>
+                <div class="border-l border-white/20 pl-4">
+                    <div class="text-[10px] text-slate-400 uppercase font-bold">Waktu</div>
+                    <div id="hud-race-timer" class="font-mono font-bold text-sm text-cyan-300">00:00:00</div>
+                </div>
+                <div class="border-l border-white/20 pl-4">
+                    <div class="text-[10px] text-slate-400 uppercase font-bold">Tabrakan</div>
+                    <div id="hud-hits-val" class="font-racing font-black text-sm text-red-400">0/20</div>
+                </div>
+            </div>
+
+            <!-- Center: Floating Player Rank Badge -->
+            <div class="pointer-events-auto">
+                <div id="hud-pos-rank" class="font-racing font-black text-xl sm:text-2xl px-5 py-1.5 bg-red-600/95 text-white rounded-xl gold-border skew-box italic shadow-2xl">
+                    <span class="unskew">4th number</span>
+                </div>
+            </div>
+
+            <!-- Right: Controls & Navigation -->
+            <div class="flex items-center gap-2 pointer-events-auto">
+                <button onclick="toggleRaceCameraAngle()" class="px-3 py-2 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 text-xs font-racing font-bold border border-white/20 flex items-center gap-1.5">
+                    <i class="fa-solid fa-video text-amber-400"></i> <span class="hidden sm:inline">KAMERA</span>
+                </button>
+                <button onclick="toggleRaceTrackTheme()" class="px-3 py-2 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 text-xs font-racing font-bold border border-white/20 flex items-center gap-1.5">
+                    <i class="fa-solid fa-mountain-sun text-cyan-400"></i> <span class="hidden sm:inline">TEMA SIRKUIT</span>
+                </button>
+                <button onclick="returnToHome()" class="px-3 py-2 rounded-xl bg-red-950/90 hover:bg-red-900 text-red-200 text-xs font-racing font-bold border border-red-500/40 flex items-center gap-1.5">
+                    <i class="fa-solid fa-arrow-left"></i> <span class="hidden sm:inline">KELUAR</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ----------------------------------------------------------------- -->
+        <!-- BOTTOM RACE HUD: SPEEDOMETER, NITRO BAR, TOUCH CONTROLS -->
+        <!-- ----------------------------------------------------------------- -->
+        <div id="hud-drift-container" class="absolute bottom-4 left-4 right-4 z-20 flex-col sm:flex-row items-center justify-between gap-4 pointer-events-none hidden">
+            <!-- Left: Mobile / On-Screen Steering Controls -->
+            <div class="flex items-center gap-2 pointer-events-auto sm:opacity-90">
+                <button onmousedown="raceInput.left=true" onmouseup="raceInput.left=false" ontouchstart="raceInput.left=true" ontouchend="raceInput.left=false" class="w-14 h-14 rounded-2xl bg-black/70 active:bg-red-600 border border-white/20 flex items-center justify-center text-white text-xl shadow-lg transition">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <button onmousedown="raceInput.right=true" onmouseup="raceInput.right=false" ontouchstart="raceInput.right=true" ontouchend="raceInput.right=false" class="w-14 h-14 rounded-2xl bg-black/70 active:bg-red-600 border border-white/20 flex items-center justify-center text-white text-xl shadow-lg transition">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- Center: NFS Style Speedometer & Nitro/Drift Gauge -->
+            <div class="bg-black/85 backdrop-blur-md px-6 py-3 rounded-2xl border border-white/20 pointer-events-auto flex flex-col items-center max-w-sm w-full shadow-2xl">
+                <div class="flex items-baseline gap-2">
+                    <span id="hud-speedometer" class="font-racing font-black text-4xl sm:text-5xl text-white italic tracking-tighter">0</span>
+                    <span class="font-racing font-bold text-sm text-yellow-400">KM/H</span>
+                </div>
+                <div class="w-full mt-2">
+                    <div class="flex justify-between text-[10px] text-slate-400 font-bold mb-1">
+                        <span>DRIFT & NITRO TANK</span>
+                        <span class="text-cyan-400">[SPACE / SHIFT]</span>
+                    </div>
+                    <div class="w-full bg-slate-900 rounded-full h-3 p-0.5 border border-white/10">
+                        <div id="drift-meter-bar" class="h-full bg-gradient-to-r from-amber-400 via-red-500 to-cyan-400 rounded-full transition-all duration-75 shadow-[0_0_10px_rgba(14,165,233,0.5)]" style="width: 78%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: On-Screen Nitro Boost Trigger Button -->
+            <div class="pointer-events-auto">
+                <button onmousedown="triggerNitroBoost(true)" onmouseup="triggerNitroBoost(false)" ontouchstart="triggerNitroBoost(true)" ontouchend="triggerNitroBoost(false)" class="px-6 py-4 rounded-2xl bg-gradient-to-r from-cyan-600 to-blue-700 active:from-cyan-400 active:to-blue-500 border border-cyan-400/50 shadow-[0_0_20px_rgba(6,182,212,0.6)] flex items-center gap-2 text-white font-racing font-black text-lg skew-box">
+                    <span class="unskew flex items-center gap-2">
+                        <i class="fa-solid fa-bolt text-yellow-300"></i> NITRO BOOST
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- 4. APPLICATION LOGIC & THREE.JS 3D ENGINE -->
+    <!-- ========================================================================= -->
+    <script>
+        // --- GAME STATE & CONFIGURATION ---
+        let currentScreen = 'intro'; // intro, home, garage, studio, racing
+        let currentGameMode = 'grand_prix'; // grand_prix, time_trial, omega_arena
+        let selectedHeroIndex = 0;
+        let isWireframe = false;
+
+        // Race Progression State
+        let currentLap = 1;
+        let maxLaps = 3;
+        let raceDistanceCovered = 0;
+        let totalTrackLength = 350; // units
+        let blindBoxes = [];
+        let activeWeapon = null;
+        let activeWeaponDuration = 0;
+
+        // Customization State for each hero (skinIdx, kartModelIdx, colorIdx)
+        let heroCustomState = [
+            { skinIdx: 0, kartModelIdx: 0, colorIdx: 0 },
+            { skinIdx: 0, kartModelIdx: 1, colorIdx: 2 },
+            { skinIdx: 0, kartModelIdx: 2, colorIdx: 3 },
+            { skinIdx: 0, kartModelIdx: 3, colorIdx: 4 },
+            { skinIdx: 0, kartModelIdx: 0, colorIdx: 2 },
+            { skinIdx: 0, kartModelIdx: 1, colorIdx: 6 },
+            { skinIdx: 0, kartModelIdx: 2, colorIdx: 3 },
+            { skinIdx: 0, kartModelIdx: 3, colorIdx: 4 }
+        ];
+
+        // Expanded Marvel Hero & Villain Faction Roster
+        const HERO_ROSTER = [
+            // --- AVENGERS ---
+            {
+                id: 'iron_man',
+                name: 'IRON MAN',
+                shortName: 'IRON MAN',
+                faction: 'avengers',
+                role: 'Speedster Hero • Nanotech Armor',
+                stats: { speed: 94, accel: 90, handling: 88, boost: 92, combat: 85 },
+                skins: [
+                    { name: 'Mark 85 Endgame', primaryColor: 0xed1d24, secondaryColor: 0xfacc15, goldColor: 0xb91c1c, accentColor: 0x00f3ff, skinColor: 0xcccccc },
+                    { name: 'Stealth Blue Armor', primaryColor: 0x1e3a8a, secondaryColor: 0x38bdf8, goldColor: 0x0284c7, accentColor: 0xffffff, skinColor: 0x94a3b8 },
+                    { name: 'Hulkbuster Heavy', primaryColor: 0x991b1b, secondaryColor: 0xfbbf24, goldColor: 0x78350f, accentColor: 0x22c55e, skinColor: 0x475569 }
+                ]
+            },
+            {
+                id: 'thor',
+                name: 'THOR ODINSON',
+                shortName: 'THOR',
+                faction: 'avengers',
+                role: 'Brawler Hero • God of Thunder',
+                stats: { speed: 89, accel: 86, handling: 82, boost: 95, combat: 98 },
+                skins: [
+                    { name: 'Asgardian Armor', primaryColor: 0x334155, secondaryColor: 0xdc2626, goldColor: 0xfacc15, accentColor: 0x38bdf8, skinColor: 0xfde047 },
+                    { name: 'King Thor Gold', primaryColor: 0xb45309, secondaryColor: 0xffffff, goldColor: 0xf59e0b, accentColor: 0x00f3ff, skinColor: 0xfef08a },
+                    { name: 'Ragnarok Dark', primaryColor: 0x0f172a, secondaryColor: 0x475569, goldColor: 0x334155, accentColor: 0xa855f7, skinColor: 0x64748b }
+                ]
+            },
+            // --- FANTASTIC 4 ---
+            {
+                id: 'mr_fantastic',
+                name: 'MR. FANTASTIC',
+                shortName: 'MR. FANTASTIC',
+                faction: 'fantastic4',
+                role: 'Trickster Hero • Elastic Genius',
+                stats: { speed: 88, accel: 92, handling: 96, boost: 85, combat: 78 },
+                skins: [
+                    { name: 'Classic Blue Suit', primaryColor: 0x1d4ed8, secondaryColor: 0xf8fafc, goldColor: 0x38bdf8, accentColor: 0x00f3ff, skinColor: 0xfbcfe8 },
+                    { name: 'Future Foundation', primaryColor: 0xffffff, secondaryColor: 0x0f172a, goldColor: 0x38bdf8, accentColor: 0x1e293b, skinColor: 0x94a3b8 }
+                ]
+            },
+            {
+                id: 'the_thing',
+                name: 'THE THING',
+                shortName: 'THE THING',
+                faction: 'fantastic4',
+                role: 'Defender Hero • Rock Solid Muscle',
+                stats: { speed: 82, accel: 80, handling: 78, boost: 88, combat: 99 },
+                skins: [
+                    { name: 'Classic Rocky', primaryColor: 0xb45309, secondaryColor: 0x1e293b, goldColor: 0x78350f, accentColor: 0x38bdf8, skinColor: 0x78350f },
+                    { name: 'Yancy Street Blue', primaryColor: 0x1d4ed8, secondaryColor: 0xfbbf24, goldColor: 0x1e3a8a, accentColor: 0xfacc15, skinColor: 0x92400e }
+                ]
+            },
+            // --- X-MEN MUTANTS ---
+            {
+                id: 'wolverine',
+                name: 'WOLVERINE',
+                shortName: 'WOLVERINE',
+                faction: 'mutants',
+                role: 'Brawler Hero • Adamantium Claws',
+                stats: { speed: 92, accel: 94, handling: 90, boost: 89, combat: 96 },
+                skins: [
+                    { name: 'Yellow & Blue X-Suit', primaryColor: 0xfacc15, secondaryColor: 0x1e3a8a, goldColor: 0xca8a04, accentColor: 0xdc2626, skinColor: 0xfde047 },
+                    { name: 'Weapon X Lab Suit', primaryColor: 0x334155, secondaryColor: 0x64748b, goldColor: 0x1e293b, accentColor: 0xef4444, skinColor: 0x94a3b8 }
+                ]
+            },
+            {
+                id: 'magneto',
+                name: 'MAGNETO',
+                shortName: 'MAGNETO',
+                faction: 'mutants',
+                role: 'Speedster Hero • Master of Magnetism',
+                stats: { speed: 95, accel: 91, handling: 89, boost: 94, combat: 92 },
+                skins: [
+                    { name: 'Classic Crimson', primaryColor: 0x991b1b, secondaryColor: 0x7e22ce, goldColor: 0xfacc15, accentColor: 0x38bdf8, skinColor: 0xfde047 },
+                    { name: 'White Monarch', primaryColor: 0xf8fafc, secondaryColor: 0x7e22ce, goldColor: 0xf59e0b, accentColor: 0xa855f7, skinColor: 0xe2e8f0 }
+                ]
+            },
+            // --- OMEGA VILLAINS ---
+            {
+                id: 'dr_doom',
+                name: 'DOCTOR DOOM',
+                shortName: 'DR. DOOM',
+                faction: 'villains',
+                role: 'Trickster Hero • Sorcerer & Monarch',
+                stats: { speed: 91, accel: 89, handling: 93, boost: 90, combat: 95 },
+                skins: [
+                    { name: 'Latverian Monarch', primaryColor: 0x065f46, secondaryColor: 0x94a3b8, goldColor: 0xf59e0b, accentColor: 0x10b981, skinColor: 0x64748b },
+                    { name: 'God Emperor White', primaryColor: 0xf8fafc, secondaryColor: 0xb45309, goldColor: 0xfbbf24, accentColor: 0x38bdf8, skinColor: 0xcfd8dc },
+                    { name: 'Arcane Sorcerer', primaryColor: 0x4c1d95, secondaryColor: 0x065f46, goldColor: 0xd97706, accentColor: 0xa855f7, skinColor: 0x475569 }
+                ]
+            },
+            {
+                id: 'thanos',
+                name: 'THANOS',
+                shortName: 'THANOS',
+                faction: 'villains',
+                role: 'Defender Hero • Mad Titan Warlord',
+                stats: { speed: 96, accel: 88, handling: 84, boost: 97, combat: 100 },
+                skins: [
+                    { name: 'Endgame Armor & Gauntlet', primaryColor: 0x581c87, secondaryColor: 0xfbbf24, goldColor: 0xb45309, accentColor: 0x38bdf8, skinColor: 0x6b21a8 },
+                    { name: 'Infinity Warlord', primaryColor: 0x1e1b4b, secondaryColor: 0xdc2626, goldColor: 0xca8a04, accentColor: 0xef4444, skinColor: 0x4c1d95 },
+                    { name: 'Farmer Thanos', primaryColor: 0x78350f, secondaryColor: 0x14532d, goldColor: 0xa16207, accentColor: 0x84cc16, skinColor: 0x581c87 }
+                ]
+            }
+        ];
+
+        let currentFactionFilter = 'all';
+
+        // 4 Kart Chassis Models (Need for Speed Supercar & Muscle Models)
+        const KART_MODELS = [
+            { id: 'koenigsegg_jesko', name: 'Agera R / Jesko Hypercar', desc: 'Canopy teardrop aerodinamis & diffuser serat karbon.' },
+            { id: 'mclaren_p1', name: 'McLaren P1 Aero-GT', desc: 'Kap dual-scoop, canard splitter & sayap GT aktif.' },
+            { id: 'phantom_charger', name: 'Phantasm V8 Supercharger', desc: 'Muscle car dengan mesin blower V8 krom menonjol.' },
+            { id: 'ferrari_f12', name: 'Berlinetta Quad-Nitro GT', desc: '4 knalpot NOS biru menyala & lampu rem F1.' }
+        ];
+
+        // 7 Paint Color Options (High-Gloss Candy & Metallic Automotive Paints)
+        const PAINT_COLORS = [
+            { name: 'Ferrari Rosso Red', hex: 0xe11d48 },
+            { name: 'McLaren Papaya Orange', hex: 0xf59e0b },
+            { name: 'Koenigsegg Liquid Silver', hex: 0xe2e8f0 },
+            { name: 'Nitro Electric Blue', hex: 0x0ea5e9 },
+            { name: 'Lamborghini Verde Green', hex: 0x22c55e },
+            { name: 'Thanos Midnight Purple', hex: 0x9333ea },
+            { name: 'Stealth Carbon Black', hex: 0x1e293b }
+        ];
+
+        // Three.js Globals
+        let scene, camera, renderer;
+        let ambientLight, mainDirLight, redNeonLight, cyanNeonLight;
+        let lobbyGroup = null;
+        let showcaseHeroMesh = null;
+        let showcaseKartMesh = null;
+        let playerCarGroup = null;
+        let highwayGroup = null;
+        let rivalCars = [];
+        let speedStreaks3D = [];
+        let animationFrameId = null;
+        const clock = new THREE.Clock();
+
+        let isDragging = false;
+        let previousMousePosition = { x: 0, y: 0 };
+        let isRacingActive = false;
+        let raceSpeed = 0;
+        let maxRaceSpeed = 1.95;
+        let trackZOffset = 0;
+        let driftMeter = 78;
+        let selectedTrackTheme = 'desert'; // 'desert' or 'night'
+        let raceCamMode = 0; // 0 = Chase Cam, 1 = Low Bumper Cam
+        let raceHits = 0;
+        let raceTimeSeconds = 0;
+        const raceInput = { left: false, right: false, nitro: false };
+
+        // --- WEB AUDIO API PROCEDURAL SOUND SYNTHESIS ---
+        let audioCtx = null;
+        let isAudioMuted = false;
+        let engineOsc = null;
+        let engineGain = null;
+
+        function initAudio() {
+            if (audioCtx) return;
+            try {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContextClass();
+                
+                // Continuous Engine Oscillator
+                engineOsc = audioCtx.createOscillator();
+                engineGain = audioCtx.createGain();
+                engineOsc.type = 'sawtooth';
+                engineOsc.frequency.setValueAtTime(65, audioCtx.currentTime);
+                engineGain.gain.setValueAtTime(0, audioCtx.currentTime);
+                engineOsc.connect(engineGain);
+                engineGain.connect(audioCtx.destination);
+                engineOsc.start();
+            } catch (e) {
+                console.log('Audio init postponed:', e);
+            }
+        }
+
+        function playSound(type) {
+            if (isAudioMuted) return;
+            if (!audioCtx) initAudio();
+            if (!audioCtx) return;
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+
+            const t = audioCtx.currentTime;
+            if (type === 'boost') {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(220, t);
+                osc.frequency.exponentialRampToValueAtTime(750, t + 0.35);
+                gain.gain.setValueAtTime(0.3, t);
+                gain.gain.exponentialRampToValueAtTime(0.01, t + 0.4);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(t);
+                osc.stop(t + 0.42);
+            } else if (type === 'pickup') {
+                const notes = [523.25, 659.25, 783.99, 1046.50];
+                notes.forEach((freq, idx) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, t + idx * 0.06);
+                    gain.gain.setValueAtTime(0.2, t + idx * 0.06);
+                    gain.gain.exponentialRampToValueAtTime(0.01, t + idx * 0.06 + 0.18);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(t + idx * 0.06);
+                    osc.stop(t + idx * 0.06 + 0.2);
+                });
+            } else if (type === 'hit') {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(140, t);
+                osc.frequency.exponentialRampToValueAtTime(40, t + 0.2);
+                gain.gain.setValueAtTime(0.4, t);
+                gain.gain.exponentialRampToValueAtTime(0.01, t + 0.22);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(t);
+                osc.stop(t + 0.25);
+            }
+        }
+
+        function toggleAudio() {
+            isAudioMuted = !isAudioMuted;
+            const icon = document.getElementById('sound-icon');
+            if (icon) {
+                icon.className = isAudioMuted ? 'fa-solid fa-volume-xmark text-red-400' : 'fa-solid fa-volume-high text-green-400';
+            }
+            if (engineGain) {
+                engineGain.gain.setValueAtTime(isAudioMuted ? 0 : 0.04, audioCtx.currentTime);
+            }
+        }
+
+        // --- NAVIGATION & SCREEN CONTROLLERS ---
+        function dismissMarvelIntro() {
+            initAudio();
+            document.getElementById('marvel-intro').classList.add('hidden');
+            document.getElementById('home-dashboard').classList.remove('hidden');
+            currentScreen = 'home';
+            updateHomeQuickHeroes();
+        }
+
+        function showMarvelIntro() {
+            document.getElementById('marvel-intro').classList.remove('hidden');
+            document.getElementById('home-dashboard').classList.add('hidden');
+            document.getElementById('game-view-container').classList.add('hidden');
+            currentScreen = 'intro';
+        }
+
+        function openGarageTab() {
+            initAudio();
+            document.getElementById('home-dashboard').classList.add('hidden');
+            document.getElementById('game-view-container').classList.remove('hidden');
+            document.getElementById('garage-deck').classList.remove('hidden');
+            document.getElementById('hud-top-race').classList.add('hidden');
+            document.getElementById('hud-drift-container').classList.add('hidden');
+            document.getElementById('nfs-speed-lines').classList.add('hidden');
+            document.getElementById('rival-labels-container').classList.add('hidden');
+            document.getElementById('leaderboard-overlay').classList.add('hidden');
+            currentScreen = 'garage';
+            isRacingActive = false;
+            buildGarageUI();
+            setupGarageScene();
+        }
+
+        function openStudio3DTab() {
+            openGarageTab();
+            currentScreen = 'studio';
+        }
+
+        function returnToHome() {
+            document.getElementById('game-view-container').classList.add('hidden');
+            document.getElementById('home-dashboard').classList.remove('hidden');
+            document.getElementById('nfs-speed-lines').classList.add('hidden');
+            document.getElementById('rival-labels-container').classList.add('hidden');
+            document.getElementById('leaderboard-overlay').classList.add('hidden');
+            currentScreen = 'home';
+            isRacingActive = false;
+            updateHomeQuickHeroes();
+        }
+
+        function startRacingMode() {
+            initAudio();
+            document.getElementById('home-dashboard').classList.add('hidden');
+            document.getElementById('game-view-container').classList.remove('hidden');
+            document.getElementById('garage-deck').classList.add('hidden');
+            document.getElementById('hud-top-race').classList.remove('hidden');
+            document.getElementById('hud-drift-container').classList.remove('hidden');
+            document.getElementById('hud-drift-container').classList.add('flex');
+            document.getElementById('nfs-speed-lines').classList.add('hidden');
+            document.getElementById('rival-labels-container').classList.remove('hidden');
+            document.getElementById('leaderboard-overlay').classList.remove('hidden');
+            currentScreen = 'racing';
+            isRacingActive = true;
+            setupRacingScene();
+        }
+
+        function setGameMode(mode) {
+            currentGameMode = mode;
+            const modes = ['grand_prix', 'time_trial', 'omega_arena'];
+            // Visual feedback
+        }
+
+        function switchHomeSubTab(tabName) {
+            ['play', 'chapters', 'collections', 'roadmap'].forEach(t => {
+                const sec = document.getElementById(`home-subtab-${t}`);
+                const btn = document.getElementById(`tab-btn-${t}`);
+                if (sec) sec.classList.toggle('hidden', t !== tabName);
+                if (btn) {
+                    if (t === tabName) {
+                        btn.className = 'skew-box px-3.5 py-1.5 bg-white text-slate-950 rounded shadow font-racing font-bold text-xs sm:text-sm';
+                    } else {
+                        btn.className = 'skew-box px-3.5 py-1.5 bg-slate-800/90 hover:bg-slate-700 text-slate-200 rounded border border-white/20 font-racing font-bold text-xs sm:text-sm';
+                    }
+                }
+            });
+        }
+
+        function selectTrackTheme(theme) {
+            selectedTrackTheme = theme;
+            const btnDesert = document.getElementById('track-btn-desert');
+            const btnNight = document.getElementById('track-btn-night');
+            if (btnDesert && btnNight) {
+                btnDesert.className = theme === 'desert'
+                    ? 'p-3.5 rounded-xl bg-amber-950/60 border-2 border-amber-400 text-left transition'
+                    : 'p-3.5 rounded-xl bg-slate-800/70 border-2 border-white/10 text-left transition';
+                btnNight.className = theme === 'night'
+                    ? 'p-3.5 rounded-xl bg-cyan-950/60 border-2 border-cyan-400 text-left transition'
+                    : 'p-3.5 rounded-xl bg-slate-800/70 border-2 border-white/10 text-left transition';
+            }
+        }
+
+        function toggleRaceCameraAngle() {
+            raceCamMode = (raceCamMode + 1) % 2;
+        }
+
+        function toggleRaceTrackTheme() {
+            selectedTrackTheme = selectedTrackTheme === 'desert' ? 'night' : 'desert';
+            if (isRacingActive) setupRacingScene();
+        }
+
+        function triggerNitroBoost(active) {
+            raceInput.nitro = active;
+            const speedLinesEl = document.getElementById('nfs-speed-lines');
+            if (speedLinesEl) {
+                if (active && isRacingActive) {
+                    speedLinesEl.classList.remove('hidden');
+                    playSound('boost');
+                } else {
+                    speedLinesEl.classList.add('hidden');
+                }
+            }
+        }
+
+        // Keyboard Listeners for Steering & Nitro
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') raceInput.left = true;
+            if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') raceInput.right = true;
+            if (e.key === ' ' || e.key === 'Shift') triggerNitroBoost(true);
+        });
+        window.addEventListener('keyup', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') raceInput.left = false;
+            if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') raceInput.right = false;
+            if (e.key === ' ' || e.key === 'Shift') triggerNitroBoost(false);
+        });
+
+        function openSettingsModal() {
+            let modal = document.getElementById('settings-modal');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'settings-modal';
+                modal.className = 'fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4';
+                modal.innerHTML = `
+                    <div class="bg-slate-900 border border-white/20 p-6 rounded-2xl max-w-md w-full shadow-2xl space-y-4">
+                        <div class="flex justify-between items-center border-b border-white/10 pb-3">
+                            <h3 class="font-racing font-black text-xl text-white flex items-center gap-2">
+                                <i class="fa-solid fa-gear text-red-500"></i> PENGATURAN GAME
+                            </h3>
+                            <button onclick="document.getElementById('settings-modal').classList.add('hidden')" class="text-slate-400 hover:text-white font-bold text-lg"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                        <div class="space-y-3 text-xs font-racing font-bold text-slate-300">
+                            <div class="flex justify-between items-center bg-slate-950 p-3 rounded-xl border border-white/10">
+                                <span>KUALITAS GRAFIK 3D</span>
+                                <span class="text-cyan-400">ULTRA PBR (THREE.JS)</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-slate-950 p-3 rounded-xl border border-white/10">
+                                <span>SUARA & AUDIO SYNTH</span>
+                                <button onclick="toggleAudio()" class="text-green-400 hover:text-green-300">GANTI STATUS</button>
+                            </div>
+                            <div class="flex justify-between items-center bg-slate-950 p-3 rounded-xl border border-white/10">
+                                <span>KONTROL SPEED</span>
+                                <span class="text-yellow-400">WASD + SPACE + TOUCH</span>
+                            </div>
+                        </div>
+                        <div class="pt-2 flex justify-end">
+                            <button onclick="document.getElementById('settings-modal').classList.add('hidden')" class="marvel-gradient px-5 py-2 rounded-xl text-white font-racing font-bold text-xs shadow gold-border">SIMPAN & KEMBALI</button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            } else {
+                modal.classList.remove('hidden');
+            }
+        }
+
+        let isGarageCollapsed = false;
+        function toggleGarageCollapse() {
+            isGarageCollapsed = !isGarageCollapsed;
+            const body = document.getElementById('garage-collapsible-body');
+            const icon = document.getElementById('collapse-icon');
+            const text = document.getElementById('collapse-text');
+            if (isGarageCollapsed) {
+                body.classList.add('hidden');
+                icon.className = 'fa-solid fa-chevron-down mr-1';
+                text.innerText = 'TAMPILKAN PANEL';
+            } else {
+                body.classList.remove('hidden');
+                icon.className = 'fa-solid fa-chevron-up mr-1';
+                text.innerText = 'SEMBUNYIKAN PANEL';
+            }
+        }
+
+        // =========================================================================
+        // THREE.JS ENGINE SETUP & MOUSE INTERACTION
+        // =========================================================================
+        function initThreeEngine() {
+            const container = document.getElementById('canvas-container');
+            if (!container) return;
+
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x030712);
+            scene.fog = new THREE.FogExp2(0x030712, 0.025);
+
+            camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 3.2, 7.5);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.15;
+            container.appendChild(renderer.domElement);
+
+            // Lighting Rig
+            ambientLight = new THREE.AmbientLight(0xffffff, 1.25);
+            scene.add(ambientLight);
+
+            mainDirLight = new THREE.DirectionalLight(0xfffbeb, 2.2);
+            mainDirLight.position.set(8, 16, 10);
+            mainDirLight.castShadow = true;
+            scene.add(mainDirLight);
+
+            redNeonLight = new THREE.PointLight(0xed1d24, 3.0, 25);
+            redNeonLight.position.set(-5, 4, -3);
+            scene.add(redNeonLight);
+
+            cyanNeonLight = new THREE.PointLight(0x00f3ff, 2.5, 25);
+            cyanNeonLight.position.set(5, 4, 3);
+            scene.add(cyanNeonLight);
+
+            // Mouse / Touch Drag 360 Rotation for Garage
+            window.addEventListener('mousedown', (e) => {
+                if (currentScreen === 'garage' || currentScreen === 'studio') {
+                    isDragging = true;
+                    previousMousePosition = { x: e.clientX, y: e.clientY };
+                }
+            });
+            window.addEventListener('mousemove', (e) => {
+                if (!isDragging || (currentScreen !== 'garage' && currentScreen !== 'studio')) return;
+                const deltaX = e.clientX - previousMousePosition.x;
+                if (lobbyGroup) {
+                    lobbyGroup.rotation.y += deltaX * 0.008;
+                }
+                previousMousePosition = { x: e.clientX, y: e.clientY };
+            });
+            window.addEventListener('mouseup', () => { isDragging = false; });
+
+            // Touch events for mobile 3D inspection
+            window.addEventListener('touchstart', (e) => {
+                if ((currentScreen === 'garage' || currentScreen === 'studio') && e.touches.length > 0) {
+                    isDragging = true;
+                    previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+                }
+            }, { passive: true });
+            window.addEventListener('touchmove', (e) => {
+                if (!isDragging || (currentScreen !== 'garage' && currentScreen !== 'studio') || e.touches.length === 0) return;
+                const deltaX = e.touches[0].clientX - previousMousePosition.x;
+                if (lobbyGroup) {
+                    lobbyGroup.rotation.y += deltaX * 0.008;
+                }
+                previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            }, { passive: true });
+            window.addEventListener('touchend', () => { isDragging = false; });
+
+            window.addEventListener('resize', () => {
+                if (!camera || !renderer) return;
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        // =========================================================================
+        // PROCEDURAL 3D SUPERCAR & MUSCLE CAR MODELS
+        // =========================================================================
+        function createKartMesh3D(kartModelIdx, colorHex) {
+            const root = new THREE.Group();
+
+            // Automotive Metallic Clearcoat Paint
+            const matBody = new THREE.MeshPhysicalMaterial({
+                color: colorHex,
+                metalness: 0.78,
+                roughness: 0.14,
+                clearcoat: 1.0,
+                clearcoatRoughness: 0.06,
+                reflectivity: 1.0,
+                wireframe: isWireframe
+            });
+            const matCarbon = new THREE.MeshStandardMaterial({ color: 0x111827, metalness: 0.5, roughness: 0.35, wireframe: isWireframe });
+            const matChrome = new THREE.MeshPhysicalMaterial({ color: 0xf8fafc, metalness: 0.98, roughness: 0.05, clearcoat: 1.0, wireframe: isWireframe });
+            const matGlass = new THREE.MeshPhysicalMaterial({ color: 0x0f172a, metalness: 0.9, roughness: 0.08, transparent: true, opacity: 0.82, wireframe: isWireframe });
+            const matTire = new THREE.MeshStandardMaterial({ color: 0x090d16, roughness: 0.85, wireframe: isWireframe });
+            const matBrakeDisc = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.8, roughness: 0.3, wireframe: isWireframe });
+            const matCaliper = new THREE.MeshStandardMaterial({ color: 0xef4444, emissive: 0x7f1d1d, wireframe: isWireframe });
+            const matHeadlight = new THREE.MeshStandardMaterial({ color: 0xe0f2fe, emissive: 0x38bdf8, emissiveIntensity: 3.0, wireframe: isWireframe });
+            const matTaillight = new THREE.MeshStandardMaterial({ color: 0xff1e27, emissive: 0xef4444, emissiveIntensity: 3.5, wireframe: isWireframe });
+            const matNitroBlue = new THREE.MeshStandardMaterial({ color: 0x60a5fa, emissive: 0x3b82f6, emissiveIntensity: 4.5, transparent: true, opacity: 0.9 });
+
+            // 1. Wide Low-Slung Aerodynamic Supercar Lower Chassis
+            const lowerPan = new THREE.Mesh(new THREE.BoxGeometry(1.92, 0.22, 4.15), matCarbon);
+            lowerPan.position.y = 0.24;
+            root.add(lowerPan);
+
+            // Sculpted Main Body Shell
+            const mainBody = new THREE.Mesh(new THREE.BoxGeometry(1.86, 0.38, 3.95), matBody);
+            mainBody.position.set(0, 0.44, 0);
+            root.add(mainBody);
+
+            // Muscular Fender Arches (Widebody Kit)
+            const archGeo = new THREE.CylinderGeometry(0.42, 0.42, 0.26, 20, 1, false, 0, Math.PI);
+            archGeo.rotateZ(Math.PI / 2);
+            const fenderCoords = [
+                [-0.86, 0.42, 1.25], [0.86, 0.42, 1.25],
+                [-0.88, 0.44, -1.25], [0.88, 0.44, -1.25]
+            ];
+            fenderCoords.forEach(([fx, fy, fz]) => {
+                const arch = new THREE.Mesh(archGeo, matBody);
+                arch.position.set(fx, fy, fz);
+                root.add(arch);
+            });
+
+            // Sloping Front Hood (Nose Cone)
+            const hood = new THREE.Mesh(new THREE.BoxGeometry(1.68, 0.22, 1.35), matBody);
+            hood.position.set(0, 0.56, -1.22);
+            hood.rotation.x = 0.14;
+            root.add(hood);
+
+            // Teardrop Cockpit Canopy (Glasshouse)
+            const cabin = new THREE.Mesh(new THREE.CylinderGeometry(0.62, 0.82, 1.85, 16), matGlass);
+            cabin.scale.set(1.05, 0.52, 1.15);
+            cabin.rotation.x = Math.PI / 2;
+            cabin.position.set(0, 0.76, -0.05);
+            root.add(cabin);
+
+            // Roof Scoop & Side Mirrors
+            const roofScoop = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.12, 0.65), matCarbon);
+            roofScoop.position.set(0, 0.98, 0.1);
+            root.add(roofScoop);
+
+            [-0.96, 0.96].forEach(mx => {
+                const mirror = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.08, 0.14), matBody);
+                mirror.position.set(mx, 0.72, -0.55);
+                root.add(mirror);
+            });
+
+            // Front Carbon Splitter
+            const frontSplitter = new THREE.Mesh(new THREE.BoxGeometry(1.98, 0.06, 0.45), matCarbon);
+            frontSplitter.position.set(0, 0.16, -1.95);
+            root.add(frontSplitter);
+
+            // LED Headlights
+            [-0.68, 0.68].forEach(hx => {
+                const hLight = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.09, 0.22), matHeadlight);
+                hLight.position.set(hx, 0.48, -1.94);
+                hLight.rotation.y = hx < 0 ? 0.18 : -0.18;
+                root.add(hLight);
+            });
+
+            // Model-Specific Customizations
+            if (kartModelIdx === 0) {
+                // Koenigsegg Agera / Jesko: Dorsal Fin + Rear Wing
+                const dorsalFin = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.28, 1.1), matCarbon);
+                dorsalFin.position.set(0, 0.85, 1.15);
+                root.add(dorsalFin);
+                const rearWing = new THREE.Mesh(new THREE.BoxGeometry(1.95, 0.06, 0.35), matCarbon);
+                rearWing.position.set(0, 0.96, 1.82);
+                root.add(rearWing);
+            } else if (kartModelIdx === 1) {
+                // McLaren P1: Dual Hood Vents + GT Wing
+                [-0.36, 0.36].forEach(vx => {
+                    const vent = new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.05, 0.65), matCarbon);
+                    vent.position.set(vx, 0.64, -1.2);
+                    vent.rotation.x = 0.14;
+                    root.add(vent);
+                });
+                const gtWing = new THREE.Mesh(new THREE.BoxGeometry(1.88, 0.07, 0.32), matBody);
+                gtWing.position.set(0, 0.92, 1.78);
+                root.add(gtWing);
+            } else if (kartModelIdx === 2) {
+                // Phantasm V8 Supercharger Muscle: Exposed Chrome V8 Blower + Stripes
+                const blowerBase = new THREE.Mesh(new THREE.BoxGeometry(0.56, 0.26, 0.72), matChrome);
+                blowerBase.position.set(0, 0.72, -1.15);
+                const intakeScoop = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.24, 0.58, 16), matChrome);
+                intakeScoop.rotation.z = Math.PI / 2;
+                intakeScoop.position.set(0, 0.9, -1.22);
+                const intakeHole = new THREE.Mesh(new THREE.BoxGeometry(0.48, 0.12, 0.08), matCarbon);
+                intakeHole.position.set(0, 0.9, -1.5);
+                root.add(blowerBase, intakeScoop, intakeHole);
+
+                const stripe = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.02, 3.85), matCarbon);
+                stripe.position.set(0, 0.64, 0);
+                root.add(stripe);
+            } else {
+                // Ferrari F12 Berlinetta Style: Ducktail Spoiler
+                const ducktail = new THREE.Mesh(new THREE.BoxGeometry(1.78, 0.14, 0.22), matBody);
+                ducktail.position.set(0, 0.68, 1.92);
+                ducktail.rotation.x = -0.35;
+                root.add(ducktail);
+            }
+
+            // Rear Fascia: Taillights
+            [-0.68, 0.68].forEach(tx => {
+                const tailRing = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.14, 0.08, 20), matTaillight);
+                tailRing.rotation.x = Math.PI / 2;
+                tailRing.position.set(tx, 0.52, 1.98);
+                root.add(tailRing);
+            });
+
+            // License Plate & F1 Brake Light
+            const plate = new THREE.Mesh(new THREE.BoxGeometry(0.56, 0.15, 0.04), new THREE.MeshBasicMaterial({ color: 0xf8fafc }));
+            plate.position.set(0, 0.42, 1.99);
+            const plateBlue = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.15, 0.05), new THREE.MeshBasicMaterial({ color: 0x1d4ed8 }));
+            plateBlue.position.set(-0.24, 0.42, 1.995);
+            const f1BrakeLight = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.14, 0.05), matTaillight);
+            f1BrakeLight.position.set(0, 0.22, 1.99);
+            root.add(plate, plateBlue, f1BrakeLight);
+
+            // Quad Exhaust Pipes & Nitro Afterburner Flames
+            const nitroFlames = [];
+            [-0.58, -0.44, 0.44, 0.58].forEach(ex => {
+                const pipe = new THREE.Mesh(new THREE.CylinderGeometry(0.055, 0.055, 0.25, 14), matChrome);
+                pipe.rotation.x = Math.PI / 2;
+                pipe.position.set(ex, 0.21, 2.02);
+                root.add(pipe);
+
+                const flameGeo = new THREE.ConeGeometry(0.075, 0.65, 12);
+                flameGeo.rotateX(Math.PI / 2);
+                const flame = new THREE.Mesh(flameGeo, matNitroBlue);
+                flame.position.set(ex, 0.21, 2.38);
+                root.add(flame);
+                nitroFlames.push(flame);
+            });
+
+            // 4 Wheels with Rims, Discs & Calipers
+            const wheels = [];
+            const wheelPositions = [
+                [-0.92, 0.36, -1.25], [0.92, 0.36, -1.25],
+                [-0.95, 0.38, 1.25], [0.95, 0.38, 1.25]
+            ];
+            wheelPositions.forEach(([wx, wy, wz], idx) => {
+                const wGroup = new THREE.Group();
+                wGroup.position.set(wx, wy, wz);
+
+                const radius = idx >= 2 ? 0.38 : 0.35;
+                const tire = new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, 0.32, 24), matTire);
+                tire.rotation.z = Math.PI / 2;
+
+                const rim = new THREE.Mesh(new THREE.CylinderGeometry(radius * 0.72, radius * 0.72, 0.33, 20), matChrome);
+                rim.rotation.z = Math.PI / 2;
+
+                const disc = new THREE.Mesh(new THREE.CylinderGeometry(radius * 0.55, radius * 0.55, 0.15, 16), matBrakeDisc);
+                disc.rotation.z = Math.PI / 2;
+
+                const caliper = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.16, 0.12), matCaliper);
+                caliper.position.set(wx < 0 ? -0.08 : 0.08, 0.1, 0.1);
+
+                wGroup.add(tire, rim, disc, caliper);
+                root.add(wGroup);
+                wheels.push(wGroup);
+            });
+
+            root.userData = { nitroFlames, wheels };
+            return root;
+        }
+
+        // =========================================================================
+        // PROCEDURAL 3D MARVEL HERO MODELS
+        // =========================================================================
+        function createArmoredHero3D(heroData, skinIdx) {
+            const root = new THREE.Group();
+            const skinInfo = heroData.skins[skinIdx] || heroData.skins[0];
+
+            const matArmor = new THREE.MeshPhysicalMaterial({
+                color: skinInfo.primaryColor,
+                metalness: 0.85,
+                roughness: 0.18,
+                clearcoat: 1.0,
+                wireframe: isWireframe
+            });
+            const matGold = new THREE.MeshPhysicalMaterial({
+                color: skinInfo.goldColor,
+                metalness: 0.95,
+                roughness: 0.1,
+                wireframe: isWireframe
+            });
+            const matSuit = new THREE.MeshStandardMaterial({
+                color: skinInfo.secondaryColor,
+                roughness: 0.4,
+                wireframe: isWireframe
+            });
+            const matGlow = new THREE.MeshStandardMaterial({
+                color: skinInfo.accentColor,
+                emissive: skinInfo.accentColor,
+                emissiveIntensity: 3.0,
+                wireframe: isWireframe
+            });
+
+            const torsoGroup = new THREE.Group();
+            torsoGroup.position.y = 1.56;
+
+            // Chest Plate
+            const chest = new THREE.Mesh(new THREE.BoxGeometry(0.68, 0.75, 0.42), matArmor);
+            chest.position.y = 0.05;
+            torsoGroup.add(chest);
+
+            // Emblem / Reactor
+            const emblem = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.06, 16), matGlow);
+            emblem.rotation.x = Math.PI / 2;
+            emblem.position.set(0, 0.12, 0.22);
+            torsoGroup.add(emblem);
+
+            // Head / Helmet
+            const head = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.46, 0.44), matArmor);
+            head.position.set(0, 0.62, 0);
+            torsoGroup.add(head);
+
+            // Visor / Eyes
+            [-0.1, 0.1].forEach(ex => {
+                const eye = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.06, 0.08), matGlow);
+                eye.position.set(ex, 0.64, 0.23);
+                torsoGroup.add(eye);
+            });
+
+            // Hero-Specific Items
+            if (heroData.id === 'iron_man') {
+                [-0.22, 0, 0.22].forEach(bx => {
+                    [-0.15, 0.15].forEach(bz => {
+                        const blade = new THREE.Mesh(new THREE.ConeGeometry(0.06, 0.65, 4), matGold);
+                        blade.position.set(bx, 0.25, -0.3 + bz);
+                        blade.rotation.x = bz < 0 ? -0.4 : 0.4;
+                        torsoGroup.add(blade);
+                    });
+                });
+            } else if (heroData.id === 'thor') {
+                const capeMat = new THREE.MeshStandardMaterial({ color: 0xdc2626, roughness: 0.5 });
+                const cape = new THREE.Mesh(new THREE.BoxGeometry(0.65, 0.95, 0.08), capeMat);
+                cape.position.set(0, 0.05, -0.26);
+                torsoGroup.add(cape);
+
+                const hammerGroup = new THREE.Group();
+                const hHandle = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.5, 10), matSuit);
+                const hHead = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.18, 0.18), matGold);
+                hHead.position.y = 0.28;
+                hammerGroup.add(hHandle, hHead);
+                hammerGroup.position.set(0.55, -0.1, 0.25);
+                hammerGroup.rotation.z = -0.3;
+                torsoGroup.add(hammerGroup);
+            } else if (heroData.id === 'dr_doom') {
+                const hoodMat = new THREE.MeshStandardMaterial({ color: 0x065f46, roughness: 0.6 });
+                const hood = new THREE.Mesh(new THREE.SphereGeometry(0.28, 16, 16), hoodMat);
+                hood.position.set(0, 0.72, 0);
+                torsoGroup.add(hood);
+            } else if (heroData.id === 'thanos') {
+                const gauntlet = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.28, 0.24), matGold);
+                gauntlet.position.set(-0.48, -0.1, 0.15);
+                torsoGroup.add(gauntlet);
+            }
+
+            root.add(torsoGroup);
+            root.userData = { torsoGroup };
+            return root;
+        }
+
+        // =========================================================================
+        // GARAGE SCENE SETUP & UI
+        // =========================================================================
+        function clearSceneExceptLights() {
+            const toRemove = [];
+            scene.children.forEach(c => {
+                if (c !== ambientLight && c !== mainDirLight && c !== redNeonLight && c !== cyanNeonLight) {
+                    toRemove.push(c);
+                }
+            });
+            toRemove.forEach(c => scene.remove(c));
+        }
+
+        function setupGarageScene() {
+            clearSceneExceptLights();
+
+            scene.background = new THREE.Color(0x030712);
+            scene.fog = new THREE.FogExp2(0x030712, 0.025);
+
+            lobbyGroup = new THREE.Group();
+
+            const floorGeo = new THREE.CylinderGeometry(4.5, 5.0, 0.4, 32);
+            const floorMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, metalness: 0.8, roughness: 0.2 });
+            const floor = new THREE.Mesh(floorGeo, floorMat);
+            floor.position.y = -0.2;
+            lobbyGroup.add(floor);
+
+            const ringGlow = new THREE.Mesh(
+                new THREE.TorusGeometry(4.2, 0.08, 16, 48),
+                new THREE.MeshStandardMaterial({ color: 0xed1d24, emissive: 0xed1d24, emissiveIntensity: 2.0 })
+            );
+            ringGlow.rotation.x = Math.PI / 2;
+            ringGlow.position.y = 0.02;
+            lobbyGroup.add(ringGlow);
+
+            const st = heroCustomState[selectedHeroIndex];
+            const heroData = HERO_ROSTER[selectedHeroIndex];
+            const colorHex = PAINT_COLORS[st.colorIdx].hex;
+
+            showcaseHeroMesh = createArmoredHero3D(heroData, st.skinIdx);
+            showcaseHeroMesh.position.set(1.35, 0, 0.2);
+            showcaseHeroMesh.rotation.y = -0.35;
+            lobbyGroup.add(showcaseHeroMesh);
+
+            showcaseKartMesh = createKartMesh3D(st.kartModelIdx, colorHex);
+            showcaseKartMesh.position.set(-0.65, 0, 0.1);
+            showcaseKartMesh.rotation.y = 0.38;
+            lobbyGroup.add(showcaseKartMesh);
+
+            scene.add(lobbyGroup);
+            camera.position.set(0, 2.0, 6.2);
+            camera.lookAt(0, 0.85, 0);
+
+            renderGarageUIControls();
+        }
+
+        function buildGarageUI() {
+            const rosterContainer = document.getElementById('garage-roster-buttons');
+            if (!rosterContainer) return;
+            rosterContainer.innerHTML = '';
+
+            HERO_ROSTER.forEach((h, idx) => {
+                if (currentFactionFilter !== 'all' && h.faction !== currentFactionFilter) return;
+
+                const btn = document.createElement('button');
+                btn.className = `px-2.5 py-1 rounded-lg font-racing font-bold text-xs transition flex items-center gap-1.5 shrink-0 ${idx === selectedHeroIndex ? 'bg-red-600 text-white shadow-lg border border-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'}`;
+                btn.onclick = () => { selectedHeroIndex = idx; setupGarageScene(); buildGarageUI(); };
+                btn.innerHTML = `<i class="fa-solid fa-shield text-[10px]"></i> ${h.shortName}`;
+                rosterContainer.appendChild(btn);
+            });
+        }
+
+        function filterFaction(faction) {
+            currentFactionFilter = faction;
+            buildGarageUI();
+        }
+
+        function renderGarageUIControls() {
+            const hero = HERO_ROSTER[selectedHeroIndex];
+            const st = heroCustomState[selectedHeroIndex];
+            const currentSkin = hero.skins[st.skinIdx] || hero.skins[0];
+
+            const titleEl = document.getElementById('garage-hero-title');
+            if (titleEl) titleEl.innerText = `${hero.name} (${currentSkin.name})`;
+            const roleEl = document.getElementById('garage-hero-role');
+            if (roleEl) roleEl.innerText = hero.role;
+
+            const skinContainer = document.getElementById('skin-buttons-container');
+            if (skinContainer) {
+                skinContainer.innerHTML = '';
+                hero.skins.forEach((sk, sIdx) => {
+                    const b = document.createElement('button');
+                    b.className = `px-2.5 py-1 rounded text-xs font-racing font-bold transition ${sIdx === st.skinIdx ? 'bg-red-600 text-white' : 'bg-slate-900 text-slate-400 hover:bg-slate-800'}`;
+                    b.onclick = () => { st.skinIdx = sIdx; setupGarageScene(); };
+                    b.innerText = sk.name;
+                    skinContainer.appendChild(b);
+                });
+            }
+
+            const kartContainer = document.getElementById('kart-model-buttons');
+            if (kartContainer) {
+                kartContainer.innerHTML = '';
+                KART_MODELS.forEach((km, kIdx) => {
+                    const b = document.createElement('button');
+                    b.className = `px-2.5 py-1 rounded text-xs font-racing font-bold transition ${kIdx === st.kartModelIdx ? 'bg-cyan-600 text-white' : 'bg-slate-900 text-slate-400 hover:bg-slate-800'}`;
+                    b.onclick = () => { st.kartModelIdx = kIdx; setupGarageScene(); };
+                    b.innerText = km.name;
+                    kartContainer.appendChild(b);
+                });
+            }
+
+            const paintContainer = document.getElementById('paint-color-buttons');
+            if (paintContainer) {
+                paintContainer.innerHTML = '';
+                PAINT_COLORS.forEach((pc, pIdx) => {
+                    const hexStr = '#' + pc.hex.toString(16).padStart(6, '0');
+                    const b = document.createElement('button');
+                    b.className = `w-7 h-7 rounded-full border-2 transition transform hover:scale-110 ${pIdx === st.colorIdx ? 'border-white scale-110 shadow-lg' : 'border-transparent'}`;
+                    b.style.backgroundColor = hexStr;
+                    b.title = pc.name;
+                    b.onclick = () => { st.colorIdx = pIdx; setupGarageScene(); };
+                    paintContainer.appendChild(b);
+                });
+            }
+        }
+
+        function updateHomeQuickHeroes() {
+            const container = document.getElementById('home-quick-heroes');
+            if (!container) return;
+            container.innerHTML = '';
+            HERO_ROSTER.forEach((h, idx) => {
+                const active = idx === selectedHeroIndex;
+                const b = document.createElement('button');
+                b.className = `px-3 py-1 rounded-lg font-racing font-bold text-xs transition shrink-0 ${active ? 'bg-red-600 text-white shadow' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`;
+                b.onclick = () => { selectedHeroIndex = idx; updateHomeQuickHeroes(); };
+                b.innerText = h.shortName;
+                container.appendChild(b);
+            });
+        }
+
+        function toggleWireframe() {
+            isWireframe = !isWireframe;
+            setupGarageScene();
+        }
+
+        // =========================================================================
+        // RACING 3D GAMEPLAY SCENE & LOOP
+        // =========================================================================
+        function setupRacingScene() {
+            clearSceneExceptLights();
+
+            const isDesert = selectedTrackTheme === 'desert';
+            if (isDesert) {
+                scene.background = new THREE.Color(0x60a5fa);
+                scene.fog = new THREE.FogExp2(0x93c5fd, 0.008);
+                ambientLight.intensity = 1.5;
+                mainDirLight.intensity = 2.4;
+            } else {
+                scene.background = new THREE.Color(0x050816);
+                scene.fog = new THREE.FogExp2(0x050816, 0.012);
+                ambientLight.intensity = 1.0;
+                mainDirLight.intensity = 1.5;
+            }
+
+            highwayGroup = new THREE.Group();
+            scene.add(highwayGroup);
+
+            // Multi-Lane Asphalt Road
+            const roadMat = new THREE.MeshStandardMaterial({
+                color: isDesert ? 0x334155 : 0x0f172a,
+                roughness: isDesert ? 0.55 : 0.15,
+                metalness: isDesert ? 0.2 : 0.75
+            });
+            const roadMesh = new THREE.Mesh(new THREE.PlaneGeometry(18, 400), roadMat);
+            roadMesh.rotation.x = -Math.PI / 2;
+            roadMesh.position.z = -150;
+            highwayGroup.add(roadMesh);
+
+            // Surrounding Ground Terrain
+            const groundMat = new THREE.MeshStandardMaterial({
+                color: isDesert ? 0xfbbf24 : 0x020617,
+                roughness: 0.9
+            });
+            const groundMesh = new THREE.Mesh(new THREE.PlaneGeometry(300, 400), groundMat);
+            groundMesh.rotation.x = -Math.PI / 2;
+            groundMesh.position.set(0, -0.08, -150);
+            highwayGroup.add(groundMesh);
+
+            // Metallic Guardrails
+            const railMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.8, roughness: 0.3 });
+            [-9.2, 9.2].forEach(rx => {
+                const rail = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.65, 400), railMat);
+                rail.position.set(rx, 0.35, -150);
+                highwayGroup.add(rail);
+            });
+
+            // Scenery Props & Lane Dividers
+            speedStreaks3D = [];
+            const stripeMat = new THREE.MeshBasicMaterial({ color: 0xf8fafc });
+            const cactusMat = new THREE.MeshStandardMaterial({ color: 0x22c55e, roughness: 0.7 });
+            const rockMat = new THREE.MeshStandardMaterial({ color: 0xd97706, roughness: 0.85 });
+            const bldgMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.6, roughness: 0.2 });
+
+            for (let z = 20; z > -260; z -= 14) {
+                // 3 Highway Lane Divider Lines
+                [-3, 0, 3].forEach(lx => {
+                    const line = new THREE.Mesh(new THREE.PlaneGeometry(0.18, 6.5), stripeMat);
+                    line.rotation.x = -Math.PI / 2;
+                    line.position.set(lx, 0.02, z);
+                    highwayGroup.add(line);
+                    speedStreaks3D.push(line);
+                });
+
+                // Scenery Props
+                [-1, 1].forEach(side => {
+                    if (isDesert) {
+                        const cactus = new THREE.Group();
+                        const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.42, 4.2, 10), cactusMat);
+                        trunk.position.y = 2.1;
+                        const arm = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.25, 1.8, 8), cactusMat);
+                        arm.position.set(0.55, 2.5, 0);
+                        arm.rotation.z = -0.45;
+                        cactus.add(trunk, arm);
+                        cactus.position.set(side * (13 + (Math.abs(z) % 9)), 0, z);
+                        highwayGroup.add(cactus);
+                        speedStreaks3D.push(cactus);
+
+                        if (Math.abs(z) % 28 === 0) {
+                            const mesa = new THREE.Mesh(new THREE.CylinderGeometry(4.5, 7.5, 14, 7), rockMat);
+                            mesa.position.set(side * 34, 6.5, z - 5);
+                            highwayGroup.add(mesa);
+                            speedStreaks3D.push(mesa);
+                        }
+                    } else {
+                        const tower = new THREE.Mesh(new THREE.BoxGeometry(8, 28, 8), bldgMat);
+                        tower.position.set(side * 20, 14, z);
+                        const neonBoard = new THREE.Mesh(
+                            new THREE.PlaneGeometry(6.5, 4.5),
+                            new THREE.MeshBasicMaterial({ color: side < 0 ? 0xf43f5e : 0x38bdf8, side: THREE.DoubleSide })
+                        );
+                        neonBoard.position.set(side * 15.8, 8, z);
+                        neonBoard.rotation.y = side < 0 ? Math.PI / 2 : -Math.PI / 2;
+                        highwayGroup.add(tower, neonBoard);
+                        speedStreaks3D.push(tower, neonBoard);
+                    }
+                });
+            }
+
+            // Player Supercar + Driver
+            const st = heroCustomState[selectedHeroIndex];
+            const heroData = HERO_ROSTER[selectedHeroIndex];
+            const colorHex = PAINT_COLORS[st.colorIdx].hex;
+
+            playerCarGroup = new THREE.Group();
+            const carMesh = createKartMesh3D(st.kartModelIdx, colorHex);
+            const driverMesh = createArmoredHero3D(heroData, st.skinIdx);
+            driverMesh.position.set(0, 0.15, -0.05);
+            driverMesh.scale.set(0.45, 0.45, 0.45);
+
+            playerCarGroup.add(carMesh, driverMesh);
+            playerCarGroup.position.set(0, 0, 0);
+            playerCarGroup.userData = { carMesh };
+            scene.add(playerCarGroup);
+
+            // 3 Rival AI Cars Ahead
+            rivalCars = [];
+            const rivalConfigs = [
+                { name: 'Thor Odinson', short: 'THOR', color: 0x22c55e, x: -0.4, z: -40, speedOffset: 0.02, modelIdx: 3, progress: 20 },
+                { name: 'Doctor Doom', short: 'DOOM', color: 0x06b6d4, x: 3.6, z: -70, speedOffset: 0.01, modelIdx: 0, progress: 40 },
+                { name: 'Thanos Titan', short: 'THANOS', color: 0xfacc15, x: -3.8, z: -100, speedOffset: -0.01, modelIdx: 1, progress: 60 }
+            ];
+
+            const labelsContainer = document.getElementById('rival-labels-container');
+            if (labelsContainer) {
+                labelsContainer.innerHTML = '';
+
+                // Player Floating Tag
+                const playerTag = document.createElement('div');
+                playerTag.id = 'floating-tag-player';
+                playerTag.className = 'absolute transform -translate-x-1/2 -translate-y-1/2 nfs-hud-skew bg-black/85 border border-white/40 px-3 py-0.5 shadow-lg';
+                playerTag.innerHTML = `<span class="nfs-hud-unskew block font-racing font-black text-xs text-white italic">4th number</span>`;
+                labelsContainer.appendChild(playerTag);
+
+                rivalConfigs.forEach((rc) => {
+                    const rGroup = createKartMesh3D(rc.modelIdx, rc.color);
+                    rGroup.position.set(rc.x, 0, rc.z);
+                    scene.add(rGroup);
+
+                    const tagEl = document.createElement('div');
+                    tagEl.className = 'absolute transform -translate-x-1/2 -translate-y-1/2 nfs-hud-skew bg-black/85 border-b-2 border-amber-400 px-2.5 py-0.5 shadow-md';
+                    tagEl.innerHTML = `<span class="nfs-hud-unskew block font-racing font-bold text-[11px] text-white italic">${rc.short}</span>`;
+                    labelsContainer.appendChild(tagEl);
+
+                    rivalCars.push({ mesh: rGroup, baseZ: rc.z, x: rc.x, labelEl: tagEl, name: rc.name, short: rc.short, progress: rc.progress, speed: 1.48 });
+                });
+            }
+
+            // Start Gate
+            const gateMat = new THREE.MeshStandardMaterial({ color: 0xed1d24, emissive: 0xed1d24, emissiveIntensity: 1.5 });
+            const startGate = new THREE.Group();
+            const leftPillar = new THREE.Mesh(new THREE.BoxGeometry(0.8, 8, 0.8), gateMat);
+            leftPillar.position.set(-10, 4, 0);
+            const rightPillar = new THREE.Mesh(new THREE.BoxGeometry(0.8, 8, 0.8), gateMat);
+            rightPillar.position.set(10, 4, 0);
+            const crossBeam = new THREE.Mesh(new THREE.BoxGeometry(20.8, 1.2, 0.8), gateMat);
+            crossBeam.position.set(0, 8, 0);
+            startGate.add(leftPillar, rightPillar, crossBeam);
+            highwayGroup.add(startGate);
+
+            // Blindbox Mystery Crates Along the Track
+            blindBoxes = [];
+            const boxGeo = new THREE.BoxGeometry(1.2, 1.2, 1.2);
+            const boxMat = new THREE.MeshStandardMaterial({ color: 0xfacc15, emissive: 0xca8a04, emissiveIntensity: 1.8, roughness: 0.2 });
+            [-30, -80, -130, -180, -220].forEach(bz => {
+                const box = new THREE.Mesh(boxGeo, boxMat);
+                box.position.set((Math.random() - 0.5) * 10, 0.8, bz);
+                highwayGroup.add(box);
+                blindBoxes.push({ mesh: box, active: true });
+            });
+
+            trackZOffset = 0;
+            raceSpeed = 1.45;
+            currentLap = 1;
+            raceDistanceCovered = 0;
+            raceHits = 0;
+            raceTimeSeconds = 0;
+
+            const lapInfo = document.getElementById('lb-lap-info');
+            if (lapInfo) lapInfo.innerText = `LAP ${currentLap}/${maxLaps}`;
+            const hitsVal = document.getElementById('hud-hits-val');
+            if (hitsVal) hitsVal.innerText = `${raceHits}/20`;
+        }
+
+        // CTR Blindbox Weapons
+        const CTR_WEAPONS = [
+            { title: 'MISIL REPULSOR', icon: 'fa-rocket' },
+            { title: 'BOM VIBRANIUM', icon: 'fa-bomb' },
+            { title: 'SUPER NITRO TIER 3', icon: 'fa-bolt' },
+            { title: 'PERISAI ASGARD', icon: 'fa-shield-halved' }
+        ];
+
+        function triggerBlindboxPickup() {
+            playSound('pickup');
+            const randWp = CTR_WEAPONS[Math.floor(Math.random() * CTR_WEAPONS.length)];
+            activeWeapon = randWp;
+            activeWeaponDuration = 350;
+
+            const toast = document.getElementById('weapon-toast');
+            const title = document.getElementById('weapon-toast-title');
+            const icon = document.getElementById('weapon-toast-icon');
+            if (toast && title && icon) {
+                title.innerText = randWp.title;
+                icon.className = `fa-solid ${randWp.icon} text-2xl text-yellow-300 animate-bounce`;
+                toast.classList.remove('hidden');
+                setTimeout(() => { toast.classList.add('hidden'); }, 3000);
+            }
+        }
+
+        function updateFloatingRankTag(worldPos, domElem) {
+            if (!domElem || !camera) return;
+            const tempVector = worldPos.clone();
+            tempVector.project(camera);
+            const x = (tempVector.x * 0.5 + 0.5) * window.innerWidth;
+            const y = (tempVector.y * -0.5 + 0.5) * window.innerHeight;
+            domElem.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
+        }
+
+        // =========================================================================
+        // MAIN ANIMATION LOOP
+        // =========================================================================
+        function startLoop() {
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+
+            function loop() {
+                animationFrameId = requestAnimationFrame(loop);
+                const delta = clock.getDelta();
+                const elapsed = clock.getElapsedTime();
+
+                if (currentScreen === 'garage' || currentScreen === 'studio') {
+                    if (lobbyGroup && !isDragging) {
+                        lobbyGroup.rotation.y += 0.0035;
+                    }
+                } else if (currentScreen === 'racing' && isRacingActive) {
+                    const targetMax = (raceInput.nitro || (activeWeapon && activeWeapon.title.includes('NITRO'))) ? 2.25 : 1.55;
+                    raceSpeed += (targetMax - raceSpeed) * 0.06;
+                    trackZOffset += raceSpeed;
+                    raceDistanceCovered += raceSpeed;
+
+                    // Update Engine Sound Frequency with Speed
+                    if (engineOsc && !isAudioMuted) {
+                        const freq = 65 + (raceSpeed / 2.25) * 160;
+                        engineOsc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                    }
+
+                    // Lap Progression Check
+                    if (raceDistanceCovered >= totalTrackLength) {
+                        raceDistanceCovered = 0;
+                        currentLap++;
+                        if (currentLap > maxLaps) {
+                            currentLap = maxLaps;
+                        }
+                        const lapInfo = document.getElementById('lb-lap-info');
+                        if (lapInfo) lapInfo.innerText = `LAP ${currentLap}/${maxLaps}`;
+                    }
+
+                    // Steer Player Supercar
+                    if (playerCarGroup) {
+                        if (raceInput.left) {
+                            playerCarGroup.position.x = Math.max(-6.8, playerCarGroup.position.x - 0.14);
+                            playerCarGroup.rotation.y = 0.08;
+                            playerCarGroup.rotation.z = 0.03;
+                        } else if (raceInput.right) {
+                            playerCarGroup.position.x = Math.min(6.8, playerCarGroup.position.x + 0.14);
+                            playerCarGroup.rotation.y = -0.08;
+                            playerCarGroup.rotation.z = -0.03;
+                        } else {
+                            playerCarGroup.rotation.y *= 0.85;
+                            playerCarGroup.rotation.z *= 0.85;
+                        }
+
+                        // Animate Nitro Flames & Wheels
+                        const carMesh = playerCarGroup.userData.carMesh;
+                        if (carMesh && carMesh.userData) {
+                            if (carMesh.userData.nitroFlames) {
+                                const flameScale = (raceInput.nitro ? 1.85 : 0.8) + Math.sin(elapsed * 45) * 0.25;
+                                carMesh.userData.nitroFlames.forEach(f => {
+                                    f.scale.set(1, 1, flameScale);
+                                });
+                            }
+                            if (carMesh.userData.wheels) {
+                                carMesh.userData.wheels.forEach(w => {
+                                    w.rotation.x -= raceSpeed * 0.6;
+                                });
+                            }
+                        }
+
+                        // Blindbox Collision
+                        blindBoxes.forEach(boxObj => {
+                            if (boxObj.active) {
+                                boxObj.mesh.rotation.y += 0.05;
+                                boxObj.mesh.position.z += raceSpeed * 1.45;
+                                if (boxObj.mesh.position.z > 22) boxObj.mesh.position.z -= 280;
+
+                                const dist = Math.hypot(playerCarGroup.position.x - boxObj.mesh.position.x, playerCarGroup.position.z - boxObj.mesh.position.z);
+                                if (dist < 1.8) {
+                                    boxObj.active = false;
+                                    boxObj.mesh.visible = false;
+                                    triggerBlindboxPickup();
+                                    setTimeout(() => {
+                                        boxObj.active = true;
+                                        boxObj.mesh.visible = true;
+                                    }, 5000);
+                                }
+                            }
+                        });
+
+                        // Dynamic Chase Camera Follow
+                        const camHeight = raceCamMode === 0 ? 2.15 : 1.35;
+                        const camDist = raceCamMode === 0 ? 4.65 : 3.2;
+                        camera.position.x += (playerCarGroup.position.x * 0.65 - camera.position.x) * 0.12;
+                        camera.position.y = camHeight + Math.sin(elapsed * 28) * 0.012;
+                        camera.position.z = camDist - (raceInput.nitro ? 0.45 : 0);
+                        camera.lookAt(playerCarGroup.position.x * 0.35, 0.65, -12);
+
+                        // Update Player Floating Tag
+                        const playerTagEl = document.getElementById('floating-tag-player');
+                        updateFloatingRankTag(
+                            new THREE.Vector3(playerCarGroup.position.x, 1.38, playerCarGroup.position.z - 0.5),
+                            playerTagEl
+                        );
+                    }
+
+                    // Scenery & Divider Stripes Movement
+                    speedStreaks3D.forEach(obj => {
+                        obj.position.z += raceSpeed * 1.45;
+                        if (obj.position.z > 22) obj.position.z -= 280;
+                    });
+
+                    // Rival AI Cars Movement & Leaderboard Tracking
+                    let racersProgress = [
+                        { name: HERO_ROSTER[selectedHeroIndex].name, progress: raceDistanceCovered + (currentLap - 1) * totalTrackLength, isPlayer: true }
+                    ];
+
+                    rivalCars.forEach((rc, idx) => {
+                        const relMove = (raceSpeed - 1.52) * 0.45 + Math.sin(elapsed * 1.5 + idx) * 0.03;
+                        rc.mesh.position.z += relMove;
+                        rc.progress += relMove * 1.2;
+                        rc.mesh.position.x = rc.x + Math.sin(elapsed * 1.2 + idx * 2) * 0.55;
+
+                        if (rc.mesh.position.z > 12) rc.mesh.position.z = -55;
+                        if (rc.mesh.position.z < -65) rc.mesh.position.z = -12;
+
+                        if (
+                            playerCarGroup &&
+                            Math.abs(rc.mesh.position.z - playerCarGroup.position.z) < 2.5 &&
+                            Math.abs(rc.mesh.position.x - playerCarGroup.position.x) < 1.75
+                        ) {
+                            raceHits = Math.min(20, raceHits + 1);
+                            playSound('hit');
+                            const hitsVal = document.getElementById('hud-hits-val');
+                            if (hitsVal) hitsVal.innerText = `${raceHits}/20`;
+                            rc.mesh.position.z -= 8;
+                        }
+
+                        updateFloatingRankTag(
+                            new THREE.Vector3(rc.mesh.position.x, 1.45, rc.mesh.position.z),
+                            rc.labelEl
+                        );
+
+                        racersProgress.push({ name: rc.name, progress: rc.progress, isPlayer: false });
+                    });
+
+                    // Sort Standings
+                    racersProgress.sort((a, b) => b.progress - a.progress);
+                    const playerRankIdx = racersProgress.findIndex(r => r.isPlayer);
+                    const rankNames = ['1st number', '2nd number', '3rd number', '4th number'];
+                    const currentRankStr = rankNames[playerRankIdx] || '4th number';
+
+                    const playerTagSpan = document.querySelector('#floating-tag-player span');
+                    if (playerTagSpan) playerTagSpan.innerText = currentRankStr;
+                    const hudPosRank = document.getElementById('hud-pos-rank');
+                    if (hudPosRank) hudPosRank.innerHTML = `<span class="unskew">${currentRankStr}</span>`;
+
+                    const lbContainer = document.getElementById('leaderboard-list');
+                    if (lbContainer) {
+                        lbContainer.innerHTML = '';
+                        racersProgress.forEach((r, rIdx) => {
+                            const row = document.createElement('div');
+                            row.className = `flex items-center justify-between px-2 py-1 rounded ${r.isPlayer ? 'bg-red-600/40 border border-red-500 text-white font-black' : 'text-slate-300'}`;
+                            row.innerHTML = `<span>#${rIdx + 1} ${r.name}</span> <span class="text-[10px] text-amber-400">${Math.floor(r.progress)}m</span>`;
+                            lbContainer.appendChild(row);
+                        });
+                    }
+
+                    // Speedometer Display
+                    const speedKmH = Math.min(395, Math.floor(raceSpeed * 155 + Math.sin(elapsed * 19) * 3));
+                    const speedoEl = document.getElementById('hud-speedometer');
+                    if (speedoEl) speedoEl.innerText = `${speedKmH}`;
+
+                    // Race Timer
+                    raceTimeSeconds += delta;
+                    const mins = String(Math.floor(raceTimeSeconds / 60)).padStart(2, '0');
+                    const secs = String(Math.floor(raceTimeSeconds % 60)).padStart(2, '0');
+                    const hunds = String(Math.floor((raceTimeSeconds % 1) * 100)).padStart(2, '0');
+                    const timerEl = document.getElementById('hud-race-timer');
+                    if (timerEl) timerEl.innerText = `${mins}:${secs}:${hunds}`;
+
+                    // Drift / Nitro Meter
+                    if (raceInput.nitro) {
+                        driftMeter = Math.max(10, driftMeter - 0.35);
+                    } else {
+                        driftMeter = Math.min(100, driftMeter + 0.25);
+                    }
+                    const driftBar = document.getElementById('drift-meter-bar');
+                    if (driftBar) driftBar.style.width = `${driftMeter}%`;
+                }
+
+                if (renderer && scene && camera) {
+                    renderer.render(scene, camera);
+                }
+            }
+            loop();
+        }
+
+        // Initialize Everything when Document Loads
+        window.addEventListener('DOMContentLoaded', () => {
+            initThreeEngine();
+            startLoop();
+        });
+    </script>
+</body>
+</html>
