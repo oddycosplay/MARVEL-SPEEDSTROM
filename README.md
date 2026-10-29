@@ -1,188 +1,53 @@
-# MARVEL-SPEEDSTROM
+# 🏎️ MARVEL SPEEDSTORM - CTR 3D RACING
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Project-Browser%20Game-0F172A?style=for-the-badge&logo=gamejolt" alt="Project Type" />
-  <img src="https://img.shields.io/badge/Status-Prototype-22C55E?style=for-the-badge" alt="Status" />
-  <img src="https://img.shields.io/badge/Stack-HTML%20%2B%20JS%20%2B%20Three.js-FF6B6B?style=for-the-badge" alt="Stack" />
-  <img src="https://img.shields.io/badge/License-Apache%202.0-10B981?style=for-the-badge" alt="License" />
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/3D-Rendering-Three.js-FFB703?style=for-the-badge" alt="3D Rendering" />
-  <img src="https://img.shields.io/badge/UI-Tailwind-CSS-38BDF8?style=for-the-badge" alt="UI" />
-  <img src="https://img.shields.io/badge/Runtime-Node.js-5FAF45?style=for-the-badge&logo=node.js" alt="Runtime" />
-</p>
-
-<div align="center">
-  <img width="100%" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1400&q=80" alt="MARVEL-SPEEDSTROM racing concept banner" />
-</div>
-
-A Marvel-inspired arcade racing prototype built as a browser-based game experience. This project blends cinematic visuals, hero selection, garage customization, and a fast-paced 3D racing loop into a stylized concept demo.
-
-## Overview
-
-MARVEL-SPEEDSTROM is a concept project exploring a high-speed racing game with a superhero aesthetic. The experience is designed to feel energetic, bold, and visually cinematic while remaining lightweight enough for a browser-based prototype.
-
-The project emphasizes:
-- cinematic presentation
-- hero and villain roster selection
-- garage customization
-- dynamic race modes
-- nitro boost mechanics
-- arcade-style HUD and motion feedback
-
-This repository is currently positioned as a prototype and concept showcase rather than a production-ready commercial game.
-
-## Why This Project
-
-This project was designed to explore:
-- browser-based 3D interaction with Three.js
-- game UI and concept design
-- interactive frontend gameplay loop
-- dynamic state management for racing experiences
-- polished visual direction without heavy infrastructure
-
-## Key Features
-
-- Marvel-inspired racer roster
-- faction-based character selection
-- vehicle customization for skins, chassis, and paint
-- multiple gameplay modes:
-  - Grand Prix
-  - Time Trial
-  - Omega Arena
-- multiple track themes:
-  - Desert
-  - Night
-- nitro boost and speed mechanics
-- race HUD and leaderboard overlays
-- keyboard and touch controls
-- procedural sound effects using Web Audio API
-- modern, cinematic interface
-
-## Screenshots
-
-<div align="center">
-  <table>
-    <tr>
-      <td align="center" width="50%">
-        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=900&q=80" alt="Racing gameplay concept" width="100%" />
-        <br />
-        <sub>Gameplay concept visual</sub>
-      </td>
-      <td align="center" width="50%">
-        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80" alt="Fast car racing scene" width="100%" />
-        <br />
-        <sub>High-speed pursuit energy</sub>
-      </td>
-    </tr>
-    <tr>
-      <td align="center" width="50%">
-        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80" alt="Supercar front view" width="100%" />
-        <br />
-        <sub>Stylized performance vehicle</sub>
-      </td>
-      <td align="center" width="50%">
-        <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=900&q=80" alt="Neon night racing vibe" width="100%" />
-        <br />
-        <sub>Night-race atmosphere</sub>
-      </td>
-    </tr>
-  </table>
-</div>
-
-These visuals help convey the game's cinematic identity: speed, energy, and a bold comic-inspired presentation.
-
-## Tech Stack
-
-- HTML5
-- JavaScript
-- Three.js
-- Tailwind CSS
-- Font Awesome
-- Google Fonts
-- Node.js
-
-## Project Structure
-
-```text
-MARVEL-SPEEDSTROM/
-├── .github/
-├── LICENSE
-├── README.md
-├── index.html
-├── marvel_speedstorm_ctr_3d_racing (1).html
-├── server.js
-├── validate.js
-```
-
-## Gameplay Concept
-
-The game presents a fictional racing universe where players:
-1. choose a hero or villain
-2. customize the vehicle
-3. select a track and mode
-4. race through a stylized environment
-5. use nitro boosts and manage race flow
-
-The design aims to capture a fast, high-energy arcade experience with a strong visual identity and polished UI.
-
-## Repository
-
-- GitHub: https://github.com/oddycosplay/MARVEL-SPEEDSTROM
-- Project Type: Browser-based racing prototype
-- Status: Prototype / concept demo
-- License: Apache 2.0
-
-## Getting Started
-
-### Prerequisites
-- Node.js
-- Modern browser
-
-### Run Locally
-
-```bash
-git clone https://github.com/oddycosplay/MARVEL-SPEEDSTROM.git
-cd MARVEL-SPEEDSTROM
-node server.js
-```
-
-Then open:
-
-```text
-http://localhost:3000
-```
-
-## Controls
-
-- Left / Right Arrow or A / D: steer
-- Space / Shift: nitro boost
-- Mouse drag: camera movement
-- On-screen buttons: touch interaction
-
-## Roadmap
-
-Planned improvements include:
-- more advanced AI behavior
-- richer race physics and collision logic
-- more track environments
-- character-specific abilities
-- progression and rewards
-- broader sound design and music
-- mobile optimization
-- production polish for demo presentation
-
-## Project Status
-
-This project is currently in the concept/prototype stage. It already demonstrates a strong visual identity, a polished game interface, and a playable front-end loop, but it is not yet a production-level commercial game.
-
-## License
-
-This project is licensed under the Apache License 2.0.
+Game balap 3D arcade bertema pahlawan dan musuh Marvel bergaya Crash Team Racing (CTR) & Need for Speed, dibangun dengan teknologi web murni (**Three.js**, **Tailwind CSS**, dan **Web Audio API**).
 
 ---
 
-<p align="center">
-  <strong>Built as a browser-based racing game concept with a cinematic Marvel-inspired visual direction.</strong>
-</p>
+## 🌟 Fitur Utama
+
+- **Karakter 3D Full-Body & Detail Tinggi**:
+  - **Iron Man**: Nanotech armor Mark 85 dengan 6 sayap nano repulsor dan efek pendaran arc reactor.
+  - **Thor Odinson**: Jubah merah berkibar, pelindung Asgardian, dan palu legendaris Mjolnir berenergi petir.
+  - **Thanos The Mad Titan**: Bodi perkasa titan, sarung tangan Infinity Gauntlet dengan 6 batu bercahaya, dan pedang ganda helikopter vibranium.
+  - **Doctor Doom**: Topeng besi Latverian dengan jubah hijau dan orb sihir mistis.
+  - **Wolverine**, **Magneto**, **Mr. Fantastic**, & **The Thing**.
+- **Sistem Balapan CTR Dinamis**:
+  - **Start Countdown (3, 2, 1, START!)**: Mobil berjejer rapi di grid start sebelum lampu hijau menyala.
+  - **Real-Time Minimap**: Radar sirkuit 2D di pojok kanan atas memantau posisi semua pembalap dan garis putaran.
+  - **Garis Start & Finish 3D**: Gerbang gantry baja dengan lampu balap dan aspal papan catur (*checkered flag strip*).
+  - **Sistem Senjata & Kotak Misteri**:
+    - ⚡ **Super NOS Booster** (Kecepatan turbo 360+ KM/H).
+    - 🎯 **Stark Repulsor Missile** (Misil 3D pelacak rival).
+    - 💣 **Bom Vibranium** (Bom peledak area lintasan).
+    - 🛡️ **Perisai Nano Asgard** (Kubah energi kebal tabrakan).
+    - *Tombol pemicu senjata*: Tekan **[ENTER]** atau klik kotak senjata di layar.
+  - **Fisika Tabrakan & Kerusakan**: Efek mundur/recoil saat menabrak rival, kecepatan anjlok, getaran kamera (*screen shake*), dan kilatan tabrakan.
+- **Navigasi Menu Game & Garasi 3D**:
+  - Menu Header terintegrasi: **Balapan**, **Story Board**, **Garasi 3D**, **Store / Stark Tech Vault**, **Hero Roster**, dan **Roadmap**.
+  - Kustomisasi sasis supercar kart, cat metalik/candy, dan kostum skin hero di Garasi 3D.
+  - Toko in-game fungsional dengan dompet Stark Coins dan Infinity Gems.
+- **Kontrol Fleksibel**:
+  - D-Pad 4 arah di layar (Maju, Mundur/Rem, Belok Kiri, Belok Kanan).
+  - Keyboard: `W`/`S`/`A`/`D` atau `Panah Keyboard` + `SPACE`/`SHIFT` (Nitro) + `ENTER` (Gunakan Senjata).
+
+---
+
+## 🚀 Cara Menjalankan
+
+### Menggunakan Web Browser Langsung:
+Buka file `index.html` atau `marvel_speedstorm_ctr_3d_racing (1).html` di browser modern apapun (Google Chrome, Microsoft Edge, Firefox).
+
+### Menggunakan Node.js Server Lokal:
+```bash
+node server.js
+```
+Lalu buka di browser: `http://localhost:3000`
+
+---
+
+## 🛠️ Tech Stack
+- **Three.js** (3D Rendering Engine & Lighting)
+- **Tailwind CSS** (UI & HUD Modern Styling)
+- **Web Audio API** (Procedural Sound Synthesizer & Engine Sound)
+- **Vanilla JavaScript (ES6+)**

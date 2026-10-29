@@ -146,13 +146,41 @@
                     <div class="font-racing font-black text-xl italic text-white hidden sm:block">SPEEDSTORM <span class="text-xs font-normal text-yellow-400 not-italic ml-1">CTR 3D</span></div>
                 </div>
 
-                <!-- Quick Hero Selector Carousel in Nav -->
-                <div class="flex items-center gap-1.5 overflow-x-auto max-w-md sm:max-w-xl py-1 px-2 bg-slate-900/80 rounded-xl border border-white/10" id="home-quick-heroes">
-                    <!-- Populated dynamically via updateHomeQuickHeroes() -->
-                </div>
+                <!-- Main Game Navigation Menu in Header -->
+                <nav class="flex items-center gap-1 sm:gap-2 overflow-x-auto py-1 px-2 bg-slate-900/90 rounded-2xl border border-white/10 shadow-inner">
+                    <button id="nav-btn-play" onclick="switchHomeSubTab('play')" class="skew-box px-3 py-1.5 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg font-racing font-bold text-xs tracking-wider shadow transition">
+                        <span class="unskew flex items-center gap-1.5"><i class="fa-solid fa-flag-checkered text-yellow-300"></i> BALAPAN</span>
+                    </button>
+                    <button id="nav-btn-chapters" onclick="switchHomeSubTab('chapters')" class="skew-box px-3 py-1.5 bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg font-racing font-bold text-xs tracking-wider transition border border-white/10">
+                        <span class="unskew flex items-center gap-1.5"><i class="fa-solid fa-clapperboard text-amber-400"></i> STORY BOARD</span>
+                    </button>
+                    <button id="nav-btn-garage" onclick="openGarageTab()" class="skew-box px-3 py-1.5 bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg font-racing font-bold text-xs tracking-wider transition border border-white/10">
+                        <span class="unskew flex items-center gap-1.5"><i class="fa-solid fa-screwdriver-wrench text-cyan-400"></i> GARASI 3D</span>
+                    </button>
+                    <button id="nav-btn-store" onclick="switchHomeSubTab('store')" class="skew-box px-3 py-1.5 bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg font-racing font-bold text-xs tracking-wider transition border border-white/10">
+                        <span class="unskew flex items-center gap-1.5"><i class="fa-solid fa-cart-shopping text-emerald-400"></i> STORE</span>
+                    </button>
+                    <button id="nav-btn-collections" onclick="switchHomeSubTab('collections')" class="skew-box px-3 py-1.5 bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg font-racing font-bold text-xs tracking-wider transition border border-white/10">
+                        <span class="unskew flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-purple-400"></i> HERO ROSTER</span>
+                    </button>
+                    <button id="nav-btn-roadmap" onclick="switchHomeSubTab('roadmap')" class="skew-box px-3 py-1.5 bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg font-racing font-bold text-xs tracking-wider transition border border-white/10">
+                        <span class="unskew flex items-center gap-1.5"><i class="fa-solid fa-map-location-dot text-blue-400"></i> ROADMAP</span>
+                    </button>
+                </nav>
 
-                <!-- Action Toolbar -->
+                <!-- Currency & Action Toolbar -->
                 <div class="flex items-center gap-2">
+                    <div class="hidden md:flex items-center gap-2.5 px-3 py-1 bg-black/60 border border-white/15 rounded-xl font-racing font-bold text-xs">
+                        <div class="flex items-center gap-1 text-amber-300">
+                            <i class="fa-solid fa-coins"></i>
+                            <span id="player-coins-display">15,000</span>
+                        </div>
+                        <div class="w-px h-3.5 bg-white/20"></div>
+                        <div class="flex items-center gap-1 text-cyan-300">
+                            <i class="fa-solid fa-gem"></i>
+                            <span id="player-gems-display">350</span>
+                        </div>
+                    </div>
                     <button onclick="toggleAudio()" id="sound-btn" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs border border-white/10" title="Suara Game">
                         <i class="fa-solid fa-volume-high" id="sound-icon"></i>
                     </button>
@@ -289,6 +317,95 @@
                 </div>
             </section>
 
+            <!-- TAB: STORE (MARVEL VAULT & TECH SHOP) -->
+            <section id="home-subtab-store" class="space-y-6 hidden">
+                <div class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-emerald-950 via-slate-900 to-indigo-950 p-6 sm:p-10 border border-emerald-500/30 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="space-y-2 max-w-2xl">
+                        <div class="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full text-xs font-bold border border-emerald-400/30">
+                            <i class="fa-solid fa-cart-shopping"></i> STARK TECH VAULT & BLACK MARKET
+                        </div>
+                        <h2 class="font-racing text-3xl sm:text-4xl font-black text-white italic">TOKO ITEM, SKIN LEGENDARIS & MODIFIKASI KART</h2>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            Buka blueprint sasis balap eksperimental, unlock skin eksklusif Avengers & Villains, dan lengkapi efek nitro kosmik menggunakan Stark Coins & Infinity Gems.
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 bg-black/60 px-5 py-3 rounded-2xl border border-white/20">
+                        <div class="text-center px-2">
+                            <div class="text-[10px] text-slate-400 font-bold">STARK COINS</div>
+                            <div class="font-racing font-black text-xl text-amber-300 flex items-center gap-1"><i class="fa-solid fa-coins text-sm"></i> 15,000</div>
+                        </div>
+                        <div class="w-px h-8 bg-white/20"></div>
+                        <div class="text-center px-2">
+                            <div class="text-[10px] text-slate-400 font-bold">INFINITY GEMS</div>
+                            <div class="font-racing font-black text-xl text-cyan-300 flex items-center gap-1"><i class="fa-solid fa-gem text-sm"></i> 350</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Store Items Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Item 1: Iron Man Mark 85 Armor -->
+                    <div class="roster-card p-5 rounded-2xl border border-red-500/40 space-y-3 flex flex-col justify-between">
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="px-2 py-0.5 rounded bg-red-600/30 text-red-400 text-[10px] font-bold">SKIN MYTHIC</span>
+                                <span class="font-racing text-xs text-amber-400 font-bold flex items-center gap-1"><i class="fa-solid fa-coins"></i> 5,000</span>
+                            </div>
+                            <h4 class="font-racing font-bold text-lg text-white">MARK 85 ENDGAME GOLD</h4>
+                            <p class="text-xs text-slate-400">Nanotech armor lengkap dengan 6 sayap nanotech repulsor lightning focus.</p>
+                        </div>
+                        <button onclick="purchaseStoreItem('Skin Mark 85 Endgame', 5000, 0)" class="w-full py-2 bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-racing font-bold text-xs rounded-lg shadow flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-bag-shopping"></i> BELI ITEM
+                        </button>
+                    </div>
+
+                    <!-- Item 2: Quantum Formula Chassis -->
+                    <div class="roster-card p-5 rounded-2xl border border-cyan-500/40 space-y-3 flex flex-col justify-between">
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="px-2 py-0.5 rounded bg-cyan-600/30 text-cyan-400 text-[10px] font-bold">SUPERCAR KART</span>
+                                <span class="font-racing text-xs text-amber-400 font-bold flex items-center gap-1"><i class="fa-solid fa-coins"></i> 8,500</span>
+                            </div>
+                            <h4 class="font-racing font-bold text-lg text-white">QUANTUM F1 CHARGER</h4>
+                            <p class="text-xs text-slate-400">Sasis aerodinamis serat karbon berkecepatan 340 KM/H dengan twin boost exhaust.</p>
+                        </div>
+                        <button onclick="purchaseStoreItem('Quantum F1 Charger', 8500, 0)" class="w-full py-2 bg-cyan-600 hover:bg-cyan-500 text-white font-racing font-bold text-xs rounded-lg shadow flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-bag-shopping"></i> BELI ITEM
+                        </button>
+                    </div>
+
+                    <!-- Item 3: Thanos Double Blade & Armor -->
+                    <div class="roster-card p-5 rounded-2xl border border-purple-500/40 space-y-3 flex flex-col justify-between">
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="px-2 py-0.5 rounded bg-purple-600/30 text-purple-400 text-[10px] font-bold">BUNDLE TITAN</span>
+                                <span class="font-racing text-xs text-cyan-300 font-bold flex items-center gap-1"><i class="fa-solid fa-gem"></i> 200</span>
+                            </div>
+                            <h4 class="font-racing font-bold text-lg text-white">INFINITY TITAN WARLORD</h4>
+                            <p class="text-xs text-slate-400">Pedang ganda helikopter vibranium dan sarung tangan Infinity Gauntlet berpendar 6 batu.</p>
+                        </div>
+                        <button onclick="purchaseStoreItem('Infinity Titan Warlord', 0, 200)" class="w-full py-2 bg-purple-600 hover:bg-purple-500 text-white font-racing font-bold text-xs rounded-lg shadow flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-gem"></i> BELI DENGAN GEMS
+                        </button>
+                    </div>
+
+                    <!-- Item 4: Arc Reactor Nitro Trail -->
+                    <div class="roster-card p-5 rounded-2xl border border-emerald-500/40 space-y-3 flex flex-col justify-between">
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="px-2 py-0.5 rounded bg-emerald-600/30 text-emerald-400 text-[10px] font-bold">EFEK NITRO</span>
+                                <span class="font-racing text-xs text-amber-400 font-bold flex items-center gap-1"><i class="fa-solid fa-coins"></i> 3,200</span>
+                            </div>
+                            <h4 class="font-racing font-bold text-lg text-white">COSMIC BIFROST EXHAUST</h4>
+                            <p class="text-xs text-slate-400">Efek semburan api nitro warna-warni berenergi pelangi Asgardian saat tombol boost ditekan.</p>
+                        </div>
+                        <button onclick="purchaseStoreItem('Cosmic Bifrost Exhaust', 3200, 0)" class="w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-racing font-bold text-xs rounded-lg shadow flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-bag-shopping"></i> BELI ITEM
+                        </button>
+                    </div>
+                </div>
+            </section>
+
             <!-- TAB 3: COLLECTIONS -->
             <section id="home-subtab-collections" class="space-y-6 hidden">
                 <div class="bg-slate-900/80 border border-white/10 rounded-2xl p-6 space-y-4">
@@ -405,6 +522,71 @@
 
         <!-- 3D Floating Name Tags Projected Overlay Container -->
         <div id="rival-labels-container" class="absolute inset-0 z-15 pointer-events-none"></div>
+
+        <!-- MINIMAP HUD (Pojok Kanan Atas Sesuai Instruksi User) -->
+        <div id="hud-minimap-container" class="absolute top-16 right-4 z-20 bg-slate-950/85 backdrop-blur-md p-2.5 rounded-2xl border border-white/20 shadow-2xl flex flex-col items-center pointer-events-auto hidden">
+            <div class="flex items-center justify-between w-full mb-1 text-[10px] font-racing font-bold text-slate-300">
+                <span class="flex items-center gap-1 text-red-500"><i class="fa-solid fa-map-location-dot"></i> CIRKUIT MAP</span>
+                <span id="map-lap-status" class="text-yellow-400">LAP 1/3</span>
+            </div>
+            <canvas id="track-minimap-canvas" width="120" height="160" class="rounded-xl bg-slate-900/90 border border-white/10 shadow-inner"></canvas>
+            <div class="flex items-center gap-2 mt-1 text-[9px] font-racing text-slate-400">
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-red-500 inline-block"></span> PLAYER</span>
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-cyan-400 inline-block"></span> RIVALS</span>
+            </div>
+        </div>
+
+        <!-- 3, 2, 1, START! RACE COUNTDOWN OVERLAY -->
+        <div id="start-countdown-overlay" class="absolute inset-0 z-40 flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm pointer-events-none hidden">
+            <div class="text-center space-y-2">
+                <div class="font-racing text-xl sm:text-2xl font-bold text-yellow-400 uppercase tracking-widest">SIAPKAN KART ANDA...</div>
+                <div id="countdown-number" class="font-racing font-black text-8xl sm:text-9xl text-white italic drop-shadow-[0_0_35px_rgba(237,29,36,0.9)] animate-pulse">
+                    3
+                </div>
+            </div>
+        </div>
+
+        <!-- RACE FINISH & VICTORY OVERLAY -->
+        <div id="race-finish-overlay" class="absolute inset-0 z-40 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 hidden">
+            <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-yellow-400/60 p-6 sm:p-8 rounded-3xl max-w-lg w-full text-center space-y-6 shadow-[0_0_50px_rgba(250,204,21,0.3)]">
+                <div class="space-y-1">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-400/20 text-yellow-300 font-racing font-bold text-xs border border-yellow-400/40">
+                        🏁 GRAND PRIX SELESAI 🏁
+                    </div>
+                    <h2 class="font-racing text-3xl sm:text-5xl font-black text-white italic" id="finish-result-title">FINISH! PODIUM JUARA</h2>
+                    <p class="text-xs text-slate-400" id="finish-result-subtitle">Selamat! Anda menyelesaikan 3 Lap sirkuit balap Marvel Speedstorm.</p>
+                </div>
+
+                <!-- Reward Cards -->
+                <div class="grid grid-cols-2 gap-3 bg-black/50 p-4 rounded-2xl border border-white/10 font-racing">
+                    <div class="p-3 bg-slate-900/80 rounded-xl border border-amber-500/30">
+                        <div class="text-xs text-slate-400 font-bold">REWARD COINS</div>
+                        <div class="text-2xl font-black text-amber-300 flex items-center justify-center gap-1.5"><i class="fa-solid fa-coins text-lg"></i> +1,500</div>
+                    </div>
+                    <div class="p-3 bg-slate-900/80 rounded-xl border border-cyan-500/30">
+                        <div class="text-xs text-slate-400 font-bold">INFINITY GEMS</div>
+                        <div class="text-2xl font-black text-cyan-300 flex items-center justify-center gap-1.5"><i class="fa-solid fa-gem text-lg"></i> +50</div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+                    <button onclick="startRacingMode()" class="skew-box px-6 py-3 bg-gradient-to-r from-red-600 to-amber-500 hover:from-red-500 hover:to-amber-400 text-white font-racing font-black text-sm rounded-xl shadow-xl gold-border">
+                        <span class="unskew flex items-center justify-center gap-2"><i class="fa-solid fa-rotate-right"></i> BALAPAN LAGI</span>
+                    </button>
+                    <button onclick="returnToHome()" class="skew-box px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-racing font-bold text-sm rounded-xl border border-white/20">
+                        <span class="unskew flex items-center justify-center gap-2"><i class="fa-solid fa-house"></i> KEMBALI KE HOME</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Crash / Damage Screen Flash Effect Overlay -->
+        <div id="crash-flash-overlay" class="absolute inset-0 z-35 pointer-events-none opacity-0 bg-red-600/30 transition-opacity duration-150 flex items-center justify-center">
+            <div class="font-racing font-black text-3xl sm:text-4xl text-white bg-red-600 px-6 py-2 rounded-xl gold-border shadow-2xl skew-box">
+                <span class="unskew">💥 TABRAKAN! CRASH! -60 KM/H</span>
+            </div>
+        </div>
 
         <!-- CTR Weapon Pickup Toast Alert Notification -->
         <div id="weapon-toast" class="absolute top-20 left-1/2 transform -translate-x-1/2 z-30 hidden bg-gradient-to-r from-amber-600 via-red-600 to-amber-700 px-6 py-3 rounded-2xl gold-border shadow-2xl flex items-center gap-3">
@@ -542,14 +724,28 @@
         <!-- BOTTOM RACE HUD: SPEEDOMETER, NITRO BAR, TOUCH CONTROLS -->
         <!-- ----------------------------------------------------------------- -->
         <div id="hud-drift-container" class="absolute bottom-4 left-4 right-4 z-20 flex-col sm:flex-row items-center justify-between gap-4 pointer-events-none hidden">
-            <!-- Left: Mobile / On-Screen Steering Controls -->
-            <div class="flex items-center gap-2 pointer-events-auto sm:opacity-90">
-                <button onmousedown="raceInput.left=true" onmouseup="raceInput.left=false" ontouchstart="raceInput.left=true" ontouchend="raceInput.left=false" class="w-14 h-14 rounded-2xl bg-black/70 active:bg-red-600 border border-white/20 flex items-center justify-center text-white text-xl shadow-lg transition">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </button>
-                <button onmousedown="raceInput.right=true" onmouseup="raceInput.right=false" ontouchstart="raceInput.right=true" ontouchend="raceInput.right=false" class="w-14 h-14 rounded-2xl bg-black/70 active:bg-red-600 border border-white/20 flex items-center justify-center text-white text-xl shadow-lg transition">
-                    <i class="fa-solid fa-arrow-right"></i>
-                </button>
+            <!-- Left: Full D-Pad Controls (Maju, Mundur, Kiri, Kanan) -->
+            <div class="pointer-events-auto sm:opacity-95 select-none">
+                <div class="grid grid-cols-3 gap-1.5 w-40 sm:w-44">
+                    <div></div>
+                    <!-- Maju / Gas (Up) -->
+                    <button onmousedown="raceInput.forward=true" onmouseup="raceInput.forward=false" ontouchstart="raceInput.forward=true" ontouchend="raceInput.forward=false" class="h-12 rounded-xl bg-black/80 active:bg-emerald-600 border border-emerald-500/40 flex items-center justify-center text-emerald-400 active:text-white text-lg shadow-xl transition" title="Maju / Gas (W / Up)">
+                        <i class="fa-solid fa-arrow-up"></i>
+                    </button>
+                    <div></div>
+                    <!-- Belok Kiri (Left) -->
+                    <button onmousedown="raceInput.left=true" onmouseup="raceInput.left=false" ontouchstart="raceInput.left=true" ontouchend="raceInput.left=false" class="h-12 rounded-xl bg-black/80 active:bg-red-600 border border-white/20 flex items-center justify-center text-white text-lg shadow-xl transition" title="Belok Kiri (A / Left)">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <!-- Mundur / Rem (Down) -->
+                    <button onmousedown="raceInput.backward=true" onmouseup="raceInput.backward=false" ontouchstart="raceInput.backward=true" ontouchend="raceInput.backward=false" class="h-12 rounded-xl bg-black/80 active:bg-amber-600 border border-amber-500/40 flex items-center justify-center text-amber-400 active:text-white text-lg shadow-xl transition" title="Rem / Mundur (S / Down)">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </button>
+                    <!-- Belok Kanan (Right) -->
+                    <button onmousedown="raceInput.right=true" onmouseup="raceInput.right=false" ontouchstart="raceInput.right=true" ontouchend="raceInput.right=false" class="h-12 rounded-xl bg-black/80 active:bg-red-600 border border-white/20 flex items-center justify-center text-white text-lg shadow-xl transition" title="Belok Kanan (D / Right)">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
             </div>
 
             <!-- Center: NFS Style Speedometer & Nitro/Drift Gauge -->
@@ -569,11 +765,23 @@
                 </div>
             </div>
 
-            <!-- Right: On-Screen Nitro Boost Trigger Button -->
-            <div class="pointer-events-auto">
-                <button onmousedown="triggerNitroBoost(true)" onmouseup="triggerNitroBoost(false)" ontouchstart="triggerNitroBoost(true)" ontouchend="triggerNitroBoost(false)" class="px-6 py-4 rounded-2xl bg-gradient-to-r from-cyan-600 to-blue-700 active:from-cyan-400 active:to-blue-500 border border-cyan-400/50 shadow-[0_0_20px_rgba(6,182,212,0.6)] flex items-center gap-2 text-white font-racing font-black text-lg skew-box">
+            <!-- Right: CTR Active Item Slot & Nitro Boost Trigger -->
+            <div class="pointer-events-auto flex items-center gap-3">
+                <!-- Active Item Slot (Click or press ENTER) -->
+                <div id="hud-item-slot" onclick="useActiveItem()" class="cursor-pointer group flex flex-col items-center justify-center w-20 h-20 rounded-2xl bg-slate-950/90 border-2 border-yellow-400/50 hover:border-yellow-300 shadow-[0_0_15px_rgba(250,204,21,0.3)] transition transform hover:scale-105 active:scale-95 text-center relative overflow-hidden">
+                    <div id="hud-item-icon-container" class="text-2xl text-slate-500 mb-0.5">
+                        <i id="hud-item-icon" class="fa-solid fa-box-open"></i>
+                    </div>
+                    <div id="hud-item-name" class="font-racing font-bold text-[9px] text-slate-300 leading-tight px-1 uppercase truncate max-w-[75px]">KOSONG</div>
+                    <div class="mt-0.5 text-[8px] bg-red-600 text-white font-bold px-1.5 py-0.2 rounded font-racing tracking-wider">[ENTER]</div>
+                    <!-- Glow effect when active -->
+                    <div id="hud-item-glow" class="absolute inset-0 bg-yellow-400/15 opacity-0 group-hover:opacity-100 transition pointer-events-none"></div>
+                </div>
+
+                <!-- Nitro Boost Button -->
+                <button onmousedown="triggerNitroBoost(true)" onmouseup="triggerNitroBoost(false)" ontouchstart="triggerNitroBoost(true)" ontouchend="triggerNitroBoost(false)" class="px-5 py-4 rounded-2xl bg-gradient-to-r from-cyan-600 to-blue-700 active:from-cyan-400 active:to-blue-500 border border-cyan-400/50 shadow-[0_0_20px_rgba(6,182,212,0.6)] flex items-center gap-2 text-white font-racing font-black text-base sm:text-lg skew-box">
                     <span class="unskew flex items-center gap-2">
-                        <i class="fa-solid fa-bolt text-yellow-300"></i> NITRO BOOST
+                        <i class="fa-solid fa-bolt text-yellow-300"></i> NITRO
                     </span>
                 </button>
             </div>
@@ -764,7 +972,15 @@
         let raceCamMode = 0; // 0 = Chase Cam, 1 = Low Bumper Cam
         let raceHits = 0;
         let raceTimeSeconds = 0;
-        const raceInput = { left: false, right: false, nitro: false };
+        const raceInput = { forward: false, backward: false, left: false, right: false, nitro: false };
+        let isCountdownActive = false;
+        let canPlayerDrive = false;
+        let activeWeaponInventory = null;
+        let activeShieldMesh = null;
+        let shieldDurationRemaining = 0;
+        let activeMissiles = [];
+        let activeBombs = [];
+        let screenShakeTimer = 0;
 
         // --- WEB AUDIO API PROCEDURAL SOUND SYNTHESIS ---
         let audioCtx = null;
@@ -913,6 +1129,21 @@
             currentScreen = 'racing';
             isRacingActive = true;
             setupRacingScene();
+            
+            // Tampilkan HUD Minimap
+            const minimapEl = document.getElementById('hud-minimap-container');
+            if (minimapEl) minimapEl.classList.remove('hidden');
+
+            // Reset Item Inventory Slot
+            activeWeaponInventory = null;
+            updateItemSlotUI();
+
+            // Sembunyikan Finish Overlay jika ada
+            const finOverlay = document.getElementById('race-finish-overlay');
+            if (finOverlay) finOverlay.classList.add('hidden');
+
+            // Jalankan Countdown 3, 2, 1, START!
+            startRaceCountdown();
         }
 
         function setGameMode(mode) {
@@ -921,16 +1152,51 @@
             // Visual feedback
         }
 
+        let playerCoins = 15000;
+        let playerGems = 350;
+
+        function purchaseStoreItem(name, costCoins, costGems) {
+            if (costCoins > 0 && playerCoins < costCoins) {
+                alert('Stark Coins tidak cukup untuk membeli ' + name);
+                return;
+            }
+            if (costGems > 0 && playerGems < costGems) {
+                alert('Infinity Gems tidak cukup untuk membeli ' + name);
+                return;
+            }
+            playerCoins -= costCoins;
+            playerGems -= costGems;
+            
+            const coinsEl = document.getElementById('player-coins-display');
+            const gemsEl = document.getElementById('player-gems-display');
+            if (coinsEl) coinsEl.innerText = playerCoins.toLocaleString();
+            if (gemsEl) gemsEl.innerText = playerGems.toLocaleString();
+
+            alert('Sukses membeli: ' + name + '! Item telah ditambahkan ke Garasi 3D Anda.');
+        }
+
         function switchHomeSubTab(tabName) {
-            ['play', 'chapters', 'collections', 'roadmap'].forEach(t => {
+            const allTabs = ['play', 'chapters', 'store', 'collections', 'roadmap'];
+            allTabs.forEach(t => {
                 const sec = document.getElementById(`home-subtab-${t}`);
-                const btn = document.getElementById(`tab-btn-${t}`);
+                const subBtn = document.getElementById(`tab-btn-${t}`);
+                const navBtn = document.getElementById(`nav-btn-${t}`);
+                
                 if (sec) sec.classList.toggle('hidden', t !== tabName);
-                if (btn) {
+                
+                if (subBtn) {
                     if (t === tabName) {
-                        btn.className = 'skew-box px-3.5 py-1.5 bg-white text-slate-950 rounded shadow font-racing font-bold text-xs sm:text-sm';
+                        subBtn.className = 'skew-box px-3.5 py-1.5 bg-white text-slate-950 rounded shadow font-racing font-bold text-xs sm:text-sm';
                     } else {
-                        btn.className = 'skew-box px-3.5 py-1.5 bg-slate-800/90 hover:bg-slate-700 text-slate-200 rounded border border-white/20 font-racing font-bold text-xs sm:text-sm';
+                        subBtn.className = 'skew-box px-3.5 py-1.5 bg-slate-800/90 hover:bg-slate-700 text-slate-200 rounded border border-white/20 font-racing font-bold text-xs sm:text-sm';
+                    }
+                }
+
+                if (navBtn) {
+                    if (t === tabName) {
+                        navBtn.className = 'skew-box px-3 py-1.5 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg font-racing font-bold text-xs tracking-wider shadow border border-red-400';
+                    } else {
+                        navBtn.className = 'skew-box px-3 py-1.5 bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg font-racing font-bold text-xs tracking-wider transition border border-white/10';
                     }
                 }
             });
@@ -972,13 +1238,20 @@
             }
         }
 
-        // Keyboard Listeners for Steering & Nitro
+        // Keyboard Listeners for Steering, Gas/Brake & Enter to Use Item
         window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') raceInput.forward = true;
+            if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') raceInput.backward = true;
             if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') raceInput.left = true;
             if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') raceInput.right = true;
             if (e.key === ' ' || e.key === 'Shift') triggerNitroBoost(true);
+            if (e.key === 'Enter') {
+                useActiveItem();
+            }
         });
         window.addEventListener('keyup', (e) => {
+            if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') raceInput.forward = false;
+            if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') raceInput.backward = false;
             if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') raceInput.left = false;
             if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') raceInput.right = false;
             if (e.key === ' ' || e.key === 'Shift') triggerNitroBoost(false);
@@ -1318,98 +1591,912 @@
         // =========================================================================
         // PROCEDURAL 3D MARVEL HERO MODELS
         // =========================================================================
+        // =========================================================================
+        // FULL-BODY PROCEDURAL 3D MARVEL CHARACTER MODELS
+        // Reference: Iron Man Mark 85, Thor Asgardian, Thanos Endgame, Dr. Doom
+        // =========================================================================
         function createArmoredHero3D(heroData, skinIdx) {
             const root = new THREE.Group();
             const skinInfo = heroData.skins[skinIdx] || heroData.skins[0];
+            const wf = isWireframe;
 
+            // --- HIGH-FIDELITY PBR MATERIAL PALETTE ---
             const matArmor = new THREE.MeshPhysicalMaterial({
-                color: skinInfo.primaryColor,
-                metalness: 0.85,
-                roughness: 0.18,
-                clearcoat: 1.0,
-                wireframe: isWireframe
+                color: skinInfo.primaryColor, metalness: 0.92, roughness: 0.12,
+                clearcoat: 1.0, clearcoatRoughness: 0.04, reflectivity: 1.0, wireframe: wf
             });
             const matGold = new THREE.MeshPhysicalMaterial({
-                color: skinInfo.goldColor,
-                metalness: 0.95,
-                roughness: 0.1,
-                wireframe: isWireframe
+                color: skinInfo.goldColor, metalness: 0.97, roughness: 0.06,
+                clearcoat: 1.0, wireframe: wf
             });
             const matSuit = new THREE.MeshStandardMaterial({
-                color: skinInfo.secondaryColor,
-                roughness: 0.4,
-                wireframe: isWireframe
+                color: skinInfo.secondaryColor, roughness: 0.45, metalness: 0.3, wireframe: wf
             });
             const matGlow = new THREE.MeshStandardMaterial({
-                color: skinInfo.accentColor,
-                emissive: skinInfo.accentColor,
-                emissiveIntensity: 3.0,
-                wireframe: isWireframe
+                color: skinInfo.accentColor, emissive: skinInfo.accentColor,
+                emissiveIntensity: 4.0, wireframe: wf
+            });
+            const matSkin = new THREE.MeshStandardMaterial({
+                color: skinInfo.skinColor || 0xcccccc, roughness: 0.55, metalness: 0.15, wireframe: wf
+            });
+            const matDark = new THREE.MeshStandardMaterial({
+                color: 0x0a0a12, roughness: 0.5, metalness: 0.4, wireframe: wf
+            });
+            const matArmorTrim = new THREE.MeshPhysicalMaterial({
+                color: skinInfo.goldColor, metalness: 0.9, roughness: 0.15,
+                clearcoat: 0.8, wireframe: wf
             });
 
+            // Helper: cylinder shortcut
+            const cyl = (rt, rb, h, seg) => new THREE.CylinderGeometry(rt, rb, h, seg || 12);
+            const box = (w, h, d) => new THREE.BoxGeometry(w, h, d);
+            const sphere = (r, ws, hs) => new THREE.SphereGeometry(r, ws || 16, hs || 12);
+
+            const bodyGroup = new THREE.Group();
+
+            // ============================================
+            // 1. PELVIS / HIP CORE
+            // ============================================
+            const pelvis = new THREE.Mesh(box(0.52, 0.22, 0.32), matDark);
+            pelvis.position.y = 0;
+            bodyGroup.add(pelvis);
+
+            const belt = new THREE.Mesh(box(0.56, 0.08, 0.34), matGold);
+            belt.position.y = 0.1;
+            bodyGroup.add(belt);
+
+            // Belt buckle
+            const buckle = new THREE.Mesh(box(0.12, 0.08, 0.04), matGlow);
+            buckle.position.set(0, 0.1, 0.19);
+            bodyGroup.add(buckle);
+
+            // ============================================
+            // 2. LEGS (FULL ARTICULATED THIGHS + SHINS + BOOTS)
+            // ============================================
+            [-1, 1].forEach(side => {
+                const legGroup = new THREE.Group();
+                legGroup.position.set(side * 0.16, -0.08, 0);
+
+                // Upper thigh (muscular taper)
+                const thigh = new THREE.Mesh(cyl(0.14, 0.11, 0.48, 10), matArmor);
+                thigh.position.y = -0.28;
+                legGroup.add(thigh);
+
+                // Thigh armor plate (front)
+                const thighPlate = new THREE.Mesh(box(0.16, 0.38, 0.06), matArmor);
+                thighPlate.position.set(0, -0.28, 0.09);
+                legGroup.add(thighPlate);
+
+                // Knee joint sphere
+                const knee = new THREE.Mesh(sphere(0.09, 10, 8), matDark);
+                knee.position.y = -0.54;
+                legGroup.add(knee);
+
+                // Knee cap armor
+                const kneeCap = new THREE.Mesh(box(0.1, 0.1, 0.06), matGold);
+                kneeCap.position.set(0, -0.54, 0.08);
+                legGroup.add(kneeCap);
+
+                // Shin (tapered cylinder)
+                const shin = new THREE.Mesh(cyl(0.10, 0.09, 0.46, 10), matArmor);
+                shin.position.y = -0.80;
+                legGroup.add(shin);
+
+                // Shin armor plate (front guard)
+                const shinPlate = new THREE.Mesh(box(0.12, 0.36, 0.05), matArmor);
+                shinPlate.position.set(0, -0.80, 0.08);
+                legGroup.add(shinPlate);
+
+                // Ankle joint
+                const ankle = new THREE.Mesh(sphere(0.07, 8, 6), matDark);
+                ankle.position.y = -1.06;
+                legGroup.add(ankle);
+
+                // Boot (armored foot)
+                const bootBase = new THREE.Mesh(box(0.14, 0.10, 0.28), matArmor);
+                bootBase.position.set(0, -1.12, 0.04);
+                legGroup.add(bootBase);
+
+                // Boot sole (thick rubber)
+                const sole = new THREE.Mesh(box(0.15, 0.04, 0.30), matDark);
+                sole.position.set(0, -1.18, 0.04);
+                legGroup.add(sole);
+
+                // Boot thruster (for Iron Man / tech heroes)
+                const thruster = new THREE.Mesh(cyl(0.04, 0.06, 0.04, 8), matGlow);
+                thruster.position.set(0, -1.16, -0.06);
+                legGroup.add(thruster);
+
+                bodyGroup.add(legGroup);
+            });
+
+            // ============================================
+            // 3. TORSO (MUSCULAR CHEST PLATE + ABS + BACK)
+            // ============================================
             const torsoGroup = new THREE.Group();
-            torsoGroup.position.y = 1.56;
+            torsoGroup.position.y = 0.18;
 
-            // Chest Plate
-            const chest = new THREE.Mesh(new THREE.BoxGeometry(0.68, 0.75, 0.42), matArmor);
-            chest.position.y = 0.05;
-            torsoGroup.add(chest);
+            // Lower abdomen (6-pack armor zone)
+            const abdomen = new THREE.Mesh(box(0.48, 0.28, 0.30), matArmor);
+            abdomen.position.y = 0.14;
+            torsoGroup.add(abdomen);
 
-            // Emblem / Reactor
-            const emblem = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.06, 16), matGlow);
-            emblem.rotation.x = Math.PI / 2;
-            emblem.position.set(0, 0.12, 0.22);
-            torsoGroup.add(emblem);
+            // Abdomen segmented lines (ab ridges)
+            for (let ay = 0; ay < 3; ay++) {
+                const abLine = new THREE.Mesh(box(0.44, 0.012, 0.02), matDark);
+                abLine.position.set(0, 0.04 + ay * 0.09, 0.16);
+                torsoGroup.add(abLine);
+            }
+            // Center ab line
+            const centerAb = new THREE.Mesh(box(0.012, 0.24, 0.02), matDark);
+            centerAb.position.set(0, 0.14, 0.16);
+            torsoGroup.add(centerAb);
 
-            // Head / Helmet
-            const head = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.46, 0.44), matArmor);
-            head.position.set(0, 0.62, 0);
-            torsoGroup.add(head);
+            // Upper chest (broad, muscular V-taper)
+            const upperChest = new THREE.Mesh(box(0.62, 0.32, 0.34), matArmor);
+            upperChest.position.y = 0.44;
+            torsoGroup.add(upperChest);
 
-            // Visor / Eyes
-            [-0.1, 0.1].forEach(ex => {
-                const eye = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.06, 0.08), matGlow);
-                eye.position.set(ex, 0.64, 0.23);
-                torsoGroup.add(eye);
+            // Pectoral muscle plates (rounded chest plates)
+            [-1, 1].forEach(side => {
+                const pec = new THREE.Mesh(sphere(0.16, 10, 8), matArmor);
+                pec.scale.set(1.2, 0.8, 0.6);
+                pec.position.set(side * 0.14, 0.46, 0.16);
+                torsoGroup.add(pec);
             });
 
-            // Hero-Specific Items
-            if (heroData.id === 'iron_man') {
-                [-0.22, 0, 0.22].forEach(bx => {
-                    [-0.15, 0.15].forEach(bz => {
-                        const blade = new THREE.Mesh(new THREE.ConeGeometry(0.06, 0.65, 4), matGold);
-                        blade.position.set(bx, 0.25, -0.3 + bz);
-                        blade.rotation.x = bz < 0 ? -0.4 : 0.4;
-                        torsoGroup.add(blade);
-                    });
-                });
-            } else if (heroData.id === 'thor') {
-                const capeMat = new THREE.MeshStandardMaterial({ color: 0xdc2626, roughness: 0.5 });
-                const cape = new THREE.Mesh(new THREE.BoxGeometry(0.65, 0.95, 0.08), capeMat);
-                cape.position.set(0, 0.05, -0.26);
-                torsoGroup.add(cape);
+            // Chest center seam line
+            const chestSeam = new THREE.Mesh(box(0.015, 0.28, 0.02), matDark);
+            chestSeam.position.set(0, 0.44, 0.18);
+            torsoGroup.add(chestSeam);
 
-                const hammerGroup = new THREE.Group();
-                const hHandle = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.5, 10), matSuit);
-                const hHead = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.18, 0.18), matGold);
-                hHead.position.y = 0.28;
-                hammerGroup.add(hHandle, hHead);
-                hammerGroup.position.set(0.55, -0.1, 0.25);
-                hammerGroup.rotation.z = -0.3;
-                torsoGroup.add(hammerGroup);
-            } else if (heroData.id === 'dr_doom') {
-                const hoodMat = new THREE.MeshStandardMaterial({ color: 0x065f46, roughness: 0.6 });
-                const hood = new THREE.Mesh(new THREE.SphereGeometry(0.28, 16, 16), hoodMat);
-                hood.position.set(0, 0.72, 0);
-                torsoGroup.add(hood);
-            } else if (heroData.id === 'thanos') {
-                const gauntlet = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.28, 0.24), matGold);
-                gauntlet.position.set(-0.48, -0.1, 0.15);
-                torsoGroup.add(gauntlet);
+            // Collarbone / neck base armor ridge
+            const collar = new THREE.Mesh(box(0.52, 0.06, 0.28), matGold);
+            collar.position.y = 0.62;
+            torsoGroup.add(collar);
+
+            // Back plate (scapula armor)
+            const backPlate = new THREE.Mesh(box(0.56, 0.40, 0.08), matArmor);
+            backPlate.position.set(0, 0.42, -0.18);
+            torsoGroup.add(backPlate);
+
+            // Spine ridge (detail line)
+            const spine = new THREE.Mesh(box(0.025, 0.50, 0.03), matDark);
+            spine.position.set(0, 0.32, -0.22);
+            torsoGroup.add(spine);
+
+            // ============================================
+            // 4. SHOULDERS (MASSIVE PAULDRONS)
+            // ============================================
+            [-1, 1].forEach(side => {
+                // Shoulder ball joint
+                const shoulderBall = new THREE.Mesh(sphere(0.10, 10, 8), matDark);
+                shoulderBall.position.set(side * 0.34, 0.56, 0);
+                torsoGroup.add(shoulderBall);
+
+                // Pauldron armor cap (big rounded shoulder pad)
+                const pauldron = new THREE.Mesh(sphere(0.16, 12, 10), matArmor);
+                pauldron.scale.set(1.3, 0.8, 1.1);
+                pauldron.position.set(side * 0.38, 0.60, 0);
+                torsoGroup.add(pauldron);
+
+                // Pauldron edge trim
+                const pauldronTrim = new THREE.Mesh(new THREE.TorusGeometry(0.14, 0.015, 8, 16, Math.PI), matGold);
+                pauldronTrim.rotation.x = Math.PI / 2;
+                pauldronTrim.rotation.z = side * Math.PI / 2;
+                pauldronTrim.position.set(side * 0.38, 0.58, 0.06);
+                torsoGroup.add(pauldronTrim);
+            });
+
+            // ============================================
+            // 5. ARMS (BICEP + FOREARM + HANDS WITH FINGERS)
+            // ============================================
+            [-1, 1].forEach(side => {
+                const armGroup = new THREE.Group();
+                armGroup.position.set(side * 0.38, 0.50, 0);
+
+                // Upper arm / bicep (muscular cylinder)
+                const bicep = new THREE.Mesh(cyl(0.10, 0.09, 0.36, 10), matArmor);
+                bicep.position.y = -0.20;
+                armGroup.add(bicep);
+
+                // Bicep armor band
+                const bicepBand = new THREE.Mesh(cyl(0.11, 0.11, 0.04, 10), matGold);
+                bicepBand.position.y = -0.08;
+                armGroup.add(bicepBand);
+
+                // Elbow joint
+                const elbow = new THREE.Mesh(sphere(0.07, 8, 6), matDark);
+                elbow.position.y = -0.40;
+                armGroup.add(elbow);
+
+                // Forearm (tapered, wider at wrist guard)
+                const forearm = new THREE.Mesh(cyl(0.08, 0.10, 0.34, 10), matArmor);
+                forearm.position.y = -0.60;
+                armGroup.add(forearm);
+
+                // Forearm armor plate (vambrace)
+                const vambrace = new THREE.Mesh(box(0.12, 0.26, 0.06), matArmor);
+                vambrace.position.set(0, -0.58, 0.07);
+                armGroup.add(vambrace);
+
+                // Wrist guard / gauntlet cuff
+                const wristGuard = new THREE.Mesh(cyl(0.10, 0.10, 0.06, 10), matGold);
+                wristGuard.position.y = -0.76;
+                armGroup.add(wristGuard);
+
+                // Hand (box + individual fingers)
+                const handGroup = new THREE.Group();
+                handGroup.position.y = -0.84;
+
+                // Palm
+                const palm = new THREE.Mesh(box(0.10, 0.12, 0.06), matSkin);
+                handGroup.add(palm);
+
+                // 4 Fingers
+                for (let fi = 0; fi < 4; fi++) {
+                    const fx = -0.035 + fi * 0.024;
+                    const finger = new THREE.Mesh(box(0.02, 0.10, 0.025), matSkin);
+                    finger.position.set(fx, -0.10, 0);
+                    handGroup.add(finger);
+
+                    // Finger tip
+                    const tip = new THREE.Mesh(sphere(0.012, 6, 4), matSkin);
+                    tip.position.set(fx, -0.155, 0);
+                    handGroup.add(tip);
+                }
+
+                // Thumb (angled outward)
+                const thumb = new THREE.Mesh(box(0.025, 0.08, 0.025), matSkin);
+                thumb.position.set(side * 0.06, -0.02, 0.03);
+                thumb.rotation.z = side * 0.4;
+                handGroup.add(thumb);
+
+                armGroup.add(handGroup);
+                torsoGroup.add(armGroup);
+            });
+
+            // ============================================
+            // 6. NECK (SHORT THICK MUSCULAR COLUMN)
+            // ============================================
+            const neck = new THREE.Mesh(cyl(0.08, 0.10, 0.14, 10), matSkin);
+            neck.position.y = 0.68;
+            torsoGroup.add(neck);
+
+            // Neck armor collar ring
+            const neckRing = new THREE.Mesh(cyl(0.12, 0.12, 0.04, 12), matArmor);
+            neckRing.position.y = 0.64;
+            torsoGroup.add(neckRing);
+
+            // ============================================
+            // 7. HEAD (DETAILED HELMET / FACE)
+            // ============================================
+            const headGroup = new THREE.Group();
+            headGroup.position.y = 0.82;
+
+            // Cranium (rounded top)
+            const cranium = new THREE.Mesh(sphere(0.20, 14, 12), matArmor);
+            cranium.scale.set(1.0, 1.1, 1.05);
+            cranium.position.y = 0.06;
+            headGroup.add(cranium);
+
+            // Face plate (front face area)
+            const facePlate = new THREE.Mesh(box(0.30, 0.24, 0.06), matArmor);
+            facePlate.position.set(0, -0.02, 0.17);
+            headGroup.add(facePlate);
+
+            // Visor / Eye slits (glowing)
+            [-1, 1].forEach(side => {
+                const eye = new THREE.Mesh(box(0.09, 0.035, 0.04), matGlow);
+                eye.position.set(side * 0.07, 0.02, 0.20);
+                eye.rotation.z = side * -0.12;
+                headGroup.add(eye);
+            });
+
+            // Mouth / chin area
+            const chin = new THREE.Mesh(box(0.16, 0.08, 0.05), matArmor);
+            chin.position.set(0, -0.10, 0.18);
+            headGroup.add(chin);
+
+            // Jaw line edges
+            [-1, 1].forEach(side => {
+                const jaw = new THREE.Mesh(box(0.04, 0.12, 0.08), matArmor);
+                jaw.position.set(side * 0.14, -0.04, 0.12);
+                headGroup.add(jaw);
+            });
+
+            // Helmet ridge line (top crest)
+            const crest = new THREE.Mesh(box(0.03, 0.06, 0.30), matGold);
+            crest.position.set(0, 0.16, 0.02);
+            headGroup.add(crest);
+
+            // Ear / temporal armor plates
+            [-1, 1].forEach(side => {
+                const earPlate = new THREE.Mesh(box(0.04, 0.10, 0.12), matArmor);
+                earPlate.position.set(side * 0.20, 0.02, -0.02);
+                headGroup.add(earPlate);
+            });
+
+            torsoGroup.add(headGroup);
+
+            // ============================================
+            // 8. CHEST EMBLEM / ARC REACTOR
+            // ============================================
+            // Triangular arc reactor shape (Iron Man reference)
+            const reactorOuter = new THREE.Mesh(cyl(0.09, 0.09, 0.04, 3), matGlow);
+            reactorOuter.rotation.x = Math.PI / 2;
+            reactorOuter.position.set(0, 0.46, 0.19);
+            torsoGroup.add(reactorOuter);
+
+            const reactorInner = new THREE.Mesh(cyl(0.05, 0.05, 0.05, 16), matGlow);
+            reactorInner.rotation.x = Math.PI / 2;
+            reactorInner.position.set(0, 0.46, 0.20);
+            torsoGroup.add(reactorInner);
+
+            // Reactor glow point light
+            const reactorLight = new THREE.PointLight(skinInfo.accentColor, 2.0, 3);
+            reactorLight.position.set(0, 0.46, 0.25);
+            torsoGroup.add(reactorLight);
+
+            bodyGroup.add(torsoGroup);
+
+            // ============================================
+            // 9. HERO-SPECIFIC SIGNATURE ACCESSORIES
+            // ============================================
+
+            // ===== IRON MAN MARK 85 =====
+            // Reference: Nano-tech wing blades fanning out from back,
+            // repulsor palm glow circles, segmented red/gold armor
+            if (heroData.id === 'iron_man') {
+                // --- 6 NANO-TECH WING BLADES (fan array from back) ---
+                const bladeAngles = [-0.7, -0.35, -0.1, 0.1, 0.35, 0.7];
+                bladeAngles.forEach((angle, idx) => {
+                    const bladeGroup = new THREE.Group();
+                    bladeGroup.position.set(0, 0.48, -0.18);
+                    bladeGroup.rotation.z = angle;
+                    bladeGroup.rotation.x = -0.3 - Math.abs(angle) * 0.15;
+
+                    // Main blade body (long tapered panel)
+                    const bladeMesh = new THREE.Mesh(box(0.08, 0.65, 0.03), matArmor);
+                    bladeMesh.position.y = 0.35;
+                    bladeGroup.add(bladeMesh);
+
+                    // Blade segments (horizontal cut lines for nanotech look)
+                    for (let seg = 0; seg < 5; seg++) {
+                        const segLine = new THREE.Mesh(box(0.09, 0.008, 0.035), matGold);
+                        segLine.position.set(0, 0.08 + seg * 0.12, 0);
+                        bladeGroup.add(segLine);
+                    }
+
+                    // Blade tip (pointed)
+                    const tip = new THREE.Mesh(new THREE.ConeGeometry(0.04, 0.12, 4), matArmor);
+                    tip.position.y = 0.70;
+                    bladeGroup.add(tip);
+
+                    // Blade inner glow strip
+                    const glowStrip = new THREE.Mesh(box(0.02, 0.55, 0.01), matGlow);
+                    glowStrip.position.set(0, 0.32, 0.02);
+                    bladeGroup.add(glowStrip);
+
+                    torsoGroup.add(bladeGroup);
+                });
+
+                // --- REPULSOR PALM GLOWS (both hands) ---
+                [-1, 1].forEach(side => {
+                    const repulsor = new THREE.Mesh(cyl(0.035, 0.035, 0.02, 12), matGlow);
+                    repulsor.rotation.x = Math.PI / 2;
+                    repulsor.position.set(side * 0.38, -0.34, 0.05);
+                    torsoGroup.add(repulsor);
+
+                    // Repulsor glow light
+                    const rLight = new THREE.PointLight(0x38bdf8, 1.5, 1.5);
+                    rLight.position.set(side * 0.38, -0.34, 0.08);
+                    torsoGroup.add(rLight);
+                });
+
+                // --- BOOT THRUSTERS (glowing circles) ---
+                [-1, 1].forEach(side => {
+                    const bootThruster = new THREE.Mesh(cyl(0.05, 0.05, 0.03, 10), matGlow);
+                    bootThruster.position.set(side * 0.16, -1.18, -0.06);
+                    bodyGroup.add(bootThruster);
+                });
             }
 
-            root.add(torsoGroup);
-            root.userData = { torsoGroup };
+            // ===== THOR ODINSON =====
+            // Reference: Dark chainmail armor, massive red cape,
+            // Mjolnir hammer with leather strap, disc plates on chest
+            else if (heroData.id === 'thor') {
+                // --- FLOWING RED CAPE (multi-segment for volume) ---
+                const capeMat = new THREE.MeshStandardMaterial({
+                    color: 0xdc2626, roughness: 0.55, metalness: 0.1,
+                    side: THREE.DoubleSide, wireframe: wf
+                });
+
+                // Cape top attachment (at shoulder line)
+                const capeTop = new THREE.Mesh(box(0.52, 0.08, 0.06), capeMat);
+                capeTop.position.set(0, 0.58, -0.20);
+                torsoGroup.add(capeTop);
+
+                // Cape cascade panels (billowing flow using angled boxes)
+                for (let ci = 0; ci < 6; ci++) {
+                    const capePanel = new THREE.Mesh(box(0.54 + ci * 0.04, 0.22, 0.03), capeMat);
+                    const capeY = 0.46 - ci * 0.20;
+                    const capeZ = -0.22 - ci * 0.06;
+                    const capeRot = ci * 0.06;
+                    capePanel.position.set(0, capeY, capeZ);
+                    capePanel.rotation.x = capeRot;
+                    torsoGroup.add(capePanel);
+                }
+
+                // Cape bottom flowing edge
+                const capeBottom = new THREE.Mesh(box(0.78, 0.18, 0.025), capeMat);
+                capeBottom.position.set(0, -0.48, -0.58);
+                capeBottom.rotation.x = 0.35;
+                torsoGroup.add(capeBottom);
+
+                // --- CIRCULAR DISC EMBLEMS on chest (Asgardian style) ---
+                [-1, 1].forEach(side => {
+                    const disc = new THREE.Mesh(cyl(0.06, 0.06, 0.03, 16), matGold);
+                    disc.rotation.x = Math.PI / 2;
+                    disc.position.set(side * 0.18, 0.52, 0.18);
+                    torsoGroup.add(disc);
+                });
+
+                // --- CHAINMAIL TEXTURE OVERLAY (dark grid pattern on torso) ---
+                for (let my = 0; my < 4; my++) {
+                    for (let mx = 0; mx < 5; mx++) {
+                        const link = new THREE.Mesh(new THREE.TorusGeometry(0.018, 0.004, 4, 6), matDark);
+                        link.position.set(-0.18 + mx * 0.09, 0.30 + my * 0.08, 0.17);
+                        link.rotation.x = Math.PI / 2;
+                        torsoGroup.add(link);
+                    }
+                }
+
+                // --- MJOLNIR HAMMER (held in right hand, raised pose) ---
+                const mjolnirGroup = new THREE.Group();
+
+                // Handle (wrapped leather)
+                const handleMat = new THREE.MeshStandardMaterial({ color: 0x78350f, roughness: 0.8, wireframe: wf });
+                const handle = new THREE.Mesh(cyl(0.025, 0.025, 0.45, 8), handleMat);
+                mjolnirGroup.add(handle);
+
+                // Handle leather wrap bands
+                for (let hi = 0; hi < 6; hi++) {
+                    const wrap = new THREE.Mesh(cyl(0.03, 0.03, 0.02, 8), new THREE.MeshStandardMaterial({ color: 0x451a03, roughness: 0.9, wireframe: wf }));
+                    wrap.position.y = -0.18 + hi * 0.07;
+                    mjolnirGroup.add(wrap);
+                }
+
+                // Hammer head (squared Uru metal block)
+                const hammerHead = new THREE.Mesh(box(0.18, 0.14, 0.18), new THREE.MeshPhysicalMaterial({
+                    color: 0x94a3b8, metalness: 0.9, roughness: 0.2, clearcoat: 0.8, wireframe: wf
+                }));
+                hammerHead.position.y = 0.28;
+                mjolnirGroup.add(hammerHead);
+
+                // Hammer face runes (engraved lines)
+                [-1, 1].forEach(side => {
+                    const rune = new THREE.Mesh(box(0.10, 0.008, 0.19), matGlow);
+                    rune.position.set(0, 0.28 + side * 0.04, 0);
+                    mjolnirGroup.add(rune);
+                });
+
+                // Hammer pommel (bottom cap)
+                const pommel = new THREE.Mesh(cyl(0.04, 0.04, 0.04, 8), matGold);
+                pommel.position.y = -0.24;
+                mjolnirGroup.add(pommel);
+
+                // Leather wrist strap loop
+                const strap = new THREE.Mesh(new THREE.TorusGeometry(0.05, 0.008, 6, 12), handleMat);
+                strap.position.y = -0.22;
+                mjolnirGroup.add(strap);
+
+                // Position hammer: raised in right hand
+                mjolnirGroup.position.set(0.42, 0.20, 0.12);
+                mjolnirGroup.rotation.z = -0.5;
+                mjolnirGroup.rotation.x = -0.2;
+                torsoGroup.add(mjolnirGroup);
+
+                // --- LIGHTNING CRACKLING around Mjolnir (glow lines) ---
+                for (let li = 0; li < 3; li++) {
+                    const bolt = new THREE.Mesh(box(0.008, 0.25 + li * 0.08, 0.008), matGlow);
+                    bolt.position.set(0.42 + (li - 1) * 0.06, 0.55 + li * 0.04, 0.10);
+                    bolt.rotation.z = (li - 1) * 0.3;
+                    torsoGroup.add(bolt);
+                }
+            }
+
+            // ===== DOCTOR DOOM =====
+            // Reference: Titanium armor with green tunic/cape,
+            // iron mask, hooded cloak, belt with arcane buckle
+            else if (heroData.id === 'dr_doom') {
+                // --- EMERALD GREEN HOODED CLOAK ---
+                const cloakMat = new THREE.MeshStandardMaterial({
+                    color: 0x065f46, roughness: 0.6, metalness: 0.1,
+                    side: THREE.DoubleSide, wireframe: wf
+                });
+
+                // Hood (large dome behind head)
+                const hood = new THREE.Mesh(sphere(0.26, 14, 12), cloakMat);
+                hood.scale.set(1.1, 1.3, 1.2);
+                hood.position.set(0, 0.92, -0.06);
+                torsoGroup.add(hood);
+
+                // Hood opening frame (darker rim)
+                const hoodRim = new THREE.Mesh(new THREE.TorusGeometry(0.18, 0.015, 8, 16, Math.PI * 1.2), matDark);
+                hoodRim.position.set(0, 0.88, 0.12);
+                hoodRim.rotation.y = Math.PI;
+                torsoGroup.add(hoodRim);
+
+                // Flowing cloak panels (cascade down back)
+                for (let ci = 0; ci < 7; ci++) {
+                    const cloakPanel = new THREE.Mesh(box(0.60 + ci * 0.06, 0.20, 0.025), cloakMat);
+                    const cY = 0.52 - ci * 0.19;
+                    const cZ = -0.20 - ci * 0.05;
+                    cloakPanel.position.set(0, cY, cZ);
+                    cloakPanel.rotation.x = ci * 0.04;
+                    torsoGroup.add(cloakPanel);
+                }
+
+                // Cloak bottom trailing edge
+                const cloakTrail = new THREE.Mesh(box(0.95, 0.15, 0.02), cloakMat);
+                cloakTrail.position.set(0, -0.70, -0.58);
+                cloakTrail.rotation.x = 0.25;
+                torsoGroup.add(cloakTrail);
+
+                // --- GREEN TUNIC OVER ARMOR ---
+                const tunic = new THREE.Mesh(box(0.50, 0.48, 0.04), cloakMat);
+                tunic.position.set(0, 0.22, 0.18);
+                torsoGroup.add(tunic);
+
+                // --- IRON MASK (Doom's iconic face mask) ---
+                const maskMat = new THREE.MeshPhysicalMaterial({
+                    color: 0x94a3b8, metalness: 0.95, roughness: 0.08,
+                    clearcoat: 1.0, wireframe: wf
+                });
+
+                // Replace the default face plate with iron mask
+                const mask = new THREE.Mesh(box(0.28, 0.24, 0.04), maskMat);
+                mask.position.set(0, 0.80, 0.20);
+                torsoGroup.add(mask);
+
+                // Mask forehead crest
+                const maskCrest = new THREE.Mesh(box(0.20, 0.04, 0.04), maskMat);
+                maskCrest.position.set(0, 0.92, 0.18);
+                torsoGroup.add(maskCrest);
+
+                // Doom eye slits (narrower, more menacing)
+                [-1, 1].forEach(side => {
+                    const doomEye = new THREE.Mesh(box(0.06, 0.02, 0.03), matGlow);
+                    doomEye.position.set(side * 0.06, 0.83, 0.22);
+                    torsoGroup.add(doomEye);
+                });
+
+                // Mask mouth grate (horizontal lines)
+                for (let gi = 0; gi < 3; gi++) {
+                    const grate = new THREE.Mesh(box(0.12, 0.006, 0.02), matDark);
+                    grate.position.set(0, 0.74 + gi * 0.02, 0.22);
+                    torsoGroup.add(grate);
+                }
+
+                // --- ARCANE ENERGY in hands ---
+                [-1, 1].forEach(side => {
+                    const orbGlow = new THREE.Mesh(sphere(0.06, 12, 8),
+                        new THREE.MeshStandardMaterial({ color: 0x10b981, emissive: 0x10b981, emissiveIntensity: 5.0, transparent: true, opacity: 0.7, wireframe: wf })
+                    );
+                    orbGlow.position.set(side * 0.38, -0.36, 0.06);
+                    torsoGroup.add(orbGlow);
+
+                    const orbLight = new THREE.PointLight(0x10b981, 1.5, 2);
+                    orbLight.position.set(side * 0.38, -0.36, 0.08);
+                    torsoGroup.add(orbLight);
+                });
+            }
+
+            // ===== THANOS THE MAD TITAN =====
+            // Reference: Massive muscular purple body, golden Endgame armor
+            // with ornate chest plate, Infinity Gauntlet with 6 gem stones,
+            // double-bladed Thanoscopter sword
+            else if (heroData.id === 'thanos') {
+                // Scale up body for titan bulk
+                bodyGroup.scale.set(1.15, 1.12, 1.15);
+
+                // --- ORNATE GOLDEN CHEST ARMOR PLATE (V-shaped Endgame design) ---
+                // Left V-arm
+                const vPlateL = new THREE.Mesh(box(0.28, 0.06, 0.04), matGold);
+                vPlateL.position.set(-0.10, 0.46, 0.20);
+                vPlateL.rotation.z = 0.55;
+                torsoGroup.add(vPlateL);
+
+                // Right V-arm
+                const vPlateR = new THREE.Mesh(box(0.28, 0.06, 0.04), matGold);
+                vPlateR.position.set(0.10, 0.46, 0.20);
+                vPlateR.rotation.z = -0.55;
+                torsoGroup.add(vPlateR);
+
+                // V apex gem
+                const vGem = new THREE.Mesh(cyl(0.04, 0.02, 0.04, 6), matGlow);
+                vGem.rotation.x = Math.PI / 2;
+                vGem.position.set(0, 0.38, 0.22);
+                torsoGroup.add(vGem);
+
+                // Horizontal gold bands across chest
+                for (let bi = 0; bi < 3; bi++) {
+                    const band = new THREE.Mesh(box(0.50 - bi * 0.08, 0.025, 0.035), matGold);
+                    band.position.set(0, 0.52 + bi * 0.05, 0.19);
+                    torsoGroup.add(band);
+                }
+
+                // --- MASSIVE SHOULDER PAULDRONS (oversized for Thanos) ---
+                [-1, 1].forEach(side => {
+                    // Extra large shoulder plate
+                    const bigPauldron = new THREE.Mesh(sphere(0.18, 12, 10), matGold);
+                    bigPauldron.scale.set(1.5, 0.9, 1.2);
+                    bigPauldron.position.set(side * 0.42, 0.62, 0);
+                    torsoGroup.add(bigPauldron);
+
+                    // Pauldron edge ridges
+                    for (let ri = 0; ri < 3; ri++) {
+                        const ridge = new THREE.Mesh(box(0.04, 0.02, 0.20), matGold);
+                        ridge.position.set(side * (0.36 + ri * 0.04), 0.64, 0);
+                        torsoGroup.add(ridge);
+                    }
+                });
+
+                // --- INFINITY GAUNTLET (Left Hand) ---
+                const gauntletGroup = new THREE.Group();
+                gauntletGroup.position.set(-0.38, -0.30, 0.05);
+
+                // Gauntlet body (golden armored glove)
+                const gauntBody = new THREE.Mesh(box(0.14, 0.22, 0.10), matGold);
+                gauntletGroup.add(gauntBody);
+
+                // Gauntlet knuckle ridge
+                const knuckleRidge = new THREE.Mesh(box(0.15, 0.04, 0.11), matGold);
+                knuckleRidge.position.y = -0.08;
+                gauntletGroup.add(knuckleRidge);
+
+                // Gauntlet finger segments
+                for (let fi = 0; fi < 4; fi++) {
+                    const gFinger = new THREE.Mesh(box(0.025, 0.10, 0.028), matGold);
+                    gFinger.position.set(-0.04 + fi * 0.028, -0.16, 0);
+                    gauntletGroup.add(gFinger);
+                }
+
+                // Gauntlet thumb
+                const gThumb = new THREE.Mesh(box(0.03, 0.07, 0.03), matGold);
+                gThumb.position.set(-0.07, -0.06, 0.04);
+                gThumb.rotation.z = 0.4;
+                gauntletGroup.add(gThumb);
+
+                // --- 6 INFINITY STONES (each a unique glowing gem) ---
+                const stoneColors = [0xef4444, 0xf97316, 0xfacc15, 0x22c55e, 0x3b82f6, 0xa855f7];
+                const stoneNames = ['Power', 'Soul', 'Mind', 'Time', 'Space', 'Reality'];
+                const stonePositions = [
+                    [0, 0.08, 0.055],      // Knuckle center top
+                    [-0.035, 0.04, 0.055],  // Knuckle left
+                    [0.035, 0.04, 0.055],   // Knuckle right
+                    [0, -0.02, 0.055],      // Mid palm
+                    [-0.03, -0.06, 0.055],  // Lower left
+                    [0.03, -0.06, 0.055]    // Lower right
+                ];
+                stoneColors.forEach((stoneColor, si) => {
+                    const stoneMat = new THREE.MeshStandardMaterial({
+                        color: stoneColor, emissive: stoneColor,
+                        emissiveIntensity: 6.0, transparent: true, opacity: 0.9, wireframe: wf
+                    });
+                    const stone = new THREE.Mesh(sphere(0.018, 8, 6), stoneMat);
+                    stone.position.set(...stonePositions[si]);
+                    gauntletGroup.add(stone);
+
+                    // Stone individual glow light
+                    const sLight = new THREE.PointLight(stoneColor, 0.8, 0.8);
+                    sLight.position.set(...stonePositions[si]);
+                    gauntletGroup.add(sLight);
+                });
+
+                torsoGroup.add(gauntletGroup);
+
+                // --- DOUBLE-BLADED SWORD (Thanoscopter Sword) in Right Hand ---
+                const swordGroup = new THREE.Group();
+
+                // Central handle shaft
+                const swordHandle = new THREE.Mesh(cyl(0.025, 0.025, 1.4, 8),
+                    new THREE.MeshPhysicalMaterial({ color: 0x78350f, metalness: 0.7, roughness: 0.3, wireframe: wf })
+                );
+                swordGroup.add(swordHandle);
+
+                // Handle grip wraps
+                for (let gi = 0; gi < 4; gi++) {
+                    const grip = new THREE.Mesh(cyl(0.032, 0.032, 0.03, 8), matGold);
+                    grip.position.y = -0.15 + gi * 0.10;
+                    swordGroup.add(grip);
+                }
+
+                // Guard / cross-guard (ornate golden piece)
+                const crossGuard = new THREE.Mesh(box(0.22, 0.04, 0.04), matGold);
+                crossGuard.position.y = 0.15;
+                swordGroup.add(crossGuard);
+
+                // Upper blade (large curved helicopter-style blade)
+                const bladeMat = new THREE.MeshPhysicalMaterial({
+                    color: 0x64748b, metalness: 0.95, roughness: 0.08,
+                    clearcoat: 1.0, wireframe: wf
+                });
+
+                const upperBlade = new THREE.Mesh(box(0.06, 0.55, 0.015), bladeMat);
+                upperBlade.position.y = 0.48;
+                swordGroup.add(upperBlade);
+
+                // Upper blade edge (sharp taper widening)
+                const upperEdge = new THREE.Mesh(new THREE.ConeGeometry(0.06, 0.18, 4), bladeMat);
+                upperEdge.position.y = 0.78;
+                swordGroup.add(upperEdge);
+
+                // Blade serrations (saw teeth along edge)
+                for (let si = 0; si < 4; si++) {
+                    const tooth = new THREE.Mesh(new THREE.ConeGeometry(0.02, 0.06, 3), bladeMat);
+                    tooth.position.set(0.04, 0.30 + si * 0.12, 0);
+                    tooth.rotation.z = -Math.PI / 2;
+                    swordGroup.add(tooth);
+
+                    const tooth2 = new THREE.Mesh(new THREE.ConeGeometry(0.02, 0.06, 3), bladeMat);
+                    tooth2.position.set(-0.04, 0.30 + si * 0.12, 0);
+                    tooth2.rotation.z = Math.PI / 2;
+                    swordGroup.add(tooth2);
+                }
+
+                // Lower blade (shorter, symmetric)
+                const lowerBlade = new THREE.Mesh(box(0.05, 0.35, 0.012), bladeMat);
+                lowerBlade.position.y = -0.50;
+                swordGroup.add(lowerBlade);
+
+                const lowerTip = new THREE.Mesh(new THREE.ConeGeometry(0.04, 0.12, 4), bladeMat);
+                lowerTip.position.y = -0.70;
+                lowerTip.rotation.x = Math.PI;
+                swordGroup.add(lowerTip);
+
+                // Sword glow edge
+                const swordGlow = new THREE.Mesh(box(0.005, 1.2, 0.02),
+                    new THREE.MeshStandardMaterial({ color: 0xf59e0b, emissive: 0xf59e0b, emissiveIntensity: 2.0, transparent: true, opacity: 0.5, wireframe: wf })
+                );
+                swordGroup.add(swordGlow);
+
+                // Position: held in right hand, angled heroically
+                swordGroup.position.set(0.50, 0.35, 0.10);
+                swordGroup.rotation.z = -0.35;
+                swordGroup.rotation.x = -0.15;
+                torsoGroup.add(swordGroup);
+
+                // --- THANOS CHIN RIDGES (iconic grooved chin) ---
+                for (let ci = 0; ci < 4; ci++) {
+                    const chinRidge = new THREE.Mesh(box(0.14, 0.012, 0.04), matSkin);
+                    chinRidge.position.set(0, 0.72 + ci * 0.018, 0.20);
+                    torsoGroup.add(chinRidge);
+                }
+            }
+
+            // ===== WOLVERINE =====
+            else if (heroData.id === 'wolverine') {
+                // --- ADAMANTIUM CLAWS (3 per hand, extended) ---
+                [-1, 1].forEach(side => {
+                    for (let ci = 0; ci < 3; ci++) {
+                        const claw = new THREE.Mesh(box(0.008, 0.32, 0.012),
+                            new THREE.MeshPhysicalMaterial({ color: 0xe2e8f0, metalness: 0.98, roughness: 0.04, clearcoat: 1.0, wireframe: wf })
+                        );
+                        claw.position.set(side * 0.38 + (ci - 1) * 0.018, -0.52, 0.04);
+                        claw.rotation.x = -0.2;
+                        torsoGroup.add(claw);
+
+                        // Claw tip
+                        const clawTip = new THREE.Mesh(new THREE.ConeGeometry(0.008, 0.06, 4),
+                            new THREE.MeshPhysicalMaterial({ color: 0xf1f5f9, metalness: 0.98, roughness: 0.04, wireframe: wf })
+                        );
+                        clawTip.position.set(side * 0.38 + (ci - 1) * 0.018, -0.70, 0.06);
+                        clawTip.rotation.x = -0.2;
+                        torsoGroup.add(clawTip);
+                    }
+                });
+
+                // Mask pointed ears / cowl tips
+                [-1, 1].forEach(side => {
+                    const cowlTip = new THREE.Mesh(new THREE.ConeGeometry(0.03, 0.16, 4), matArmor);
+                    cowlTip.position.set(side * 0.14, 1.02, 0.02);
+                    cowlTip.rotation.z = side * -0.15;
+                    torsoGroup.add(cowlTip);
+                });
+            }
+
+            // ===== MAGNETO =====
+            else if (heroData.id === 'magneto') {
+                // --- ICONIC BUCKET HELMET with crest ---
+                const helmetMat = new THREE.MeshPhysicalMaterial({ color: skinInfo.primaryColor, metalness: 0.9, roughness: 0.1, clearcoat: 1.0, wireframe: wf });
+
+                // Extended helmet dome
+                const helmetDome = new THREE.Mesh(sphere(0.22, 14, 12), helmetMat);
+                helmetDome.scale.set(1.0, 1.2, 1.0);
+                helmetDome.position.set(0, 0.90, 0);
+                torsoGroup.add(helmetDome);
+
+                // Helmet visor opening (dark face area)
+                const visorOpen = new THREE.Mesh(box(0.24, 0.12, 0.04), matDark);
+                visorOpen.position.set(0, 0.80, 0.20);
+                torsoGroup.add(visorOpen);
+
+                // Helmet cheek guards
+                [-1, 1].forEach(side => {
+                    const cheek = new THREE.Mesh(box(0.06, 0.18, 0.10), helmetMat);
+                    cheek.position.set(side * 0.16, 0.82, 0.08);
+                    torsoGroup.add(cheek);
+                });
+
+                // --- FLOWING CAPE ---
+                const mCapeMat = new THREE.MeshStandardMaterial({ color: skinInfo.secondaryColor, roughness: 0.5, side: THREE.DoubleSide, wireframe: wf });
+                for (let ci = 0; ci < 5; ci++) {
+                    const cPanel = new THREE.Mesh(box(0.55 + ci * 0.05, 0.20, 0.025), mCapeMat);
+                    cPanel.position.set(0, 0.40 - ci * 0.20, -0.22 - ci * 0.05);
+                    cPanel.rotation.x = ci * 0.05;
+                    torsoGroup.add(cPanel);
+                }
+
+                // --- MAGNETIC FIELD EFFECT (floating metal debris rings) ---
+                for (let ri = 0; ri < 2; ri++) {
+                    const fieldRing = new THREE.Mesh(
+                        new THREE.TorusGeometry(0.45 + ri * 0.15, 0.008, 8, 32),
+                        new THREE.MeshStandardMaterial({ color: 0xa855f7, emissive: 0xa855f7, emissiveIntensity: 3.0, transparent: true, opacity: 0.5, wireframe: wf })
+                    );
+                    fieldRing.rotation.x = Math.PI / 2 + ri * 0.3;
+                    fieldRing.rotation.z = ri * 0.5;
+                    fieldRing.position.y = 0.30;
+                    torsoGroup.add(fieldRing);
+                }
+            }
+
+            // ===== MR. FANTASTIC & THE THING - generic enhanced look ---
+            else {
+                // Add faction-colored shoulder orbs & belt detail
+                [-1, 1].forEach(side => {
+                    const orb = new THREE.Mesh(sphere(0.06, 10, 8), matGlow);
+                    orb.position.set(side * 0.40, 0.60, 0.08);
+                    torsoGroup.add(orb);
+                });
+
+                // Additional armor panel lines
+                for (let pi = 0; pi < 3; pi++) {
+                    const panelLine = new THREE.Mesh(box(0.50, 0.008, 0.02), matGold);
+                    panelLine.position.set(0, 0.30 + pi * 0.12, 0.18);
+                    torsoGroup.add(panelLine);
+                }
+            }
+
+            // Special: The Thing gets rocky texture overlay
+            if (heroData.id === 'the_thing') {
+                // Replace smooth armor with rocky boulder segments
+                const rockMat = new THREE.MeshStandardMaterial({
+                    color: 0xb45309, roughness: 0.85, metalness: 0.15, wireframe: wf
+                });
+                for (let rx = 0; rx < 8; rx++) {
+                    for (let ry = 0; ry < 6; ry++) {
+                        const rock = new THREE.Mesh(
+                            box(0.08 + Math.random() * 0.04, 0.06 + Math.random() * 0.04, 0.04),
+                            rockMat
+                        );
+                        rock.position.set(
+                            -0.22 + rx * 0.065 + (Math.random() - 0.5) * 0.02,
+                            0.14 + ry * 0.09 + (Math.random() - 0.5) * 0.02,
+                            0.18
+                        );
+                        rock.rotation.z = (Math.random() - 0.5) * 0.2;
+                        torsoGroup.add(rock);
+                    }
+                }
+                // Scale up for hulking physique
+                bodyGroup.scale.set(1.2, 1.1, 1.2);
+            }
+
+            bodyGroup.add(torsoGroup);
+            root.add(bodyGroup);
+            root.userData = { torsoGroup: bodyGroup, headGroup: torsoGroup };
             return root;
         }
 
@@ -1677,12 +2764,14 @@
             playerCarGroup.userData = { carMesh };
             scene.add(playerCarGroup);
 
-            // 3 Rival AI Cars Ahead
+            // Mobil Berjejer Rapi di Starting Grid Balap (Row 1 & Row 2)
+            playerCarGroup.position.set(-2.8, 0, 1.5);
+
             rivalCars = [];
             const rivalConfigs = [
-                { name: 'Thor Odinson', short: 'THOR', color: 0x22c55e, x: -0.4, z: -40, speedOffset: 0.02, modelIdx: 3, progress: 20 },
-                { name: 'Doctor Doom', short: 'DOOM', color: 0x06b6d4, x: 3.6, z: -70, speedOffset: 0.01, modelIdx: 0, progress: 40 },
-                { name: 'Thanos Titan', short: 'THANOS', color: 0xfacc15, x: -3.8, z: -100, speedOffset: -0.01, modelIdx: 1, progress: 60 }
+                { name: 'Thor Odinson', short: 'THOR', color: 0x22c55e, x: 2.8, z: 1.5, speedOffset: 0.02, modelIdx: 3, progress: 0 },
+                { name: 'Doctor Doom', short: 'DOOM', color: 0x06b6d4, x: -2.8, z: -5.0, speedOffset: 0.01, modelIdx: 0, progress: 0 },
+                { name: 'Thanos Titan', short: 'THANOS', color: 0xfacc15, x: 2.8, z: -5.0, speedOffset: -0.01, modelIdx: 1, progress: 0 }
             ];
 
             const labelsContainer = document.getElementById('rival-labels-container');
@@ -1710,17 +2799,116 @@
                 });
             }
 
-            // Start Gate
-            const gateMat = new THREE.MeshStandardMaterial({ color: 0xed1d24, emissive: 0xed1d24, emissiveIntensity: 1.5 });
+            // ==========================================
+            // REAL 3D START & FINISH LINE (CTR STYLE)
+            // ==========================================
+            // 1. Checkered Finish Line Strip on Asphalt
+            const startFinishCanvas = document.createElement('canvas');
+            startFinishCanvas.width = 512;
+            startFinishCanvas.height = 128;
+            const sfCtx = startFinishCanvas.getContext('2d');
+            const sfRows = 4;
+            const sfCols = 16;
+            const sfW = startFinishCanvas.width / sfCols;
+            const sfH = startFinishCanvas.height / sfRows;
+            for (let r = 0; r < sfRows; r++) {
+                for (let c = 0; c < sfCols; c++) {
+                    sfCtx.fillStyle = ((r + c) % 2 === 0) ? '#ffffff' : '#05050a';
+                    sfCtx.fillRect(c * sfW, r * sfH, sfW, sfH);
+                }
+            }
+            sfCtx.strokeStyle = '#facc15';
+            sfCtx.lineWidth = 8;
+            sfCtx.strokeRect(0, 0, startFinishCanvas.width, startFinishCanvas.height);
+            const sfTexture = new THREE.CanvasTexture(startFinishCanvas);
+            sfTexture.wrapS = THREE.RepeatWrapping;
+            sfTexture.wrapT = THREE.RepeatWrapping;
+
+            const finishStripGeo = new THREE.PlaneGeometry(18, 5.5);
+            const finishStripMat = new THREE.MeshStandardMaterial({
+                map: sfTexture,
+                roughness: 0.35,
+                metalness: 0.2
+            });
+            const finishStrip = new THREE.Mesh(finishStripGeo, finishStripMat);
+            finishStrip.rotation.x = -Math.PI / 2;
+            finishStrip.position.set(0, 0.03, 0);
+            highwayGroup.add(finishStrip);
+            speedStreaks3D.push(finishStrip);
+
+            // 2. High-Tech Gantry Truss Arch (START / FINISH GATE)
             const startGate = new THREE.Group();
-            const leftPillar = new THREE.Mesh(new THREE.BoxGeometry(0.8, 8, 0.8), gateMat);
-            leftPillar.position.set(-10, 4, 0);
-            const rightPillar = new THREE.Mesh(new THREE.BoxGeometry(0.8, 8, 0.8), gateMat);
-            rightPillar.position.set(10, 4, 0);
-            const crossBeam = new THREE.Mesh(new THREE.BoxGeometry(20.8, 1.2, 0.8), gateMat);
-            crossBeam.position.set(0, 8, 0);
-            startGate.add(leftPillar, rightPillar, crossBeam);
+            const trussMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, metalness: 0.85, roughness: 0.2 });
+            const marvelRedMat = new THREE.MeshStandardMaterial({ color: 0xed1d24, metalness: 0.5, roughness: 0.3, emissive: 0xed1d24, emissiveIntensity: 0.3 });
+            const goldMat = new THREE.MeshStandardMaterial({ color: 0xfacc15, metalness: 0.9, roughness: 0.1 });
+
+            // Tiang Kiri & Kanan
+            [-9.8, 9.8].forEach(px => {
+                const pMesh = new THREE.Mesh(new THREE.BoxGeometry(1.2, 9.5, 1.2), trussMat);
+                pMesh.position.set(px, 4.75, 0);
+                const pDeco = new THREE.Mesh(new THREE.BoxGeometry(1.3, 0.8, 1.3), marvelRedMat);
+                pDeco.position.set(px, 7.2, 0);
+                const pBase = new THREE.Mesh(new THREE.CylinderGeometry(1.4, 1.6, 0.6, 8), trussMat);
+                pBase.position.set(px, 0.3, 0);
+                startGate.add(pMesh, pDeco, pBase);
+            });
+
+            // Balok Melintang Atas (Main Overhead Beam)
+            const topBeam = new THREE.Mesh(new THREE.BoxGeometry(22, 1.8, 1.4), trussMat);
+            topBeam.position.set(0, 9.2, 0);
+            const topTrim = new THREE.Mesh(new THREE.BoxGeometry(22.2, 0.25, 1.45), goldMat);
+            topTrim.position.set(0, 10.1, 0);
+            startGate.add(topBeam, topTrim);
+
+            // Papan Banner Neon START / FINISH
+            const bannerCanvas = document.createElement('canvas');
+            bannerCanvas.width = 512;
+            bannerCanvas.height = 128;
+            const bCtx = bannerCanvas.getContext('2d');
+            bCtx.fillStyle = '#0b0f19';
+            bCtx.fillRect(0, 0, bannerCanvas.width, bannerCanvas.height);
+            bCtx.strokeStyle = '#ed1d24';
+            bCtx.lineWidth = 8;
+            bCtx.strokeRect(4, 4, bannerCanvas.width - 8, bannerCanvas.height - 8);
+            bCtx.fillStyle = '#f8fafc';
+            bCtx.font = 'bold 50px Rajdhani, sans-serif';
+            bCtx.textAlign = 'center';
+            bCtx.textBaseline = 'middle';
+            bCtx.shadowColor = '#ed1d24';
+            bCtx.shadowBlur = 15;
+            bCtx.fillText('🏁 START / FINISH 🏁', bannerCanvas.width / 2, bannerCanvas.height / 2);
+
+            const bannerTex = new THREE.CanvasTexture(bannerCanvas);
+            const bannerGeo = new THREE.PlaneGeometry(12, 2.2);
+            const bannerMat = new THREE.MeshBasicMaterial({ map: bannerTex });
+            const bannerFront = new THREE.Mesh(bannerGeo, bannerMat);
+            bannerFront.position.set(0, 9.2, 0.72);
+            const bannerBack = new THREE.Mesh(bannerGeo, bannerMat);
+            bannerBack.rotation.y = Math.PI;
+            bannerBack.position.set(0, 9.2, -0.72);
+            startGate.add(bannerFront, bannerBack);
+
+            // Lampu Start Balap CTR (Merah, Kuning, Hijau)
+            const lightsBox = new THREE.Mesh(new THREE.BoxGeometry(4.5, 1.1, 0.6), trussMat);
+            lightsBox.position.set(0, 7.8, 0);
+            startGate.add(lightsBox);
+
+            const ctrSignalColors = [0xef4444, 0xfacc15, 0x22c55e];
+            [-1.3, 0, 1.3].forEach((lx, li) => {
+                const lamp = new THREE.Mesh(
+                    new THREE.SphereGeometry(0.35, 16, 16),
+                    new THREE.MeshStandardMaterial({
+                        color: ctrSignalColors[li],
+                        emissive: ctrSignalColors[li],
+                        emissiveIntensity: 1.2
+                    })
+                );
+                lamp.position.set(lx, 7.8, 0.32);
+                startGate.add(lamp);
+            });
+
             highwayGroup.add(startGate);
+            speedStreaks3D.push(startGate);
 
             // Blindbox Mystery Crates Along the Track
             blindBoxes = [];
@@ -1746,29 +2934,194 @@
             if (hitsVal) hitsVal.innerText = `${raceHits}/20`;
         }
 
-        // CTR Blindbox Weapons
+        // CTR Blindbox Weapons (NOS, ROCKET, BOM, SHIELD)
         const CTR_WEAPONS = [
-            { title: 'MISIL REPULSOR', icon: 'fa-rocket' },
-            { title: 'BOM VIBRANIUM', icon: 'fa-bomb' },
-            { title: 'SUPER NITRO TIER 3', icon: 'fa-bolt' },
-            { title: 'PERISAI ASGARD', icon: 'fa-shield-halved' }
+            { id: 'nos', title: 'SUPER NOS BOOSTER', icon: 'fa-bolt', color: '#facc15' },
+            { id: 'rocket', title: 'STARK REPULSOR MISSILE', icon: 'fa-rocket', color: '#ef4444' },
+            { id: 'bomb', title: 'BOM VIBRANIUM', icon: 'fa-bomb', color: '#a855f7' },
+            { id: 'shield', title: 'PERISAI NANO ASGARD', icon: 'fa-shield-halved', color: '#38bdf8' }
         ];
 
         function triggerBlindboxPickup() {
             playSound('pickup');
             const randWp = CTR_WEAPONS[Math.floor(Math.random() * CTR_WEAPONS.length)];
-            activeWeapon = randWp;
-            activeWeaponDuration = 350;
+            activeWeaponInventory = randWp;
+            updateItemSlotUI();
 
             const toast = document.getElementById('weapon-toast');
             const title = document.getElementById('weapon-toast-title');
             const icon = document.getElementById('weapon-toast-icon');
             if (toast && title && icon) {
-                title.innerText = randWp.title;
+                title.innerText = randWp.title + ' [TEKAN ENTER UNTUK PAKAI]';
                 icon.className = `fa-solid ${randWp.icon} text-2xl text-yellow-300 animate-bounce`;
                 toast.classList.remove('hidden');
-                setTimeout(() => { toast.classList.add('hidden'); }, 3000);
+                setTimeout(() => { toast.classList.add('hidden'); }, 2500);
             }
+        }
+
+        function updateItemSlotUI() {
+            const iconEl = document.getElementById('hud-item-icon');
+            const nameEl = document.getElementById('hud-item-name');
+            const slotEl = document.getElementById('hud-item-slot');
+            const glowEl = document.getElementById('hud-item-glow');
+
+            if (!iconEl || !nameEl) return;
+
+            if (activeWeaponInventory) {
+                iconEl.className = `fa-solid ${activeWeaponInventory.icon} text-yellow-400 animate-pulse text-2xl`;
+                nameEl.innerText = activeWeaponInventory.title;
+                nameEl.className = 'font-racing font-bold text-[9px] text-yellow-300 leading-tight px-1 uppercase truncate max-w-[75px]';
+                if (slotEl) slotEl.classList.add('border-yellow-400', 'bg-yellow-950/40');
+                if (glowEl) glowEl.classList.remove('opacity-0');
+            } else {
+                iconEl.className = 'fa-solid fa-box-open text-slate-500 text-2xl';
+                nameEl.innerText = 'KOSONG';
+                nameEl.className = 'font-racing font-bold text-[9px] text-slate-400 leading-tight px-1 uppercase truncate max-w-[75px]';
+                if (slotEl) slotEl.classList.remove('border-yellow-400', 'bg-yellow-950/40');
+                if (glowEl) glowEl.classList.add('opacity-0');
+            }
+        }
+
+        /**
+         * Menggunakan item aktif saat tombol ENTER atau kotak item ditekan
+         */
+        function useActiveItem() {
+            if (!activeWeaponInventory || !isRacingActive || !canPlayerDrive) return;
+
+            const wp = activeWeaponInventory;
+            activeWeaponInventory = null;
+            updateItemSlotUI();
+
+            if (wp.id === 'nos') {
+                playSound('boost');
+                activeWeapon = { title: 'SUPER NITRO TIER 3' };
+                activeWeaponDuration = 240;
+                showNotification('🚀 SUPER NOS DIAKTIFKAN! TOP SPEED!');
+            } else if (wp.id === 'rocket') {
+                spawnRocketProjectile();
+            } else if (wp.id === 'bomb') {
+                spawnBombProjectile();
+            } else if (wp.id === 'shield') {
+                activateNanoShield();
+            }
+        }
+
+        function spawnRocketProjectile() {
+            playSound('boost');
+            showNotification('🎯 MISIL REPULSOR MELUNCUR!');
+
+            const rocketGroup = new THREE.Group();
+            const bodyMat = new THREE.MeshStandardMaterial({ color: 0xed1d24, metalness: 0.8, roughness: 0.2 });
+            const tipMat = new THREE.MeshStandardMaterial({ color: 0xfacc15, emissive: 0xfacc15, emissiveIntensity: 1.0 });
+
+            const rBody = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 1.4, 12), bodyMat);
+            rBody.rotation.x = Math.PI / 2;
+            const rTip = new THREE.Mesh(new THREE.ConeGeometry(0.22, 0.6, 12), tipMat);
+            rTip.rotation.x = -Math.PI / 2;
+            rTip.position.z = -0.9;
+            rocketGroup.add(rBody, rTip);
+
+            rocketGroup.position.set(playerCarGroup.position.x, 0.6, playerCarGroup.position.z - 2.5);
+            scene.add(rocketGroup);
+            activeMissiles.push({ mesh: rocketGroup, life: 180, speed: 2.8 });
+        }
+
+        function spawnBombProjectile() {
+            playSound('boost');
+            showNotification('💣 BOM VIBRANIUM DILEMPARKAN!');
+
+            const bombMat = new THREE.MeshStandardMaterial({ color: 0x1e1b4b, metalness: 0.9, roughness: 0.1 });
+            const fuseMat = new THREE.MeshBasicMaterial({ color: 0xef4444 });
+            const bombMesh = new THREE.Mesh(new THREE.SphereGeometry(0.48, 16, 16), bombMat);
+            const fuse = new THREE.Mesh(new THREE.SphereGeometry(0.15, 8, 8), fuseMat);
+            fuse.position.y = 0.52;
+            const bGroup = new THREE.Group();
+            bGroup.add(bombMesh, fuse);
+            bGroup.position.set(playerCarGroup.position.x, 0.45, playerCarGroup.position.z - 3);
+            scene.add(bGroup);
+            activeBombs.push({ mesh: bGroup, life: 200, speed: 1.4 });
+        }
+
+        function activateNanoShield() {
+            playSound('pickup');
+            showNotification('🛡️ PERISAI NANO ASGARD AKTIF! KEBAL TABRAKAN!');
+            shieldDurationRemaining = 360;
+
+            if (!activeShieldMesh) {
+                const sGeo = new THREE.SphereGeometry(1.9, 24, 24);
+                const sMat = new THREE.MeshStandardMaterial({
+                    color: 0x38bdf8,
+                    emissive: 0x0284c7,
+                    emissiveIntensity: 0.6,
+                    transparent: true,
+                    opacity: 0.45,
+                    wireframe: true
+                });
+                activeShieldMesh = new THREE.Mesh(sGeo, sMat);
+                playerCarGroup.add(activeShieldMesh);
+            }
+            activeShieldMesh.visible = true;
+        }
+
+        // ==========================================
+        // COUNTDOWN 3, 2, 1, START! IMPLEMENTATION
+        // ==========================================
+        function startRaceCountdown() {
+            isCountdownActive = true;
+            canPlayerDrive = false;
+            raceSpeed = 0;
+
+            const overlay = document.getElementById('start-countdown-overlay');
+            const countNum = document.getElementById('countdown-number');
+            if (!overlay || !countNum) return;
+
+            overlay.classList.remove('hidden');
+            countNum.innerText = '3';
+            countNum.className = 'font-racing font-black text-8xl sm:text-9xl text-red-500 italic drop-shadow-[0_0_40px_rgba(239,68,68,0.9)] animate-ping';
+            playSound('pickup');
+
+            setTimeout(() => {
+                countNum.innerText = '2';
+                countNum.className = 'font-racing font-black text-8xl sm:text-9xl text-amber-400 italic drop-shadow-[0_0_40px_rgba(251,191,36,0.9)] animate-pulse';
+                playSound('pickup');
+            }, 1000);
+
+            setTimeout(() => {
+                countNum.innerText = '1';
+                countNum.className = 'font-racing font-black text-8xl sm:text-9xl text-yellow-300 italic drop-shadow-[0_0_40px_rgba(253,224,71,0.9)] animate-pulse';
+                playSound('pickup');
+            }, 2000);
+
+            setTimeout(() => {
+                countNum.innerText = 'START!!';
+                countNum.className = 'font-racing font-black text-7xl sm:text-9xl text-emerald-400 italic drop-shadow-[0_0_50px_rgba(52,211,153,1)] scale-125';
+                playSound('boost');
+                isCountdownActive = false;
+                canPlayerDrive = true;
+                showNotification('🏁 GO!! GASPOL REBUT KLASEMEN 1!');
+            }, 3000);
+
+            setTimeout(() => {
+                overlay.classList.add('hidden');
+            }, 4000);
+        }
+
+        // Trigger Selesai Balapan & Podium
+        function triggerRaceFinish() {
+            isRacingActive = false;
+            canPlayerDrive = false;
+            playSound('boost');
+
+            // Tambah reward ke dompet
+            playerCoins += 1500;
+            playerGems += 50;
+            const coinsEl = document.getElementById('player-coins-display');
+            const gemsEl = document.getElementById('player-gems-display');
+            if (coinsEl) coinsEl.innerText = playerCoins.toLocaleString();
+            if (gemsEl) gemsEl.innerText = playerGems.toLocaleString();
+
+            const finOverlay = document.getElementById('race-finish-overlay');
+            if (finOverlay) finOverlay.classList.remove('hidden');
         }
 
         function updateFloatingRankTag(worldPos, domElem) {
@@ -1796,8 +3149,25 @@
                         lobbyGroup.rotation.y += 0.0035;
                     }
                 } else if (currentScreen === 'racing' && isRacingActive) {
-                    const targetMax = (raceInput.nitro || (activeWeapon && activeWeapon.title.includes('NITRO'))) ? 2.25 : 1.55;
-                    raceSpeed += (targetMax - raceSpeed) * 0.06;
+                    // Kontrol Kecepatan Berdasarkan Gas/Maju & Rem/Mundur
+                    let targetMax = 0;
+                    if (canPlayerDrive) {
+                        if (raceInput.nitro || (activeWeapon && activeWeapon.title.includes('NITRO'))) {
+                            targetMax = 2.45;
+                        } else if (raceInput.backward) {
+                            targetMax = 0.25;
+                        } else if (raceInput.forward) {
+                            targetMax = 1.65;
+                        } else {
+                            targetMax = 1.30;
+                        }
+                    } else {
+                        targetMax = 0;
+                    }
+
+                    raceSpeed += (targetMax - raceSpeed) * (raceInput.backward ? 0.12 : 0.05);
+                    if (raceSpeed < 0) raceSpeed = 0;
+                    
                     trackZOffset += raceSpeed;
                     raceDistanceCovered += raceSpeed;
 
@@ -1807,15 +3177,81 @@
                         engineOsc.frequency.setValueAtTime(freq, audioCtx.currentTime);
                     }
 
-                    // Lap Progression Check
+                    // Lap Progression Check & Finish Trigger
                     if (raceDistanceCovered >= totalTrackLength) {
                         raceDistanceCovered = 0;
                         currentLap++;
                         if (currentLap > maxLaps) {
-                            currentLap = maxLaps;
+                            triggerRaceFinish();
+                        } else {
+                            const lapInfo = document.getElementById('lb-lap-info');
+                            if (lapInfo) lapInfo.innerText = `LAP ${currentLap}/${maxLaps}`;
+                            const mapLap = document.getElementById('map-lap-status');
+                            if (mapLap) mapLap.innerText = `LAP ${currentLap}/${maxLaps}`;
+                            showNotification(`🏁 LAP ${currentLap}/${maxLaps} DIMULAI!`);
                         }
-                        const lapInfo = document.getElementById('lb-lap-info');
-                        if (lapInfo) lapInfo.innerText = `LAP ${currentLap}/${maxLaps}`;
+                    }
+
+                    // Perisai Nano Countdown
+                    if (shieldDurationRemaining > 0) {
+                        shieldDurationRemaining--;
+                        if (activeShieldMesh) activeShieldMesh.rotation.y += 0.05;
+                        if (shieldDurationRemaining <= 0 && activeShieldMesh) {
+                            activeShieldMesh.visible = false;
+                        }
+                    }
+
+                    // Screen Shake pasca Tabrakan
+                    if (screenShakeTimer > 0) {
+                        screenShakeTimer--;
+                        camera.position.x += (Math.random() - 0.5) * 0.35;
+                        camera.position.y += (Math.random() - 0.5) * 0.25;
+                    }
+
+                    // Projectile Misil 3D Update
+                    for (let mi = activeMissiles.length - 1; mi >= 0; mi--) {
+                        const mObj = activeMissiles[mi];
+                        mObj.mesh.position.z -= mObj.speed;
+                        mObj.life--;
+
+                        rivalCars.forEach(rc => {
+                            const dist = Math.hypot(mObj.mesh.position.x - rc.mesh.position.x, mObj.mesh.position.z - rc.mesh.position.z);
+                            if (dist < 2.5) {
+                                playSound('crash');
+                                rc.mesh.rotation.y += 1.5;
+                                rc.mesh.position.z -= 15;
+                                showNotification('💥 ' + rc.name + ' TERKENA HANTAMAN MISIL!');
+                                mObj.life = 0;
+                            }
+                        });
+
+                        if (mObj.life <= 0 || mObj.mesh.position.z < -160) {
+                            scene.remove(mObj.mesh);
+                            activeMissiles.splice(mi, 1);
+                        }
+                    }
+
+                    // Projectile Bom 3D Update
+                    for (let bi = activeBombs.length - 1; bi >= 0; bi--) {
+                        const bObj = activeBombs[bi];
+                        bObj.mesh.position.z -= bObj.speed;
+                        bObj.life--;
+
+                        rivalCars.forEach(rc => {
+                            const dist = Math.hypot(bObj.mesh.position.x - rc.mesh.position.x, bObj.mesh.position.z - rc.mesh.position.z);
+                            if (dist < 2.5) {
+                                playSound('crash');
+                                rc.mesh.position.x += 3.5;
+                                rc.mesh.position.z -= 12;
+                                showNotification('💥 ' + rc.name + ' TERKENA LEDAKAN BOM!');
+                                bObj.life = 0;
+                            }
+                        });
+
+                        if (bObj.life <= 0 || bObj.mesh.position.z < -140) {
+                            scene.remove(bObj.mesh);
+                            activeBombs.splice(bi, 1);
+                        }
                     }
 
                     // Steer Player Supercar
@@ -1905,6 +3341,35 @@
                         if (rc.mesh.position.z > 12) rc.mesh.position.z = -55;
                         if (rc.mesh.position.z < -65) rc.mesh.position.z = -12;
 
+                        // ==========================================
+                        // TABRAKAN PLAYER VS RIVAL (COLLISION & DAMAGE)
+                        // ==========================================
+                        if (canPlayerDrive && playerCarGroup) {
+                            const distHorizontal = Math.abs(playerCarGroup.position.x - rc.mesh.position.x);
+                            const distVertical = Math.abs(playerCarGroup.position.z - rc.mesh.position.z);
+
+                            if (distHorizontal < 1.6 && distVertical < 2.6) {
+                                if (shieldDurationRemaining > 0) {
+                                    rc.mesh.position.x += (rc.mesh.position.x > playerCarGroup.position.x ? 2.5 : -2.5);
+                                    rc.mesh.position.z -= 6;
+                                } else {
+                                    playSound('crash');
+                                    raceHits++;
+                                    updateHitsCounterHUD();
+
+                                    raceSpeed = Math.max(0.35, raceSpeed * 0.45);
+                                    playerCarGroup.position.x += (playerCarGroup.position.x > rc.mesh.position.x ? 0.8 : -0.8);
+                                    
+                                    screenShakeTimer = 16;
+                                    const flashOverlay = document.getElementById('crash-flash-overlay');
+                                    if (flashOverlay) {
+                                        flashOverlay.style.opacity = '1';
+                                        setTimeout(() => { flashOverlay.style.opacity = '0'; }, 300);
+                                    }
+                                }
+                            }
+                        }
+
                         if (
                             playerCarGroup &&
                             Math.abs(rc.mesh.position.z - playerCarGroup.position.z) < 2.5 &&
@@ -1951,6 +3416,73 @@
                     const speedKmH = Math.min(395, Math.floor(raceSpeed * 155 + Math.sin(elapsed * 19) * 3));
                     const speedoEl = document.getElementById('hud-speedometer');
                     if (speedoEl) speedoEl.innerText = `${speedKmH}`;
+
+                    // ==========================================
+                    // REAL-TIME MINIMAP RENDER (POJOK KANAN ATAS)
+                    // ==========================================
+                    const mapCanvas = document.getElementById('track-minimap-canvas');
+                    if (mapCanvas && isRacingActive) {
+                        const mctx = mapCanvas.getContext('2d');
+                        mctx.clearRect(0, 0, mapCanvas.width, mapCanvas.height);
+
+                        const cx = mapCanvas.width / 2;
+                        const cy = mapCanvas.height / 2;
+                        const rx = 40;
+                        const ry = 62;
+
+                        // Gambar Lintasan Sirkuit Oval 2D
+                        mctx.lineWidth = 14;
+                        mctx.strokeStyle = '#1e293b';
+                        mctx.beginPath();
+                        mctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+                        mctx.stroke();
+
+                        // Garis Tengah Sirkuit
+                        mctx.lineWidth = 2;
+                        mctx.setLineDash([4, 4]);
+                        mctx.strokeStyle = '#38bdf8';
+                        mctx.stroke();
+                        mctx.setLineDash([]);
+
+                        // Garis Start/Finish di Minimap (Bawah Oval)
+                        mctx.fillStyle = '#facc15';
+                        mctx.fillRect(cx - 10, cy + ry - 4, 20, 8);
+
+                        // Helper kalkulasi koordinat oval berdasarkan progress (0 - 1)
+                        const getOvalPos = (ratio) => {
+                            const angle = (ratio * Math.PI * 2) + (Math.PI / 2);
+                            return {
+                                x: cx + rx * Math.cos(angle),
+                                y: cy + ry * Math.sin(angle)
+                            };
+                        };
+
+                        // 1. Gambar Posisi Player Dot (Merah Bersinar)
+                        const playerRatio = (raceDistanceCovered / totalTrackLength) % 1;
+                        const pPos = getOvalPos(playerRatio);
+
+                        mctx.shadowColor = '#ed1d24';
+                        mctx.shadowBlur = 10;
+                        mctx.fillStyle = '#ef4444';
+                        mctx.beginPath();
+                        mctx.arc(pPos.x, pPos.y, 6.5, 0, Math.PI * 2);
+                        mctx.fill();
+                        mctx.lineWidth = 2;
+                        mctx.strokeStyle = '#ffffff';
+                        mctx.stroke();
+                        mctx.shadowBlur = 0;
+
+                        // 2. Gambar Posisi Rival Dots
+                        const rivalColors = ['#22c55e', '#06b6d4', '#eab308'];
+                        rivalCars.forEach((rc, rIdx) => {
+                            const rRatio = ((raceDistanceCovered + (rc.progress || 0)) / totalTrackLength) % 1;
+                            const rPos = getOvalPos(rRatio);
+                            mctx.fillStyle = rivalColors[rIdx] || '#ffffff';
+                            mctx.beginPath();
+                            mctx.arc(rPos.x, rPos.y, 4.5, 0, Math.PI * 2);
+                            mctx.fill();
+                        });
+                    }
 
                     // Race Timer
                     raceTimeSeconds += delta;

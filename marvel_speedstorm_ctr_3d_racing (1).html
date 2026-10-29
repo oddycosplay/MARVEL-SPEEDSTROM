@@ -146,13 +146,41 @@
                     <div class="font-racing font-black text-xl italic text-white hidden sm:block">SPEEDSTORM <span class="text-xs font-normal text-yellow-400 not-italic ml-1">CTR 3D</span></div>
                 </div>
 
-                <!-- Quick Hero Selector Carousel in Nav -->
-                <div class="flex items-center gap-1.5 overflow-x-auto max-w-md sm:max-w-xl py-1 px-2 bg-slate-900/80 rounded-xl border border-white/10" id="home-quick-heroes">
-                    <!-- Populated dynamically via updateHomeQuickHeroes() -->
-                </div>
+                <!-- Main Game Navigation Menu in Header -->
+                <nav class="flex items-center gap-1 sm:gap-2 overflow-x-auto py-1 px-2 bg-slate-900/90 rounded-2xl border border-white/10 shadow-inner">
+                    <button id="nav-btn-play" onclick="switchHomeSubTab('play')" class="skew-box px-3 py-1.5 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg font-racing font-bold text-xs tracking-wider shadow transition">
+                        <span class="unskew flex items-center gap-1.5"><i class="fa-solid fa-flag-checkered text-yellow-300"></i> BALAPAN</span>
+                    </button>
+                    <button id="nav-btn-chapters" onclick="switchHomeSubTab('chapters')" class="skew-box px-3 py-1.5 bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg font-racing font-bold text-xs tracking-wider transition border border-white/10">
+                        <span class="unskew flex items-center gap-1.5"><i class="fa-solid fa-clapperboard text-amber-400"></i> STORY BOARD</span>
+                    </button>
+                    <button id="nav-btn-garage" onclick="openGarageTab()" class="skew-box px-3 py-1.5 bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg font-racing font-bold text-xs tracking-wider transition border border-white/10">
+                        <span class="unskew flex items-center gap-1.5"><i class="fa-solid fa-screwdriver-wrench text-cyan-400"></i> GARASI 3D</span>
+                    </button>
+                    <button id="nav-btn-store" onclick="switchHomeSubTab('store')" class="skew-box px-3 py-1.5 bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg font-racing font-bold text-xs tracking-wider transition border border-white/10">
+                        <span class="unskew flex items-center gap-1.5"><i class="fa-solid fa-cart-shopping text-emerald-400"></i> STORE</span>
+                    </button>
+                    <button id="nav-btn-collections" onclick="switchHomeSubTab('collections')" class="skew-box px-3 py-1.5 bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg font-racing font-bold text-xs tracking-wider transition border border-white/10">
+                        <span class="unskew flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-purple-400"></i> HERO ROSTER</span>
+                    </button>
+                    <button id="nav-btn-roadmap" onclick="switchHomeSubTab('roadmap')" class="skew-box px-3 py-1.5 bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg font-racing font-bold text-xs tracking-wider transition border border-white/10">
+                        <span class="unskew flex items-center gap-1.5"><i class="fa-solid fa-map-location-dot text-blue-400"></i> ROADMAP</span>
+                    </button>
+                </nav>
 
-                <!-- Action Toolbar -->
+                <!-- Currency & Action Toolbar -->
                 <div class="flex items-center gap-2">
+                    <div class="hidden md:flex items-center gap-2.5 px-3 py-1 bg-black/60 border border-white/15 rounded-xl font-racing font-bold text-xs">
+                        <div class="flex items-center gap-1 text-amber-300">
+                            <i class="fa-solid fa-coins"></i>
+                            <span id="player-coins-display">15,000</span>
+                        </div>
+                        <div class="w-px h-3.5 bg-white/20"></div>
+                        <div class="flex items-center gap-1 text-cyan-300">
+                            <i class="fa-solid fa-gem"></i>
+                            <span id="player-gems-display">350</span>
+                        </div>
+                    </div>
                     <button onclick="toggleAudio()" id="sound-btn" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs border border-white/10" title="Suara Game">
                         <i class="fa-solid fa-volume-high" id="sound-icon"></i>
                     </button>
@@ -289,6 +317,95 @@
                 </div>
             </section>
 
+            <!-- TAB: STORE (MARVEL VAULT & TECH SHOP) -->
+            <section id="home-subtab-store" class="space-y-6 hidden">
+                <div class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-emerald-950 via-slate-900 to-indigo-950 p-6 sm:p-10 border border-emerald-500/30 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="space-y-2 max-w-2xl">
+                        <div class="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full text-xs font-bold border border-emerald-400/30">
+                            <i class="fa-solid fa-cart-shopping"></i> STARK TECH VAULT & BLACK MARKET
+                        </div>
+                        <h2 class="font-racing text-3xl sm:text-4xl font-black text-white italic">TOKO ITEM, SKIN LEGENDARIS & MODIFIKASI KART</h2>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            Buka blueprint sasis balap eksperimental, unlock skin eksklusif Avengers & Villains, dan lengkapi efek nitro kosmik menggunakan Stark Coins & Infinity Gems.
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 bg-black/60 px-5 py-3 rounded-2xl border border-white/20">
+                        <div class="text-center px-2">
+                            <div class="text-[10px] text-slate-400 font-bold">STARK COINS</div>
+                            <div class="font-racing font-black text-xl text-amber-300 flex items-center gap-1"><i class="fa-solid fa-coins text-sm"></i> 15,000</div>
+                        </div>
+                        <div class="w-px h-8 bg-white/20"></div>
+                        <div class="text-center px-2">
+                            <div class="text-[10px] text-slate-400 font-bold">INFINITY GEMS</div>
+                            <div class="font-racing font-black text-xl text-cyan-300 flex items-center gap-1"><i class="fa-solid fa-gem text-sm"></i> 350</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Store Items Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Item 1: Iron Man Mark 85 Armor -->
+                    <div class="roster-card p-5 rounded-2xl border border-red-500/40 space-y-3 flex flex-col justify-between">
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="px-2 py-0.5 rounded bg-red-600/30 text-red-400 text-[10px] font-bold">SKIN MYTHIC</span>
+                                <span class="font-racing text-xs text-amber-400 font-bold flex items-center gap-1"><i class="fa-solid fa-coins"></i> 5,000</span>
+                            </div>
+                            <h4 class="font-racing font-bold text-lg text-white">MARK 85 ENDGAME GOLD</h4>
+                            <p class="text-xs text-slate-400">Nanotech armor lengkap dengan 6 sayap nanotech repulsor lightning focus.</p>
+                        </div>
+                        <button onclick="purchaseStoreItem('Skin Mark 85 Endgame', 5000, 0)" class="w-full py-2 bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-racing font-bold text-xs rounded-lg shadow flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-bag-shopping"></i> BELI ITEM
+                        </button>
+                    </div>
+
+                    <!-- Item 2: Quantum Formula Chassis -->
+                    <div class="roster-card p-5 rounded-2xl border border-cyan-500/40 space-y-3 flex flex-col justify-between">
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="px-2 py-0.5 rounded bg-cyan-600/30 text-cyan-400 text-[10px] font-bold">SUPERCAR KART</span>
+                                <span class="font-racing text-xs text-amber-400 font-bold flex items-center gap-1"><i class="fa-solid fa-coins"></i> 8,500</span>
+                            </div>
+                            <h4 class="font-racing font-bold text-lg text-white">QUANTUM F1 CHARGER</h4>
+                            <p class="text-xs text-slate-400">Sasis aerodinamis serat karbon berkecepatan 340 KM/H dengan twin boost exhaust.</p>
+                        </div>
+                        <button onclick="purchaseStoreItem('Quantum F1 Charger', 8500, 0)" class="w-full py-2 bg-cyan-600 hover:bg-cyan-500 text-white font-racing font-bold text-xs rounded-lg shadow flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-bag-shopping"></i> BELI ITEM
+                        </button>
+                    </div>
+
+                    <!-- Item 3: Thanos Double Blade & Armor -->
+                    <div class="roster-card p-5 rounded-2xl border border-purple-500/40 space-y-3 flex flex-col justify-between">
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="px-2 py-0.5 rounded bg-purple-600/30 text-purple-400 text-[10px] font-bold">BUNDLE TITAN</span>
+                                <span class="font-racing text-xs text-cyan-300 font-bold flex items-center gap-1"><i class="fa-solid fa-gem"></i> 200</span>
+                            </div>
+                            <h4 class="font-racing font-bold text-lg text-white">INFINITY TITAN WARLORD</h4>
+                            <p class="text-xs text-slate-400">Pedang ganda helikopter vibranium dan sarung tangan Infinity Gauntlet berpendar 6 batu.</p>
+                        </div>
+                        <button onclick="purchaseStoreItem('Infinity Titan Warlord', 0, 200)" class="w-full py-2 bg-purple-600 hover:bg-purple-500 text-white font-racing font-bold text-xs rounded-lg shadow flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-gem"></i> BELI DENGAN GEMS
+                        </button>
+                    </div>
+
+                    <!-- Item 4: Arc Reactor Nitro Trail -->
+                    <div class="roster-card p-5 rounded-2xl border border-emerald-500/40 space-y-3 flex flex-col justify-between">
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="px-2 py-0.5 rounded bg-emerald-600/30 text-emerald-400 text-[10px] font-bold">EFEK NITRO</span>
+                                <span class="font-racing text-xs text-amber-400 font-bold flex items-center gap-1"><i class="fa-solid fa-coins"></i> 3,200</span>
+                            </div>
+                            <h4 class="font-racing font-bold text-lg text-white">COSMIC BIFROST EXHAUST</h4>
+                            <p class="text-xs text-slate-400">Efek semburan api nitro warna-warni berenergi pelangi Asgardian saat tombol boost ditekan.</p>
+                        </div>
+                        <button onclick="purchaseStoreItem('Cosmic Bifrost Exhaust', 3200, 0)" class="w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-racing font-bold text-xs rounded-lg shadow flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-bag-shopping"></i> BELI ITEM
+                        </button>
+                    </div>
+                </div>
+            </section>
+
             <!-- TAB 3: COLLECTIONS -->
             <section id="home-subtab-collections" class="space-y-6 hidden">
                 <div class="bg-slate-900/80 border border-white/10 rounded-2xl p-6 space-y-4">
@@ -405,6 +522,71 @@
 
         <!-- 3D Floating Name Tags Projected Overlay Container -->
         <div id="rival-labels-container" class="absolute inset-0 z-15 pointer-events-none"></div>
+
+        <!-- MINIMAP HUD (Pojok Kanan Atas Sesuai Instruksi User) -->
+        <div id="hud-minimap-container" class="absolute top-16 right-4 z-20 bg-slate-950/85 backdrop-blur-md p-2.5 rounded-2xl border border-white/20 shadow-2xl flex flex-col items-center pointer-events-auto hidden">
+            <div class="flex items-center justify-between w-full mb-1 text-[10px] font-racing font-bold text-slate-300">
+                <span class="flex items-center gap-1 text-red-500"><i class="fa-solid fa-map-location-dot"></i> CIRKUIT MAP</span>
+                <span id="map-lap-status" class="text-yellow-400">LAP 1/3</span>
+            </div>
+            <canvas id="track-minimap-canvas" width="120" height="160" class="rounded-xl bg-slate-900/90 border border-white/10 shadow-inner"></canvas>
+            <div class="flex items-center gap-2 mt-1 text-[9px] font-racing text-slate-400">
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-red-500 inline-block"></span> PLAYER</span>
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-cyan-400 inline-block"></span> RIVALS</span>
+            </div>
+        </div>
+
+        <!-- 3, 2, 1, START! RACE COUNTDOWN OVERLAY -->
+        <div id="start-countdown-overlay" class="absolute inset-0 z-40 flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm pointer-events-none hidden">
+            <div class="text-center space-y-2">
+                <div class="font-racing text-xl sm:text-2xl font-bold text-yellow-400 uppercase tracking-widest">SIAPKAN KART ANDA...</div>
+                <div id="countdown-number" class="font-racing font-black text-8xl sm:text-9xl text-white italic drop-shadow-[0_0_35px_rgba(237,29,36,0.9)] animate-pulse">
+                    3
+                </div>
+            </div>
+        </div>
+
+        <!-- RACE FINISH & VICTORY OVERLAY -->
+        <div id="race-finish-overlay" class="absolute inset-0 z-40 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 hidden">
+            <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-yellow-400/60 p-6 sm:p-8 rounded-3xl max-w-lg w-full text-center space-y-6 shadow-[0_0_50px_rgba(250,204,21,0.3)]">
+                <div class="space-y-1">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-400/20 text-yellow-300 font-racing font-bold text-xs border border-yellow-400/40">
+                        🏁 GRAND PRIX SELESAI 🏁
+                    </div>
+                    <h2 class="font-racing text-3xl sm:text-5xl font-black text-white italic" id="finish-result-title">FINISH! PODIUM JUARA</h2>
+                    <p class="text-xs text-slate-400" id="finish-result-subtitle">Selamat! Anda menyelesaikan 3 Lap sirkuit balap Marvel Speedstorm.</p>
+                </div>
+
+                <!-- Reward Cards -->
+                <div class="grid grid-cols-2 gap-3 bg-black/50 p-4 rounded-2xl border border-white/10 font-racing">
+                    <div class="p-3 bg-slate-900/80 rounded-xl border border-amber-500/30">
+                        <div class="text-xs text-slate-400 font-bold">REWARD COINS</div>
+                        <div class="text-2xl font-black text-amber-300 flex items-center justify-center gap-1.5"><i class="fa-solid fa-coins text-lg"></i> +1,500</div>
+                    </div>
+                    <div class="p-3 bg-slate-900/80 rounded-xl border border-cyan-500/30">
+                        <div class="text-xs text-slate-400 font-bold">INFINITY GEMS</div>
+                        <div class="text-2xl font-black text-cyan-300 flex items-center justify-center gap-1.5"><i class="fa-solid fa-gem text-lg"></i> +50</div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+                    <button onclick="startRacingMode()" class="skew-box px-6 py-3 bg-gradient-to-r from-red-600 to-amber-500 hover:from-red-500 hover:to-amber-400 text-white font-racing font-black text-sm rounded-xl shadow-xl gold-border">
+                        <span class="unskew flex items-center justify-center gap-2"><i class="fa-solid fa-rotate-right"></i> BALAPAN LAGI</span>
+                    </button>
+                    <button onclick="returnToHome()" class="skew-box px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-racing font-bold text-sm rounded-xl border border-white/20">
+                        <span class="unskew flex items-center justify-center gap-2"><i class="fa-solid fa-house"></i> KEMBALI KE HOME</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Crash / Damage Screen Flash Effect Overlay -->
+        <div id="crash-flash-overlay" class="absolute inset-0 z-35 pointer-events-none opacity-0 bg-red-600/30 transition-opacity duration-150 flex items-center justify-center">
+            <div class="font-racing font-black text-3xl sm:text-4xl text-white bg-red-600 px-6 py-2 rounded-xl gold-border shadow-2xl skew-box">
+                <span class="unskew">💥 TABRAKAN! CRASH! -60 KM/H</span>
+            </div>
+        </div>
 
         <!-- CTR Weapon Pickup Toast Alert Notification -->
         <div id="weapon-toast" class="absolute top-20 left-1/2 transform -translate-x-1/2 z-30 hidden bg-gradient-to-r from-amber-600 via-red-600 to-amber-700 px-6 py-3 rounded-2xl gold-border shadow-2xl flex items-center gap-3">
@@ -542,14 +724,28 @@
         <!-- BOTTOM RACE HUD: SPEEDOMETER, NITRO BAR, TOUCH CONTROLS -->
         <!-- ----------------------------------------------------------------- -->
         <div id="hud-drift-container" class="absolute bottom-4 left-4 right-4 z-20 flex-col sm:flex-row items-center justify-between gap-4 pointer-events-none hidden">
-            <!-- Left: Mobile / On-Screen Steering Controls -->
-            <div class="flex items-center gap-2 pointer-events-auto sm:opacity-90">
-                <button onmousedown="raceInput.left=true" onmouseup="raceInput.left=false" ontouchstart="raceInput.left=true" ontouchend="raceInput.left=false" class="w-14 h-14 rounded-2xl bg-black/70 active:bg-red-600 border border-white/20 flex items-center justify-center text-white text-xl shadow-lg transition">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </button>
-                <button onmousedown="raceInput.right=true" onmouseup="raceInput.right=false" ontouchstart="raceInput.right=true" ontouchend="raceInput.right=false" class="w-14 h-14 rounded-2xl bg-black/70 active:bg-red-600 border border-white/20 flex items-center justify-center text-white text-xl shadow-lg transition">
-                    <i class="fa-solid fa-arrow-right"></i>
-                </button>
+            <!-- Left: Full D-Pad Controls (Maju, Mundur, Kiri, Kanan) -->
+            <div class="pointer-events-auto sm:opacity-95 select-none">
+                <div class="grid grid-cols-3 gap-1.5 w-40 sm:w-44">
+                    <div></div>
+                    <!-- Maju / Gas (Up) -->
+                    <button onmousedown="raceInput.forward=true" onmouseup="raceInput.forward=false" ontouchstart="raceInput.forward=true" ontouchend="raceInput.forward=false" class="h-12 rounded-xl bg-black/80 active:bg-emerald-600 border border-emerald-500/40 flex items-center justify-center text-emerald-400 active:text-white text-lg shadow-xl transition" title="Maju / Gas (W / Up)">
+                        <i class="fa-solid fa-arrow-up"></i>
+                    </button>
+                    <div></div>
+                    <!-- Belok Kiri (Left) -->
+                    <button onmousedown="raceInput.left=true" onmouseup="raceInput.left=false" ontouchstart="raceInput.left=true" ontouchend="raceInput.left=false" class="h-12 rounded-xl bg-black/80 active:bg-red-600 border border-white/20 flex items-center justify-center text-white text-lg shadow-xl transition" title="Belok Kiri (A / Left)">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <!-- Mundur / Rem (Down) -->
+                    <button onmousedown="raceInput.backward=true" onmouseup="raceInput.backward=false" ontouchstart="raceInput.backward=true" ontouchend="raceInput.backward=false" class="h-12 rounded-xl bg-black/80 active:bg-amber-600 border border-amber-500/40 flex items-center justify-center text-amber-400 active:text-white text-lg shadow-xl transition" title="Rem / Mundur (S / Down)">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </button>
+                    <!-- Belok Kanan (Right) -->
+                    <button onmousedown="raceInput.right=true" onmouseup="raceInput.right=false" ontouchstart="raceInput.right=true" ontouchend="raceInput.right=false" class="h-12 rounded-xl bg-black/80 active:bg-red-600 border border-white/20 flex items-center justify-center text-white text-lg shadow-xl transition" title="Belok Kanan (D / Right)">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
             </div>
 
             <!-- Center: NFS Style Speedometer & Nitro/Drift Gauge -->
@@ -569,11 +765,23 @@
                 </div>
             </div>
 
-            <!-- Right: On-Screen Nitro Boost Trigger Button -->
-            <div class="pointer-events-auto">
-                <button onmousedown="triggerNitroBoost(true)" onmouseup="triggerNitroBoost(false)" ontouchstart="triggerNitroBoost(true)" ontouchend="triggerNitroBoost(false)" class="px-6 py-4 rounded-2xl bg-gradient-to-r from-cyan-600 to-blue-700 active:from-cyan-400 active:to-blue-500 border border-cyan-400/50 shadow-[0_0_20px_rgba(6,182,212,0.6)] flex items-center gap-2 text-white font-racing font-black text-lg skew-box">
+            <!-- Right: CTR Active Item Slot & Nitro Boost Trigger -->
+            <div class="pointer-events-auto flex items-center gap-3">
+                <!-- Active Item Slot (Click or press ENTER) -->
+                <div id="hud-item-slot" onclick="useActiveItem()" class="cursor-pointer group flex flex-col items-center justify-center w-20 h-20 rounded-2xl bg-slate-950/90 border-2 border-yellow-400/50 hover:border-yellow-300 shadow-[0_0_15px_rgba(250,204,21,0.3)] transition transform hover:scale-105 active:scale-95 text-center relative overflow-hidden">
+                    <div id="hud-item-icon-container" class="text-2xl text-slate-500 mb-0.5">
+                        <i id="hud-item-icon" class="fa-solid fa-box-open"></i>
+                    </div>
+                    <div id="hud-item-name" class="font-racing font-bold text-[9px] text-slate-300 leading-tight px-1 uppercase truncate max-w-[75px]">KOSONG</div>
+                    <div class="mt-0.5 text-[8px] bg-red-600 text-white font-bold px-1.5 py-0.2 rounded font-racing tracking-wider">[ENTER]</div>
+                    <!-- Glow effect when active -->
+                    <div id="hud-item-glow" class="absolute inset-0 bg-yellow-400/15 opacity-0 group-hover:opacity-100 transition pointer-events-none"></div>
+                </div>
+
+                <!-- Nitro Boost Button -->
+                <button onmousedown="triggerNitroBoost(true)" onmouseup="triggerNitroBoost(false)" ontouchstart="triggerNitroBoost(true)" ontouchend="triggerNitroBoost(false)" class="px-5 py-4 rounded-2xl bg-gradient-to-r from-cyan-600 to-blue-700 active:from-cyan-400 active:to-blue-500 border border-cyan-400/50 shadow-[0_0_20px_rgba(6,182,212,0.6)] flex items-center gap-2 text-white font-racing font-black text-base sm:text-lg skew-box">
                     <span class="unskew flex items-center gap-2">
-                        <i class="fa-solid fa-bolt text-yellow-300"></i> NITRO BOOST
+                        <i class="fa-solid fa-bolt text-yellow-300"></i> NITRO
                     </span>
                 </button>
             </div>
@@ -764,7 +972,15 @@
         let raceCamMode = 0; // 0 = Chase Cam, 1 = Low Bumper Cam
         let raceHits = 0;
         let raceTimeSeconds = 0;
-        const raceInput = { left: false, right: false, nitro: false };
+        const raceInput = { forward: false, backward: false, left: false, right: false, nitro: false };
+        let isCountdownActive = false;
+        let canPlayerDrive = false;
+        let activeWeaponInventory = null;
+        let activeShieldMesh = null;
+        let shieldDurationRemaining = 0;
+        let activeMissiles = [];
+        let activeBombs = [];
+        let screenShakeTimer = 0;
 
         // --- WEB AUDIO API PROCEDURAL SOUND SYNTHESIS ---
         let audioCtx = null;
@@ -913,6 +1129,21 @@
             currentScreen = 'racing';
             isRacingActive = true;
             setupRacingScene();
+            
+            // Tampilkan HUD Minimap
+            const minimapEl = document.getElementById('hud-minimap-container');
+            if (minimapEl) minimapEl.classList.remove('hidden');
+
+            // Reset Item Inventory Slot
+            activeWeaponInventory = null;
+            updateItemSlotUI();
+
+            // Sembunyikan Finish Overlay jika ada
+            const finOverlay = document.getElementById('race-finish-overlay');
+            if (finOverlay) finOverlay.classList.add('hidden');
+
+            // Jalankan Countdown 3, 2, 1, START!
+            startRaceCountdown();
         }
 
         function setGameMode(mode) {
@@ -921,16 +1152,51 @@
             // Visual feedback
         }
 
+        let playerCoins = 15000;
+        let playerGems = 350;
+
+        function purchaseStoreItem(name, costCoins, costGems) {
+            if (costCoins > 0 && playerCoins < costCoins) {
+                alert('Stark Coins tidak cukup untuk membeli ' + name);
+                return;
+            }
+            if (costGems > 0 && playerGems < costGems) {
+                alert('Infinity Gems tidak cukup untuk membeli ' + name);
+                return;
+            }
+            playerCoins -= costCoins;
+            playerGems -= costGems;
+            
+            const coinsEl = document.getElementById('player-coins-display');
+            const gemsEl = document.getElementById('player-gems-display');
+            if (coinsEl) coinsEl.innerText = playerCoins.toLocaleString();
+            if (gemsEl) gemsEl.innerText = playerGems.toLocaleString();
+
+            alert('Sukses membeli: ' + name + '! Item telah ditambahkan ke Garasi 3D Anda.');
+        }
+
         function switchHomeSubTab(tabName) {
-            ['play', 'chapters', 'collections', 'roadmap'].forEach(t => {
+            const allTabs = ['play', 'chapters', 'store', 'collections', 'roadmap'];
+            allTabs.forEach(t => {
                 const sec = document.getElementById(`home-subtab-${t}`);
-                const btn = document.getElementById(`tab-btn-${t}`);
+                const subBtn = document.getElementById(`tab-btn-${t}`);
+                const navBtn = document.getElementById(`nav-btn-${t}`);
+                
                 if (sec) sec.classList.toggle('hidden', t !== tabName);
-                if (btn) {
+                
+                if (subBtn) {
                     if (t === tabName) {
-                        btn.className = 'skew-box px-3.5 py-1.5 bg-white text-slate-950 rounded shadow font-racing font-bold text-xs sm:text-sm';
+                        subBtn.className = 'skew-box px-3.5 py-1.5 bg-white text-slate-950 rounded shadow font-racing font-bold text-xs sm:text-sm';
                     } else {
-                        btn.className = 'skew-box px-3.5 py-1.5 bg-slate-800/90 hover:bg-slate-700 text-slate-200 rounded border border-white/20 font-racing font-bold text-xs sm:text-sm';
+                        subBtn.className = 'skew-box px-3.5 py-1.5 bg-slate-800/90 hover:bg-slate-700 text-slate-200 rounded border border-white/20 font-racing font-bold text-xs sm:text-sm';
+                    }
+                }
+
+                if (navBtn) {
+                    if (t === tabName) {
+                        navBtn.className = 'skew-box px-3 py-1.5 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg font-racing font-bold text-xs tracking-wider shadow border border-red-400';
+                    } else {
+                        navBtn.className = 'skew-box px-3 py-1.5 bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg font-racing font-bold text-xs tracking-wider transition border border-white/10';
                     }
                 }
             });
@@ -972,13 +1238,20 @@
             }
         }
 
-        // Keyboard Listeners for Steering & Nitro
+        // Keyboard Listeners for Steering, Gas/Brake & Enter to Use Item
         window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') raceInput.forward = true;
+            if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') raceInput.backward = true;
             if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') raceInput.left = true;
             if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') raceInput.right = true;
             if (e.key === ' ' || e.key === 'Shift') triggerNitroBoost(true);
+            if (e.key === 'Enter') {
+                useActiveItem();
+            }
         });
         window.addEventListener('keyup', (e) => {
+            if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') raceInput.forward = false;
+            if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') raceInput.backward = false;
             if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') raceInput.left = false;
             if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') raceInput.right = false;
             if (e.key === ' ' || e.key === 'Shift') triggerNitroBoost(false);
@@ -2491,12 +2764,14 @@
             playerCarGroup.userData = { carMesh };
             scene.add(playerCarGroup);
 
-            // 3 Rival AI Cars Ahead
+            // Mobil Berjejer Rapi di Starting Grid Balap (Row 1 & Row 2)
+            playerCarGroup.position.set(-2.8, 0, 1.5);
+
             rivalCars = [];
             const rivalConfigs = [
-                { name: 'Thor Odinson', short: 'THOR', color: 0x22c55e, x: -0.4, z: -40, speedOffset: 0.02, modelIdx: 3, progress: 20 },
-                { name: 'Doctor Doom', short: 'DOOM', color: 0x06b6d4, x: 3.6, z: -70, speedOffset: 0.01, modelIdx: 0, progress: 40 },
-                { name: 'Thanos Titan', short: 'THANOS', color: 0xfacc15, x: -3.8, z: -100, speedOffset: -0.01, modelIdx: 1, progress: 60 }
+                { name: 'Thor Odinson', short: 'THOR', color: 0x22c55e, x: 2.8, z: 1.5, speedOffset: 0.02, modelIdx: 3, progress: 0 },
+                { name: 'Doctor Doom', short: 'DOOM', color: 0x06b6d4, x: -2.8, z: -5.0, speedOffset: 0.01, modelIdx: 0, progress: 0 },
+                { name: 'Thanos Titan', short: 'THANOS', color: 0xfacc15, x: 2.8, z: -5.0, speedOffset: -0.01, modelIdx: 1, progress: 0 }
             ];
 
             const labelsContainer = document.getElementById('rival-labels-container');
@@ -2524,17 +2799,116 @@
                 });
             }
 
-            // Start Gate
-            const gateMat = new THREE.MeshStandardMaterial({ color: 0xed1d24, emissive: 0xed1d24, emissiveIntensity: 1.5 });
+            // ==========================================
+            // REAL 3D START & FINISH LINE (CTR STYLE)
+            // ==========================================
+            // 1. Checkered Finish Line Strip on Asphalt
+            const startFinishCanvas = document.createElement('canvas');
+            startFinishCanvas.width = 512;
+            startFinishCanvas.height = 128;
+            const sfCtx = startFinishCanvas.getContext('2d');
+            const sfRows = 4;
+            const sfCols = 16;
+            const sfW = startFinishCanvas.width / sfCols;
+            const sfH = startFinishCanvas.height / sfRows;
+            for (let r = 0; r < sfRows; r++) {
+                for (let c = 0; c < sfCols; c++) {
+                    sfCtx.fillStyle = ((r + c) % 2 === 0) ? '#ffffff' : '#05050a';
+                    sfCtx.fillRect(c * sfW, r * sfH, sfW, sfH);
+                }
+            }
+            sfCtx.strokeStyle = '#facc15';
+            sfCtx.lineWidth = 8;
+            sfCtx.strokeRect(0, 0, startFinishCanvas.width, startFinishCanvas.height);
+            const sfTexture = new THREE.CanvasTexture(startFinishCanvas);
+            sfTexture.wrapS = THREE.RepeatWrapping;
+            sfTexture.wrapT = THREE.RepeatWrapping;
+
+            const finishStripGeo = new THREE.PlaneGeometry(18, 5.5);
+            const finishStripMat = new THREE.MeshStandardMaterial({
+                map: sfTexture,
+                roughness: 0.35,
+                metalness: 0.2
+            });
+            const finishStrip = new THREE.Mesh(finishStripGeo, finishStripMat);
+            finishStrip.rotation.x = -Math.PI / 2;
+            finishStrip.position.set(0, 0.03, 0);
+            highwayGroup.add(finishStrip);
+            speedStreaks3D.push(finishStrip);
+
+            // 2. High-Tech Gantry Truss Arch (START / FINISH GATE)
             const startGate = new THREE.Group();
-            const leftPillar = new THREE.Mesh(new THREE.BoxGeometry(0.8, 8, 0.8), gateMat);
-            leftPillar.position.set(-10, 4, 0);
-            const rightPillar = new THREE.Mesh(new THREE.BoxGeometry(0.8, 8, 0.8), gateMat);
-            rightPillar.position.set(10, 4, 0);
-            const crossBeam = new THREE.Mesh(new THREE.BoxGeometry(20.8, 1.2, 0.8), gateMat);
-            crossBeam.position.set(0, 8, 0);
-            startGate.add(leftPillar, rightPillar, crossBeam);
+            const trussMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, metalness: 0.85, roughness: 0.2 });
+            const marvelRedMat = new THREE.MeshStandardMaterial({ color: 0xed1d24, metalness: 0.5, roughness: 0.3, emissive: 0xed1d24, emissiveIntensity: 0.3 });
+            const goldMat = new THREE.MeshStandardMaterial({ color: 0xfacc15, metalness: 0.9, roughness: 0.1 });
+
+            // Tiang Kiri & Kanan
+            [-9.8, 9.8].forEach(px => {
+                const pMesh = new THREE.Mesh(new THREE.BoxGeometry(1.2, 9.5, 1.2), trussMat);
+                pMesh.position.set(px, 4.75, 0);
+                const pDeco = new THREE.Mesh(new THREE.BoxGeometry(1.3, 0.8, 1.3), marvelRedMat);
+                pDeco.position.set(px, 7.2, 0);
+                const pBase = new THREE.Mesh(new THREE.CylinderGeometry(1.4, 1.6, 0.6, 8), trussMat);
+                pBase.position.set(px, 0.3, 0);
+                startGate.add(pMesh, pDeco, pBase);
+            });
+
+            // Balok Melintang Atas (Main Overhead Beam)
+            const topBeam = new THREE.Mesh(new THREE.BoxGeometry(22, 1.8, 1.4), trussMat);
+            topBeam.position.set(0, 9.2, 0);
+            const topTrim = new THREE.Mesh(new THREE.BoxGeometry(22.2, 0.25, 1.45), goldMat);
+            topTrim.position.set(0, 10.1, 0);
+            startGate.add(topBeam, topTrim);
+
+            // Papan Banner Neon START / FINISH
+            const bannerCanvas = document.createElement('canvas');
+            bannerCanvas.width = 512;
+            bannerCanvas.height = 128;
+            const bCtx = bannerCanvas.getContext('2d');
+            bCtx.fillStyle = '#0b0f19';
+            bCtx.fillRect(0, 0, bannerCanvas.width, bannerCanvas.height);
+            bCtx.strokeStyle = '#ed1d24';
+            bCtx.lineWidth = 8;
+            bCtx.strokeRect(4, 4, bannerCanvas.width - 8, bannerCanvas.height - 8);
+            bCtx.fillStyle = '#f8fafc';
+            bCtx.font = 'bold 50px Rajdhani, sans-serif';
+            bCtx.textAlign = 'center';
+            bCtx.textBaseline = 'middle';
+            bCtx.shadowColor = '#ed1d24';
+            bCtx.shadowBlur = 15;
+            bCtx.fillText('🏁 START / FINISH 🏁', bannerCanvas.width / 2, bannerCanvas.height / 2);
+
+            const bannerTex = new THREE.CanvasTexture(bannerCanvas);
+            const bannerGeo = new THREE.PlaneGeometry(12, 2.2);
+            const bannerMat = new THREE.MeshBasicMaterial({ map: bannerTex });
+            const bannerFront = new THREE.Mesh(bannerGeo, bannerMat);
+            bannerFront.position.set(0, 9.2, 0.72);
+            const bannerBack = new THREE.Mesh(bannerGeo, bannerMat);
+            bannerBack.rotation.y = Math.PI;
+            bannerBack.position.set(0, 9.2, -0.72);
+            startGate.add(bannerFront, bannerBack);
+
+            // Lampu Start Balap CTR (Merah, Kuning, Hijau)
+            const lightsBox = new THREE.Mesh(new THREE.BoxGeometry(4.5, 1.1, 0.6), trussMat);
+            lightsBox.position.set(0, 7.8, 0);
+            startGate.add(lightsBox);
+
+            const ctrSignalColors = [0xef4444, 0xfacc15, 0x22c55e];
+            [-1.3, 0, 1.3].forEach((lx, li) => {
+                const lamp = new THREE.Mesh(
+                    new THREE.SphereGeometry(0.35, 16, 16),
+                    new THREE.MeshStandardMaterial({
+                        color: ctrSignalColors[li],
+                        emissive: ctrSignalColors[li],
+                        emissiveIntensity: 1.2
+                    })
+                );
+                lamp.position.set(lx, 7.8, 0.32);
+                startGate.add(lamp);
+            });
+
             highwayGroup.add(startGate);
+            speedStreaks3D.push(startGate);
 
             // Blindbox Mystery Crates Along the Track
             blindBoxes = [];
@@ -2560,29 +2934,194 @@
             if (hitsVal) hitsVal.innerText = `${raceHits}/20`;
         }
 
-        // CTR Blindbox Weapons
+        // CTR Blindbox Weapons (NOS, ROCKET, BOM, SHIELD)
         const CTR_WEAPONS = [
-            { title: 'MISIL REPULSOR', icon: 'fa-rocket' },
-            { title: 'BOM VIBRANIUM', icon: 'fa-bomb' },
-            { title: 'SUPER NITRO TIER 3', icon: 'fa-bolt' },
-            { title: 'PERISAI ASGARD', icon: 'fa-shield-halved' }
+            { id: 'nos', title: 'SUPER NOS BOOSTER', icon: 'fa-bolt', color: '#facc15' },
+            { id: 'rocket', title: 'STARK REPULSOR MISSILE', icon: 'fa-rocket', color: '#ef4444' },
+            { id: 'bomb', title: 'BOM VIBRANIUM', icon: 'fa-bomb', color: '#a855f7' },
+            { id: 'shield', title: 'PERISAI NANO ASGARD', icon: 'fa-shield-halved', color: '#38bdf8' }
         ];
 
         function triggerBlindboxPickup() {
             playSound('pickup');
             const randWp = CTR_WEAPONS[Math.floor(Math.random() * CTR_WEAPONS.length)];
-            activeWeapon = randWp;
-            activeWeaponDuration = 350;
+            activeWeaponInventory = randWp;
+            updateItemSlotUI();
 
             const toast = document.getElementById('weapon-toast');
             const title = document.getElementById('weapon-toast-title');
             const icon = document.getElementById('weapon-toast-icon');
             if (toast && title && icon) {
-                title.innerText = randWp.title;
+                title.innerText = randWp.title + ' [TEKAN ENTER UNTUK PAKAI]';
                 icon.className = `fa-solid ${randWp.icon} text-2xl text-yellow-300 animate-bounce`;
                 toast.classList.remove('hidden');
-                setTimeout(() => { toast.classList.add('hidden'); }, 3000);
+                setTimeout(() => { toast.classList.add('hidden'); }, 2500);
             }
+        }
+
+        function updateItemSlotUI() {
+            const iconEl = document.getElementById('hud-item-icon');
+            const nameEl = document.getElementById('hud-item-name');
+            const slotEl = document.getElementById('hud-item-slot');
+            const glowEl = document.getElementById('hud-item-glow');
+
+            if (!iconEl || !nameEl) return;
+
+            if (activeWeaponInventory) {
+                iconEl.className = `fa-solid ${activeWeaponInventory.icon} text-yellow-400 animate-pulse text-2xl`;
+                nameEl.innerText = activeWeaponInventory.title;
+                nameEl.className = 'font-racing font-bold text-[9px] text-yellow-300 leading-tight px-1 uppercase truncate max-w-[75px]';
+                if (slotEl) slotEl.classList.add('border-yellow-400', 'bg-yellow-950/40');
+                if (glowEl) glowEl.classList.remove('opacity-0');
+            } else {
+                iconEl.className = 'fa-solid fa-box-open text-slate-500 text-2xl';
+                nameEl.innerText = 'KOSONG';
+                nameEl.className = 'font-racing font-bold text-[9px] text-slate-400 leading-tight px-1 uppercase truncate max-w-[75px]';
+                if (slotEl) slotEl.classList.remove('border-yellow-400', 'bg-yellow-950/40');
+                if (glowEl) glowEl.classList.add('opacity-0');
+            }
+        }
+
+        /**
+         * Menggunakan item aktif saat tombol ENTER atau kotak item ditekan
+         */
+        function useActiveItem() {
+            if (!activeWeaponInventory || !isRacingActive || !canPlayerDrive) return;
+
+            const wp = activeWeaponInventory;
+            activeWeaponInventory = null;
+            updateItemSlotUI();
+
+            if (wp.id === 'nos') {
+                playSound('boost');
+                activeWeapon = { title: 'SUPER NITRO TIER 3' };
+                activeWeaponDuration = 240;
+                showNotification('🚀 SUPER NOS DIAKTIFKAN! TOP SPEED!');
+            } else if (wp.id === 'rocket') {
+                spawnRocketProjectile();
+            } else if (wp.id === 'bomb') {
+                spawnBombProjectile();
+            } else if (wp.id === 'shield') {
+                activateNanoShield();
+            }
+        }
+
+        function spawnRocketProjectile() {
+            playSound('boost');
+            showNotification('🎯 MISIL REPULSOR MELUNCUR!');
+
+            const rocketGroup = new THREE.Group();
+            const bodyMat = new THREE.MeshStandardMaterial({ color: 0xed1d24, metalness: 0.8, roughness: 0.2 });
+            const tipMat = new THREE.MeshStandardMaterial({ color: 0xfacc15, emissive: 0xfacc15, emissiveIntensity: 1.0 });
+
+            const rBody = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 1.4, 12), bodyMat);
+            rBody.rotation.x = Math.PI / 2;
+            const rTip = new THREE.Mesh(new THREE.ConeGeometry(0.22, 0.6, 12), tipMat);
+            rTip.rotation.x = -Math.PI / 2;
+            rTip.position.z = -0.9;
+            rocketGroup.add(rBody, rTip);
+
+            rocketGroup.position.set(playerCarGroup.position.x, 0.6, playerCarGroup.position.z - 2.5);
+            scene.add(rocketGroup);
+            activeMissiles.push({ mesh: rocketGroup, life: 180, speed: 2.8 });
+        }
+
+        function spawnBombProjectile() {
+            playSound('boost');
+            showNotification('💣 BOM VIBRANIUM DILEMPARKAN!');
+
+            const bombMat = new THREE.MeshStandardMaterial({ color: 0x1e1b4b, metalness: 0.9, roughness: 0.1 });
+            const fuseMat = new THREE.MeshBasicMaterial({ color: 0xef4444 });
+            const bombMesh = new THREE.Mesh(new THREE.SphereGeometry(0.48, 16, 16), bombMat);
+            const fuse = new THREE.Mesh(new THREE.SphereGeometry(0.15, 8, 8), fuseMat);
+            fuse.position.y = 0.52;
+            const bGroup = new THREE.Group();
+            bGroup.add(bombMesh, fuse);
+            bGroup.position.set(playerCarGroup.position.x, 0.45, playerCarGroup.position.z - 3);
+            scene.add(bGroup);
+            activeBombs.push({ mesh: bGroup, life: 200, speed: 1.4 });
+        }
+
+        function activateNanoShield() {
+            playSound('pickup');
+            showNotification('🛡️ PERISAI NANO ASGARD AKTIF! KEBAL TABRAKAN!');
+            shieldDurationRemaining = 360;
+
+            if (!activeShieldMesh) {
+                const sGeo = new THREE.SphereGeometry(1.9, 24, 24);
+                const sMat = new THREE.MeshStandardMaterial({
+                    color: 0x38bdf8,
+                    emissive: 0x0284c7,
+                    emissiveIntensity: 0.6,
+                    transparent: true,
+                    opacity: 0.45,
+                    wireframe: true
+                });
+                activeShieldMesh = new THREE.Mesh(sGeo, sMat);
+                playerCarGroup.add(activeShieldMesh);
+            }
+            activeShieldMesh.visible = true;
+        }
+
+        // ==========================================
+        // COUNTDOWN 3, 2, 1, START! IMPLEMENTATION
+        // ==========================================
+        function startRaceCountdown() {
+            isCountdownActive = true;
+            canPlayerDrive = false;
+            raceSpeed = 0;
+
+            const overlay = document.getElementById('start-countdown-overlay');
+            const countNum = document.getElementById('countdown-number');
+            if (!overlay || !countNum) return;
+
+            overlay.classList.remove('hidden');
+            countNum.innerText = '3';
+            countNum.className = 'font-racing font-black text-8xl sm:text-9xl text-red-500 italic drop-shadow-[0_0_40px_rgba(239,68,68,0.9)] animate-ping';
+            playSound('pickup');
+
+            setTimeout(() => {
+                countNum.innerText = '2';
+                countNum.className = 'font-racing font-black text-8xl sm:text-9xl text-amber-400 italic drop-shadow-[0_0_40px_rgba(251,191,36,0.9)] animate-pulse';
+                playSound('pickup');
+            }, 1000);
+
+            setTimeout(() => {
+                countNum.innerText = '1';
+                countNum.className = 'font-racing font-black text-8xl sm:text-9xl text-yellow-300 italic drop-shadow-[0_0_40px_rgba(253,224,71,0.9)] animate-pulse';
+                playSound('pickup');
+            }, 2000);
+
+            setTimeout(() => {
+                countNum.innerText = 'START!!';
+                countNum.className = 'font-racing font-black text-7xl sm:text-9xl text-emerald-400 italic drop-shadow-[0_0_50px_rgba(52,211,153,1)] scale-125';
+                playSound('boost');
+                isCountdownActive = false;
+                canPlayerDrive = true;
+                showNotification('🏁 GO!! GASPOL REBUT KLASEMEN 1!');
+            }, 3000);
+
+            setTimeout(() => {
+                overlay.classList.add('hidden');
+            }, 4000);
+        }
+
+        // Trigger Selesai Balapan & Podium
+        function triggerRaceFinish() {
+            isRacingActive = false;
+            canPlayerDrive = false;
+            playSound('boost');
+
+            // Tambah reward ke dompet
+            playerCoins += 1500;
+            playerGems += 50;
+            const coinsEl = document.getElementById('player-coins-display');
+            const gemsEl = document.getElementById('player-gems-display');
+            if (coinsEl) coinsEl.innerText = playerCoins.toLocaleString();
+            if (gemsEl) gemsEl.innerText = playerGems.toLocaleString();
+
+            const finOverlay = document.getElementById('race-finish-overlay');
+            if (finOverlay) finOverlay.classList.remove('hidden');
         }
 
         function updateFloatingRankTag(worldPos, domElem) {
@@ -2610,8 +3149,25 @@
                         lobbyGroup.rotation.y += 0.0035;
                     }
                 } else if (currentScreen === 'racing' && isRacingActive) {
-                    const targetMax = (raceInput.nitro || (activeWeapon && activeWeapon.title.includes('NITRO'))) ? 2.25 : 1.55;
-                    raceSpeed += (targetMax - raceSpeed) * 0.06;
+                    // Kontrol Kecepatan Berdasarkan Gas/Maju & Rem/Mundur
+                    let targetMax = 0;
+                    if (canPlayerDrive) {
+                        if (raceInput.nitro || (activeWeapon && activeWeapon.title.includes('NITRO'))) {
+                            targetMax = 2.45;
+                        } else if (raceInput.backward) {
+                            targetMax = 0.25;
+                        } else if (raceInput.forward) {
+                            targetMax = 1.65;
+                        } else {
+                            targetMax = 1.30;
+                        }
+                    } else {
+                        targetMax = 0;
+                    }
+
+                    raceSpeed += (targetMax - raceSpeed) * (raceInput.backward ? 0.12 : 0.05);
+                    if (raceSpeed < 0) raceSpeed = 0;
+                    
                     trackZOffset += raceSpeed;
                     raceDistanceCovered += raceSpeed;
 
@@ -2621,15 +3177,81 @@
                         engineOsc.frequency.setValueAtTime(freq, audioCtx.currentTime);
                     }
 
-                    // Lap Progression Check
+                    // Lap Progression Check & Finish Trigger
                     if (raceDistanceCovered >= totalTrackLength) {
                         raceDistanceCovered = 0;
                         currentLap++;
                         if (currentLap > maxLaps) {
-                            currentLap = maxLaps;
+                            triggerRaceFinish();
+                        } else {
+                            const lapInfo = document.getElementById('lb-lap-info');
+                            if (lapInfo) lapInfo.innerText = `LAP ${currentLap}/${maxLaps}`;
+                            const mapLap = document.getElementById('map-lap-status');
+                            if (mapLap) mapLap.innerText = `LAP ${currentLap}/${maxLaps}`;
+                            showNotification(`🏁 LAP ${currentLap}/${maxLaps} DIMULAI!`);
                         }
-                        const lapInfo = document.getElementById('lb-lap-info');
-                        if (lapInfo) lapInfo.innerText = `LAP ${currentLap}/${maxLaps}`;
+                    }
+
+                    // Perisai Nano Countdown
+                    if (shieldDurationRemaining > 0) {
+                        shieldDurationRemaining--;
+                        if (activeShieldMesh) activeShieldMesh.rotation.y += 0.05;
+                        if (shieldDurationRemaining <= 0 && activeShieldMesh) {
+                            activeShieldMesh.visible = false;
+                        }
+                    }
+
+                    // Screen Shake pasca Tabrakan
+                    if (screenShakeTimer > 0) {
+                        screenShakeTimer--;
+                        camera.position.x += (Math.random() - 0.5) * 0.35;
+                        camera.position.y += (Math.random() - 0.5) * 0.25;
+                    }
+
+                    // Projectile Misil 3D Update
+                    for (let mi = activeMissiles.length - 1; mi >= 0; mi--) {
+                        const mObj = activeMissiles[mi];
+                        mObj.mesh.position.z -= mObj.speed;
+                        mObj.life--;
+
+                        rivalCars.forEach(rc => {
+                            const dist = Math.hypot(mObj.mesh.position.x - rc.mesh.position.x, mObj.mesh.position.z - rc.mesh.position.z);
+                            if (dist < 2.5) {
+                                playSound('crash');
+                                rc.mesh.rotation.y += 1.5;
+                                rc.mesh.position.z -= 15;
+                                showNotification('💥 ' + rc.name + ' TERKENA HANTAMAN MISIL!');
+                                mObj.life = 0;
+                            }
+                        });
+
+                        if (mObj.life <= 0 || mObj.mesh.position.z < -160) {
+                            scene.remove(mObj.mesh);
+                            activeMissiles.splice(mi, 1);
+                        }
+                    }
+
+                    // Projectile Bom 3D Update
+                    for (let bi = activeBombs.length - 1; bi >= 0; bi--) {
+                        const bObj = activeBombs[bi];
+                        bObj.mesh.position.z -= bObj.speed;
+                        bObj.life--;
+
+                        rivalCars.forEach(rc => {
+                            const dist = Math.hypot(bObj.mesh.position.x - rc.mesh.position.x, bObj.mesh.position.z - rc.mesh.position.z);
+                            if (dist < 2.5) {
+                                playSound('crash');
+                                rc.mesh.position.x += 3.5;
+                                rc.mesh.position.z -= 12;
+                                showNotification('💥 ' + rc.name + ' TERKENA LEDAKAN BOM!');
+                                bObj.life = 0;
+                            }
+                        });
+
+                        if (bObj.life <= 0 || bObj.mesh.position.z < -140) {
+                            scene.remove(bObj.mesh);
+                            activeBombs.splice(bi, 1);
+                        }
                     }
 
                     // Steer Player Supercar
@@ -2719,6 +3341,35 @@
                         if (rc.mesh.position.z > 12) rc.mesh.position.z = -55;
                         if (rc.mesh.position.z < -65) rc.mesh.position.z = -12;
 
+                        // ==========================================
+                        // TABRAKAN PLAYER VS RIVAL (COLLISION & DAMAGE)
+                        // ==========================================
+                        if (canPlayerDrive && playerCarGroup) {
+                            const distHorizontal = Math.abs(playerCarGroup.position.x - rc.mesh.position.x);
+                            const distVertical = Math.abs(playerCarGroup.position.z - rc.mesh.position.z);
+
+                            if (distHorizontal < 1.6 && distVertical < 2.6) {
+                                if (shieldDurationRemaining > 0) {
+                                    rc.mesh.position.x += (rc.mesh.position.x > playerCarGroup.position.x ? 2.5 : -2.5);
+                                    rc.mesh.position.z -= 6;
+                                } else {
+                                    playSound('crash');
+                                    raceHits++;
+                                    updateHitsCounterHUD();
+
+                                    raceSpeed = Math.max(0.35, raceSpeed * 0.45);
+                                    playerCarGroup.position.x += (playerCarGroup.position.x > rc.mesh.position.x ? 0.8 : -0.8);
+                                    
+                                    screenShakeTimer = 16;
+                                    const flashOverlay = document.getElementById('crash-flash-overlay');
+                                    if (flashOverlay) {
+                                        flashOverlay.style.opacity = '1';
+                                        setTimeout(() => { flashOverlay.style.opacity = '0'; }, 300);
+                                    }
+                                }
+                            }
+                        }
+
                         if (
                             playerCarGroup &&
                             Math.abs(rc.mesh.position.z - playerCarGroup.position.z) < 2.5 &&
@@ -2765,6 +3416,73 @@
                     const speedKmH = Math.min(395, Math.floor(raceSpeed * 155 + Math.sin(elapsed * 19) * 3));
                     const speedoEl = document.getElementById('hud-speedometer');
                     if (speedoEl) speedoEl.innerText = `${speedKmH}`;
+
+                    // ==========================================
+                    // REAL-TIME MINIMAP RENDER (POJOK KANAN ATAS)
+                    // ==========================================
+                    const mapCanvas = document.getElementById('track-minimap-canvas');
+                    if (mapCanvas && isRacingActive) {
+                        const mctx = mapCanvas.getContext('2d');
+                        mctx.clearRect(0, 0, mapCanvas.width, mapCanvas.height);
+
+                        const cx = mapCanvas.width / 2;
+                        const cy = mapCanvas.height / 2;
+                        const rx = 40;
+                        const ry = 62;
+
+                        // Gambar Lintasan Sirkuit Oval 2D
+                        mctx.lineWidth = 14;
+                        mctx.strokeStyle = '#1e293b';
+                        mctx.beginPath();
+                        mctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+                        mctx.stroke();
+
+                        // Garis Tengah Sirkuit
+                        mctx.lineWidth = 2;
+                        mctx.setLineDash([4, 4]);
+                        mctx.strokeStyle = '#38bdf8';
+                        mctx.stroke();
+                        mctx.setLineDash([]);
+
+                        // Garis Start/Finish di Minimap (Bawah Oval)
+                        mctx.fillStyle = '#facc15';
+                        mctx.fillRect(cx - 10, cy + ry - 4, 20, 8);
+
+                        // Helper kalkulasi koordinat oval berdasarkan progress (0 - 1)
+                        const getOvalPos = (ratio) => {
+                            const angle = (ratio * Math.PI * 2) + (Math.PI / 2);
+                            return {
+                                x: cx + rx * Math.cos(angle),
+                                y: cy + ry * Math.sin(angle)
+                            };
+                        };
+
+                        // 1. Gambar Posisi Player Dot (Merah Bersinar)
+                        const playerRatio = (raceDistanceCovered / totalTrackLength) % 1;
+                        const pPos = getOvalPos(playerRatio);
+
+                        mctx.shadowColor = '#ed1d24';
+                        mctx.shadowBlur = 10;
+                        mctx.fillStyle = '#ef4444';
+                        mctx.beginPath();
+                        mctx.arc(pPos.x, pPos.y, 6.5, 0, Math.PI * 2);
+                        mctx.fill();
+                        mctx.lineWidth = 2;
+                        mctx.strokeStyle = '#ffffff';
+                        mctx.stroke();
+                        mctx.shadowBlur = 0;
+
+                        // 2. Gambar Posisi Rival Dots
+                        const rivalColors = ['#22c55e', '#06b6d4', '#eab308'];
+                        rivalCars.forEach((rc, rIdx) => {
+                            const rRatio = ((raceDistanceCovered + (rc.progress || 0)) / totalTrackLength) % 1;
+                            const rPos = getOvalPos(rRatio);
+                            mctx.fillStyle = rivalColors[rIdx] || '#ffffff';
+                            mctx.beginPath();
+                            mctx.arc(rPos.x, rPos.y, 4.5, 0, Math.PI * 2);
+                            mctx.fill();
+                        });
+                    }
 
                     // Race Timer
                     raceTimeSeconds += delta;
