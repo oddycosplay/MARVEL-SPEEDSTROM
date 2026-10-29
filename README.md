@@ -14,15 +14,14 @@
 </p>
 
 <div align="center">
-  <img width="100%" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80" alt="Racing game concept banner" />
+  <img width="100%" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1400&q=80" alt="MARVEL-SPEEDSTROM racing concept banner" />
 </div>
 
-A Marvel-inspired arcade racing prototype built as a browser-based game experience.  
-This project combines cinematic visuals, custom garage systems, hero selection, and a stylized 3D racing loop into a single front-end game concept.
+A Marvel-inspired arcade racing prototype built as a browser-based game experience. This project blends cinematic visuals, hero selection, garage customization, and a fast-paced 3D racing loop into a stylized concept demo.
 
 ## Overview
 
-MARVEL-SPEEDSTROM is a concept project exploring a high-speed racing game with a superhero aesthetic. The experience is built to feel energetic, visually bold, and fast-paced, with a polished UI and dynamic racing systems.
+MARVEL-SPEEDSTROM is a concept project exploring a high-speed racing game with a superhero aesthetic. The experience is designed to feel energetic, bold, and visually cinematic while remaining lightweight enough for a browser-based prototype.
 
 The project emphasizes:
 - cinematic presentation
@@ -30,9 +29,9 @@ The project emphasizes:
 - garage customization
 - dynamic race modes
 - nitro boost mechanics
-- arcade-style motion and HUD feedback
+- arcade-style HUD and motion feedback
 
-This repository is currently positioned as a prototype and concept showcase rather than a fully production-ready commercial game.
+This repository is currently positioned as a prototype and concept showcase rather than a production-ready commercial game.
 
 ## Why This Project
 
@@ -60,6 +59,39 @@ This project was designed to explore:
 - keyboard and touch controls
 - procedural sound effects using Web Audio API
 - modern, cinematic interface
+
+## Screenshots
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center" width="50%">
+        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=900&q=80" alt="Racing gameplay concept" width="100%" />
+        <br />
+        <sub>Gameplay concept visual</sub>
+      </td>
+      <td align="center" width="50%">
+        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80" alt="Fast car racing scene" width="100%" />
+        <br />
+        <sub>High-speed pursuit energy</sub>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" width="50%">
+        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80" alt="Supercar front view" width="100%" />
+        <br />
+        <sub>Stylized performance vehicle</sub>
+      </td>
+      <td align="center" width="50%">
+        <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=900&q=80" alt="Neon night racing vibe" width="100%" />
+        <br />
+        <sub>Night-race atmosphere</sub>
+      </td>
+    </tr>
+  </table>
+</div>
+
+These visuals help convey the game's cinematic identity: speed, energy, and a bold comic-inspired presentation.
 
 ## Tech Stack
 
@@ -93,15 +125,7 @@ The game presents a fictional racing universe where players:
 4. race through a stylized environment
 5. use nitro boosts and manage race flow
 
-The game is designed to emulate a fast, high-energy racing experience with strong concept and visual identity.
-
-## Gameplay Screenshot
-
-<div align="center">
-  <img width="100%" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1400&q=80" alt="Gameplay screenshot of MARVEL-SPEEDSTROM" />
-</div>
-
-This visual captures the high-speed, cinematic feel of the racing prototype and gives the project a more polished presentation in the repository overview.
+The design aims to capture a fast, high-energy arcade experience with a strong visual identity and polished UI.
 
 ## Repository
 
@@ -151,8 +175,7 @@ Planned improvements include:
 
 ## Project Status
 
-This project is currently in the concept/prototype stage.  
-It already demonstrates a strong visual identity, a polished game interface, and a playable front-end loop, but it is not yet a production-level commercial game.
+This project is currently in the concept/prototype stage. It already demonstrates a strong visual identity, a polished game interface, and a playable front-end loop, but it is not yet a production-level commercial game.
 
 ## License
 
