@@ -1,9 +1,9 @@
 # 🚀 MARVEL SPEEDSTORM
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Marvel%20Inspired-Sci%20Fi%20Racing-red?style=for-the-badge&logo=appveyor" alt="Marvel Inspired" />
+  <img src="https://img.shields.io/badge/Esports-Competitive%20Racing-FF2D55?style=for-the-badge" alt="Esports" />
   <img src="https://img.shields.io/badge/AntiGravity-Quantum%20Boost-06B6D4?style=for-the-badge" alt="AntiGravity" />
-  <img src="https://img.shields.io/badge/Gemini%20Argon-Future%20Prototype-8B5CF6?style=for-the-badge" alt="Gemini Argon" />
+  <img src="https://img.shields.io/badge/Gemini%20Argon-Prototype%20Engine-8B5CF6?style=for-the-badge" alt="Gemini Argon" />
   <img src="https://img.shields.io/badge/Status-Playable%20Concept-22C55E?style=for-the-badge" alt="Playable Concept" />
 </p>
 
@@ -17,60 +17,60 @@
 </p>
 
 <div align="center">
-  <img width="100%" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1600&q=80" alt="MARVEL-SPEEDSTORM futuristic banner" />
+  <img width="100%" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1600&q=80" alt="MARVEL-SPEEDSTROM esports banner" />
 </div>
 
 <p align="center">
-  <strong>THE SKYLINE IS NO LIMIT. THE FUTURE IS THE TRACK.</strong>
+  <strong>RACE TO WIN. BOOST TO DOMINATE. OWN THE TRACK.</strong>
 </p>
 
-MARVEL-SPEEDSTROM is a futuristic sci-fi racing prototype built for browser play. It mixes arcade speed, anti-gravity movement, cinematic vehicle styling, and a comic-inspired universe into a bold racing concept designed to feel fast, sleek, and powerful from the very first second.
+MARVEL-SPEEDSTROM is a competitive arcade racing concept built for speed, precision, and spectacle. Built as a browser-based prototype, it blends futuristic design, anti-gravity boost mechanics, and arcade combat energy into a race experience tuned for players who want instant action and a high-skill feel.
 
 ---
 
-## 🚀 GAME OVERVIEW
+## 🏁 COMPETITIVE OVERVIEW
 
-This project is a high-speed sci-fi racer designed around speed, spectacle, and control. Players blast through futuristic roads, launch into anti-gravity boosts, and compete in a stylized world where the atmosphere feels like a crossover between cinematic superhero energy and next-generation motorsport.
+This project is designed around the thrill of competition: tight control, aggressive boosts, tactical lane management, and clean arcade energy. It aims to capture the feel of a modern racing title built for quick loops, replayability, and high-intensity matches.
 
-The concept is built around:
-- futuristic urban and skyline racing
-- anti-gravity burst mechanics
-- cinematic vehicle customization
-- comic-inspired hero and villain energy
-- lightweight browser-first gameplay
+The experience centers on:
+- fast lap pressure
+- boost timing and drift control
+- skill-based race flow
+- rival pressure and tactical overtakes
+- sleek, modern esports presentation
 
 ---
 
-## 🧠 WHY IT FEELS NEXT-GEN
+## 🎯 WHY THIS FEELS LIKE ESPORTS
 
-MARVEL-SPEEDSTROM is meant to feel like a premium concept for a futuristic racing universe. It is not just a car game — it is a speed fantasy set in a high-tech world where gravity is optional and power is visual.
+MARVEL-SPEEDSTROM is not just a concept demo — it is designed to feel like a competitive racing experience with a strong identity and repeatable gameplay loop.
 
-Key pillars:
-- hyper-speed lane control
-- anti-gravity nitro bursts
-- polished sci-fi HUD and presentation
-- customizable racing identity
-- immersive arcade energy with hero-vs-villain vibes
+Core design pillars:
+- precise steering under pressure
+- high-speed nitro timing
+- clean, readable HUD and race flow
+- fast rounds and instant replay value
+- polished presentation for showcase and demo use
 
 ---
 
 ## ⚡ CORE FEATURES
 
-- futuristic sci-fi racing identity
-- anti-gravity boost system and nitro acceleration
-- customizable vehicles and performance styling
+- competitive arcade racing format
+- anti-gravity boost system and nitro management
+- customizable racing identity and visual tuning
 - multiple race modes:
   - Grand Prix
   - Time Trial
   - Omega Arena
-- multiple futuristic track themes:
+- multiple track styles:
   - Desert Storm
   - Neon Night
   - Skyline Run
-- HUD overlays, minimap, leaderboard system, and race telemetry
+- leaderboard states, race telemetry, and HUD overlays
 - keyboard and touch controls
-- procedural sound effects with Web Audio API
-- browser-first build for fast local play
+- procedural audio feedback using Web Audio API
+- browser-based instant-play accessibility
 
 ---
 
@@ -80,26 +80,26 @@ Key pillars:
   <table>
     <tr>
       <td align="center" width="50%">
-        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=900&q=80" alt="Futuristic racing concept" width="100%" />
+        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=900&q=80" alt="Competitive racing concept" width="100%" />
         <br />
-        <sub>Skyline race energy</sub>
+        <sub>Track pressure</sub>
       </td>
       <td align="center" width="50%">
-        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80" alt="High-speed sci-fi lane" width="100%" />
+        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80" alt="High-speed rivals" width="100%" />
         <br />
-        <sub>High-speed pursuit</sub>
+        <sub>Race intensity</sub>
       </td>
     </tr>
     <tr>
       <td align="center" width="50%">
-        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80" alt="Performance vehicle" width="100%" />
+        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80" alt="Performance machine" width="100%" />
         <br />
-        <sub>Performance machine</sub>
+        <sub>High-performance build</sub>
       </td>
       <td align="center" width="50%">
-        <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=900&q=80" alt="Night racing atmosphere" width="100%" />
+        <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=900&q=80" alt="Night race atmosphere" width="100%" />
         <br />
-        <sub>Night-run aesthetic</sub>
+        <sub>Night-race pressure</sub>
       </td>
     </tr>
   </table>
@@ -109,22 +109,22 @@ Key pillars:
 
 ## 🧩 ENGINE DIRECTION
 
-The project is shaped around two futuristic pillars:
+The project is shaped around an esports-inspired build philosophy:
 
-- Gemini Argon: a speculative, prototype-first design direction centered on cinematic arcade and web innovation
-- AntiGravity: a high-speed boost system that makes movement feel more dynamic, aggressive, and superhuman
+- Gemini Argon: experimental prototype direction focused on competitive arcade design and rapid iteration
+- AntiGravity: boost system crafted for speed control, drift timing, and race-changing momentum swings
 
 ---
 
-## 🕹️ DEMO TAGLINES
+## 🏆 DEMO MESSAGES
 
-> “Built for the speed of tomorrow.”
+> “Built to race. Built to win.”
 
-> “When gravity fails, victory begins.”
+> “Every millisecond matters.”
 
-> “The skyline is alive — and it’s racing.”
+> “The track is live. The leaderboard is waiting.”
 
-> “Zero to hyperspeed in a single pulse.”
+> “No excuses. Just speed.”
 
 ---
 
@@ -178,9 +178,9 @@ MARVEL-SPEEDSTROM/
 
 ---
 
-## 🏆 STATUS
+## 🏅 STATUS
 
-This project is currently in the concept/prototype stage, but it already shows a strong futuristic visual identity, polished browser presentation, and a playable loop that feels built for a next-generation racing showcase.
+This project is currently in the concept/prototype stage, but it already delivers a strong competitive racing identity, polished browser presentation, and a fast gameplay loop built for speed-focused showcase and iteration.
 
 ---
 
@@ -191,5 +191,5 @@ This project is licensed under the Apache License 2.0.
 ---
 
 <p align="center">
-  <strong>Built as a futuristic sci-fi racing concept with cinematic energy, anti-gravity speed, and a bold hero-vs-villain identity.</strong>
+  <strong>Built as a competitive arcade racing concept with futuristic energy, anti-gravity speed, and a high-stakes track identity.</strong>
 </p>
