@@ -22,7 +22,7 @@ This project combines cinematic visuals, custom garage systems, hero selection, 
 
 ## Overview
 
-MARVEL-SPEEDSTROM is a concept project exploring a high-speed racing game with a superhero aesthetic. The experience is built to feel energetic, visually bold, and fast-paced, with a polished UI and browser gameplay loop.
+MARVEL-SPEEDSTROM is a concept project exploring a high-speed racing game with a superhero aesthetic. The experience is built to feel energetic, visually bold, and fast-paced, with a polished UI and dynamic racing systems.
 
 The project emphasizes:
 - cinematic presentation
@@ -94,6 +94,14 @@ The game presents a fictional racing universe where players:
 5. use nitro boosts and manage race flow
 
 The game is designed to emulate a fast, high-energy racing experience with strong concept and visual identity.
+
+## Gameplay Screenshot
+
+<div align="center">
+  <img width="100%" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1400&q=80" alt="Gameplay screenshot of MARVEL-SPEEDSTROM" />
+</div>
+
+This visual captures the high-speed, cinematic feel of the racing prototype and gives the project a more polished presentation in the repository overview.
 
 ## Repository
 
